@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-14 17:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: index.php:23
+msgid "Selamat Datang ke Sistem Meja Bantuan EDC"
+msgstr ""
+
+#: index.php:25
+msgid ""
+"In order to better support you, we utilize a support ticket system. Every "
+"support request is assigned a unique ticket number which you can use to "
+"track the progress online. For your reference we provide complete history of "
+"all your support requests."
+msgstr ""
+
+#: index.php:26
+msgid "A valid email address is required to access the support system."
+msgstr ""
+
+#: index.php:27
+msgid ""
+"EDC menyediakan satu pusat sehenti menerusi gabungan pelbagai agensi-agensi "
+"kerajaan yang berkaitan dengan penggalakan dan pembangunan usahawan agar "
+"khidmat masihat, rundingan permasalahan, bantuan, perlaksanaan program "
+"latihan dan sebagainya dengan cepat, efisien dan tepat."
+msgstr ""
+
+#: index.php:29
+msgid "<b>Latihan / Kursus</b>"
+msgstr ""
+
+#: index.php:29
+msgid "<b>Pemasaran</b>"
+msgstr ""
+
+#: index.php:29
+msgid "<b>Bidang Perniagaan Baru</b>"
+msgstr ""
+
+#: index.php:30
+msgid "*Menyelaras Kursus dan Latihan anjuran negeri<br>*Pembudayaan Usahawan"
+msgstr ""
+
+#: index.php:30
+msgid ""
+"*Gerak Usahawan Negeri Johor<br>*Star Rating Usahawan<br>*Anugerah Usahawan "
+"Bumiputra Johor<br>*Direktori Usahawan Johor<br>*Flyers Stand - "
+"Billboard<br>*Penubuhan PUJB Retail SB<br>*Business Matching"
+msgstr ""
+
+#: index.php:30
+msgid ""
+"Perniagaan secara online<br>*Industri kosmetik dan "
+"runcit<br>*Argopreneur<br>*Pendidikan awal kanak-kanak"
+msgstr ""
+
+#: index.php:31
+msgid "<b>Groom Big</b>"
+msgstr ""
+
+#: index.php:31
+msgid "<b>Industri Sokongan</b>"
+msgstr ""
+
+#: index.php:32
+msgid "*Naiktaraf produk untuk pasaran lebih luas"
+msgstr ""
+
+#: index.php:32
+msgid ""
+"*Industri Minyak & Gas<br>*Industri Hab Coklat<br>*Industri "
+"Kreatif<br>*Industri Perubatan"
+msgstr ""
+
+#: index.php:33
+msgid "<b>Pusat Sehenti dan Rujukan</b>"
+msgstr ""
+
+#: index.php:34
+msgid ""
+"*Rujukan kepada usahawan, maklumat semua agensi, skim initiatif yang "
+"ditawarkan"
+msgstr ""
