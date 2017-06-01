@@ -2,7 +2,7 @@
   function sendMessage($title, $message, $recipient, $companyIn, $send_after){
     if (is_null($send_after)) {
   		$fields = array(
-	      'app_id' => "575d28b7-1bdf-48d0-8871-fbf29029345c",
+	      'app_id' => "1b1b57f7-fdae-47c1-a9e5-453b9992a2ba",
 	      //'included_segments' => array('All'),
 	      //'send_after' => 'Fri May 02 2014 00:00:00 GMT-0700 (PDT)',
 	      'isIos' => true,
@@ -15,11 +15,11 @@
 	      'content_available' => true,
 	      'contents' => $message,
 	      'headings' => $title,
-	      'tags' =>  array($recipient, $companyIn)
+  		  'tags' =>  array($recipient, $companyIn)
 	    );
   	}else{
   		$fields = array(
-	      'app_id' => "575d28b7-1bdf-48d0-8871-fbf29029345c",
+	      'app_id' => "1b1b57f7-fdae-47c1-a9e5-453b9992a2ba",
 	      //'included_segments' => array('All'),
 	      'send_after' => $send_after,
 	      'isIos' => true,
@@ -32,7 +32,7 @@
 	      'content_available' => true,
 	      'contents' => $message,
 	      'headings' => $title,
-	      'tags' =>  array($recipient, $companyIn)
+  		  'tags' =>  array($recipient, $companyIn)
 	    );
   	}
     
@@ -41,7 +41,7 @@
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
-                           'Authorization: Basic ZWQ2ZjZjMWEtYWMzNi00OGM2LWJkMDMtZGUyNzRjMmFiMGIx'));
+                           'Authorization: Basic ZTBhZWI0NzgtZTU3My00YjU4LTg4MTYtMDI3ZmUxZWUzMDU3'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
     curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -53,6 +53,61 @@
     
     return $ret;
   }
+  
+  function sendSegment($title, $message, $segment, $send_after){
+    if (is_null($send_after)) {
+  		$fields = array(
+	      'app_id' => "1b1b57f7-fdae-47c1-a9e5-453b9992a2ba",
+	      'included_segments' => $segment,
+	      //'send_after' => 'Fri May 02 2014 00:00:00 GMT-0700 (PDT)',
+	      'isIos' => true,
+	      'isChromeWeb' => true,
+	      'ios_badgeType' => "Increase",
+	      'ios_badgeCount' => 1,
+	      //'data' => array("message" => $message),
+	      'data' => $title,
+	      'isAndroid' => true,
+	      'content_available' => true,
+	      'contents' => $message,
+	      'headings' => $title,
+  		  'tags' =>  array($recipient, $companyIn)
+	    );
+  	}else{
+  		$fields = array(
+	      'app_id' => "1b1b57f7-fdae-47c1-a9e5-453b9992a2ba",
+	      'included_segments' => $segment,
+	      'send_after' => $send_after,
+	      'isIos' => true,
+	      'isChromeWeb' => true,
+	      'ios_badgeType' => "Increase",
+	      'ios_badgeCount' => 1,
+	      //'data' => array("message" => $message),
+	      'data' => $title,
+	      'isAndroid' => true,
+	      'content_available' => true,
+	      'contents' => $message,
+	      'headings' => $title
+	    );
+  	}
+    
+    
+    $fields = json_encode($fields);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                           'Authorization: Basic ZTBhZWI0NzgtZTU3My00YjU4LTg4MTYtMDI3ZmUxZWUzMDU3'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $ret = curl_exec($ch);
+    curl_close($ch);
+    
+    return $ret;
+  }
+  
   $response = array();
   
   $company=isset($_POST['company']) ? $_POST['company'] : $_GET['company'];
@@ -107,27 +162,33 @@
       "value" => $company
       );  
       
-      
-  $role=isset($_POST['role']) ? $_POST['role'] : $_GET['role'];
-  if (strlen($role)>0) {
-  	$send2  =  array(
-      "key" => 'role',
-      "relation" => '=',
-      "value" => $role
-      );
+  $segment=isset($_POST['segment']) ? $_POST['segment'] : $_GET['segment'];
+  if (strlen($segment)>0) {
+  	  $send_after=isset($_POST['send_after']) ? $_POST['send_after'] : $_GET['send_after'];
+      $retResponse = sendSegment($heading, $content, $segment, $send_after);
+  }else{     
+	  $role=isset($_POST['role']) ? $_POST['role'] : $_GET['role'];
+	  if (strlen($role)>0) {
+	  	$send2  =  array(
+	      "key" => 'role',
+	      "relation" => '=',
+	      "value" => $role
+	      );
+	  }
+	  $user=isset($_POST['user']) ? $_POST['user'] : $_GET['user'];
+	  if (strlen($user)>0) {
+		$send2 =  array(
+	      "key" => 'user',
+	      "relation" => '=',
+	      "value" => $user
+	      );
+	  
+	  }
+	  $send_after=isset($_POST['send_after']) ? $_POST['send_after'] : $_GET['send_after'];
+      $retResponse = sendMessage($heading, $content, $send2, $companyTag, $send_after);
+
   }
-  $user=isset($_POST['user']) ? $_POST['user'] : $_GET['user'];
-  if (strlen($user)>0) {
-	$send2 =  array(
-      "key" => 'user',
-      "relation" => '=',
-      "value" => $user
-      );
-  
-  }
-  $send_after=isset($_POST['send_after']) ? $_POST['send_after'] : $_GET['send_after'];
  
-  $retResponse = sendMessage($heading, $content, $send2, $companyTag, $send_after);
   $response["success"] = 1;
   $response["message"] = $retResponse;
    

@@ -1,17 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.domain.wtdesk" version="2.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>WtDesk</name>
+<widget id="com.domain.wtpropertycheck.hh" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>WT Hartamas Heights</name>
     <description>
-        WtDesk is a mobile helpdesk application.
+        A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <author email="rudzuan@wbiztech.com" href="http://cordova.io">
-         Wbiztech Sdn Bhd - Rudzuan Sulaiman
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
     </author>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
-    <access origin="content:///*" />
-    <allow-navigation href="*://*android.schoolcheck-now.com/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -25,23 +23,16 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="10000" />
-    <preference name="loadUrlTimeoutValue" value="60000" />
-    <preference name="LoadingPageDialog" value="WtDesk Loading, ..." />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <plugin name="cordova-plugin-camera" spec="^2.1.1" />
-    <plugin name="cordova-plugin-device" spec="^1.1.1" />
-    <plugin name="cordova-plugin-dialogs" spec="^1.2.0" />
-    <plugin name="cordova-plugin-file-transfer" spec="^1.5.0" />
-    <plugin name="cordova-plugin-media" spec="^2.2.0" />
-    <plugin name="cordova-plugin-file" spec="^4.1.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^1.3.0" />
-    <plugin name="cordova-plugin-network-information" spec="^1.2.0" />
-    <plugin name="cordova-plugin-splashscreen" spec="^3.2.1" />
-    <plugin name="cordova-plugin-vibration" spec="^2.1.0" />
-    <plugin name="cordova-plugin-android-support-v4" spec="^21.0.1" />
-    <plugin name="com.google.playservices" spec="^21.0.0" />
-    <plugin name="cordova-plugin-geolocation" spec="^2.1.0" />
-    <plugin name="cordova-plugin-globalization" spec="^1.0.3" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+    <plugin name="cordova-plugin-device" spec="~1.1.6" />
+    <plugin name="cordova-plugin-dialogs" spec="~1.3.3" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.6.3" />
+    <plugin name="cordova-plugin-media" spec="~3.0.1" />
+    <plugin name="cordova-plugin-file" spec="~4.3.3" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+    <plugin name="cordova-plugin-network-information" spec="~1.3.3" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
+    <plugin name="cordova-plugin-vibration" spec="~2.1.5" />
+    <plugin name="onesignal-cordova-plugin" spec="~2.1.1" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
 </widget>

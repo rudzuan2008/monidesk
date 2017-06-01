@@ -37,13 +37,12 @@ $bubble-bg-color-left: #78C0A8;
 $bubble-bg-color: #F07818;
 
 /* THE SPEECH BUBBLE
-------------------------------------------------------------------------------------------------------------------------------- */
-
+----------------------------------------------------------------------------------------------------------------------------- */
 .triangle-right {
 	position: relative;
 	padding: 5px;
 	//margin: 1em 0 3em;
-	color: #000;
+	color: $text-base-color;
 	font-weight: bold;
 	background: $bubble-bg-color; /* default background for browsers without gradient support */
 

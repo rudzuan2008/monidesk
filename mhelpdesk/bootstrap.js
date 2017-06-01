@@ -9,39 +9,31 @@
  * metadata-driven class system features
  */
 Ext.Loader.addClassPathMappings({
-  "Ext": "touch/src",
-  "Ext-more": "touch/src/core/Ext-more.js",
+  "Ext": "../../touch/src",
+  "Ext-more": "../../touch/src/core/Ext-more.js",
   "Ext.Boot": ".sencha/app/Boot.js",
-  "Ext.DomHelper": "touch/src/dom/Helper.js",
-  "Ext.DomQuery": "touch/src/dom/Query.js",
-  "Ext.Element-alignment": "touch/src/dom/Element.alignment.js",
-  "Ext.Element-all": "touch/src/dom/Element.traversal.js",
-  "Ext.Element-insertion": "touch/src/dom/Element.insertion.js",
-  "Ext.Element-position": "touch/src/dom/Element.position.js",
-  "Ext.Element-static": "touch/src/dom/Element.static.js",
-  "Ext.Element-style": "touch/src/dom/Element.style.js",
-  "Ext.Element-traversal": "touch/src/dom/Element.traversal.js",
-  "Ext.core.DomQuery": "touch/src/dom/Query.js",
-  "Ext.device.Purchases.Product": "touch/src/device/purchases/Sencha.js",
-  "Ext.device.filesystem.DirectoryEntry": "touch/src/device/filesystem/Sencha.js",
-  "Ext.device.filesystem.Entry": "touch/src/device/filesystem/Sencha.js",
-  "Ext.device.filesystem.FileEntry": "touch/src/device/filesystem/Sencha.js",
-  "Ext.device.filesystem.FileSystem": "touch/src/device/filesystem/Sencha.js",
-  "Ext.device.purchases.Purchase": "touch/src/device/purchases/Sencha.js",
-  "Ext.device.sqlite.Database": "touch/src/device/sqlite/Sencha.js",
-  "Ext.device.sqlite.SQLResultSet": "touch/src/device/sqlite/Sencha.js",
-  "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
-  "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
-  "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
-  "Ext.ux.ActionOverFlowMenuButton": "touch/src/ux/ActionOverFlowMenuButton.js",
-  "Ext.ux.ApplicationMenu": "touch/src/ux/ApplicationMenu.js",
-  "Ext.ux.ContextMenu": "touch/src/ux/ContextMenu.js",
-  "Ext.ux.MenuButton": "touch/src/ux/MenuButton.js",
-  "Ext.ux.TabMenuButton": "touch/src/ux/TabMenuButton.js",
-  "Ext.ux.device": "touch/src/ux/device",
-  "Ext.ux.parse": "touch/src/ux/parse",
-  "Ext.ux.touch.grid": "app/lib/Ext.ux.touch.grid",
-  "mhelpdesk": "app"
+  "Ext.DomHelper": "../../touch/src/dom/Helper.js",
+  "Ext.DomQuery": "../../touch/src/dom/Query.js",
+  "Ext.Element-alignment": "../../touch/src/dom/Element.alignment.js",
+  "Ext.Element-all": "../../touch/src/dom/Element.traversal.js",
+  "Ext.Element-insertion": "../../touch/src/dom/Element.insertion.js",
+  "Ext.Element-position": "../../touch/src/dom/Element.position.js",
+  "Ext.Element-static": "../../touch/src/dom/Element.static.js",
+  "Ext.Element-style": "../../touch/src/dom/Element.style.js",
+  "Ext.Element-traversal": "../../touch/src/dom/Element.traversal.js",
+  "Ext.core.DomQuery": "../../touch/src/dom/Query.js",
+  "Ext.device.Purchases.Product": "../../touch/src/device/purchases/Sencha.js",
+  "Ext.device.filesystem.DirectoryEntry": "../../touch/src/device/filesystem/Sencha.js",
+  "Ext.device.filesystem.Entry": "../../touch/src/device/filesystem/Sencha.js",
+  "Ext.device.filesystem.FileEntry": "../../touch/src/device/filesystem/Sencha.js",
+  "Ext.device.filesystem.FileSystem": "../../touch/src/device/filesystem/Sencha.js",
+  "Ext.device.purchases.Purchase": "../../touch/src/device/purchases/Sencha.js",
+  "Ext.device.sqlite.Database": "../../touch/src/device/sqlite/Sencha.js",
+  "Ext.device.sqlite.SQLResultSet": "../../touch/src/device/sqlite/Sencha.js",
+  "Ext.device.sqlite.SQLResultSetRowList": "../../touch/src/device/sqlite/Sencha.js",
+  "Ext.device.sqlite.SQLTransaction": "../../touch/src/device/sqlite/Sencha.js",
+  "Ext.draw.engine.SvgContext.Gradient": "../../touch/src/draw/engine/SvgContext.js",
+  "com.domain.wtpropertycheck.hh": "app"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
@@ -645,6 +637,17 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
+  "Ext.log.Base": [],
+  "Ext.log.Logger": [],
+  "Ext.log.filter.Filter": [],
+  "Ext.log.filter.Priority": [],
+  "Ext.log.formatter.Default": [],
+  "Ext.log.formatter.Formatter": [],
+  "Ext.log.formatter.Identity": [],
+  "Ext.log.writer.Console": [],
+  "Ext.log.writer.DocumentTitle": [],
+  "Ext.log.writer.Remote": [],
+  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -745,12 +748,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.ActionOverFlowMenuButton": [],
   "Ext.ux.ApplicationMenu": [],
   "Ext.ux.ContextMenu": [],
-  "Ext.ux.Fileup": [],
   "Ext.ux.MenuButton": [],
-  "Ext.ux.MessageBoxPatch": [],
-  "Ext.ux.PaintMonitor": [],
-  "Ext.ux.PathMenu": [],
-  "Ext.ux.PullRefreshFn": [],
   "Ext.ux.TabMenuButton": [],
   "Ext.ux.device.Analytics": [],
   "Ext.ux.device.Twitter": [],
@@ -767,78 +765,17 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.parse.Store": [],
   "Ext.ux.parse.association.Pointer": [],
   "Ext.ux.parse.association.Relation": [],
-  "Ext.ux.touch.grid.List": [],
-  "Ext.ux.touch.grid.feature.Abstract": [],
-  "Ext.ux.touch.grid.feature.CheckboxSelection": [],
-  "Ext.ux.touch.grid.feature.Editable": [],
-  "Ext.ux.touch.grid.feature.Feature": [],
-  "Ext.ux.touch.grid.feature.Paging": [],
-  "Ext.ux.touch.grid.feature.Sorter": [],
   "Ext.viewport.Android": [],
+  "Ext.viewport.AndroidStock": [
+    "Ext.viewport.Android"
+  ],
   "Ext.viewport.Default": [],
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
-  "mhelpdesk.component.MenuButton": [],
-  "mhelpdesk.component.MenuHome": [],
-  "mhelpdesk.controller.MainController": [],
-  "mhelpdesk.model.Client": [],
-  "mhelpdesk.model.Config": [],
-  "mhelpdesk.model.DailyTimetable": [],
-  "mhelpdesk.model.Email": [],
-  "mhelpdesk.model.Faq": [],
-  "mhelpdesk.model.LoadedImage": [],
-  "mhelpdesk.model.Message": [],
-  "mhelpdesk.model.Priority": [],
-  "mhelpdesk.model.SubjectTimetable": [],
-  "mhelpdesk.model.SystemSetting": [],
-  "mhelpdesk.model.Ticket": [],
-  "mhelpdesk.model.Topic": [],
-  "mhelpdesk.store.LocalClient": [],
-  "mhelpdesk.store.LocalConfig": [],
-  "mhelpdesk.store.LocalDailyTimetable": [],
-  "mhelpdesk.store.LocalEmail": [],
-  "mhelpdesk.store.LocalFaq": [],
-  "mhelpdesk.store.LocalLoadedImage": [],
-  "mhelpdesk.store.LocalMessage": [],
-  "mhelpdesk.store.LocalPriority": [],
-  "mhelpdesk.store.LocalSubjectTimetable": [],
-  "mhelpdesk.store.LocalSystemSetting": [],
-  "mhelpdesk.store.LocalTicket": [],
-  "mhelpdesk.store.LocalTopic": [],
-  "mhelpdesk.store.RemoteClient": [],
-  "mhelpdesk.store.RemoteConfig": [],
-  "mhelpdesk.store.RemoteEmail": [],
-  "mhelpdesk.store.RemoteFaq": [],
-  "mhelpdesk.store.RemoteMessage": [],
-  "mhelpdesk.store.RemotePriority": [],
-  "mhelpdesk.store.RemoteTicket": [],
-  "mhelpdesk.store.RemoteTopic": [],
-  "mhelpdesk.view.ClientList": [],
-  "mhelpdesk.view.Faq": [],
-  "mhelpdesk.view.FaqList": [],
-  "mhelpdesk.view.FileUpload": [],
-  "mhelpdesk.view.HomePage": [],
-  "mhelpdesk.view.Locale": [],
-  "mhelpdesk.view.Main": [],
-  "mhelpdesk.view.MainPage": [],
-  "mhelpdesk.view.MessageList": [],
-  "mhelpdesk.view.NoticeTicket": [],
-  "mhelpdesk.view.NoticeTicketFail": [],
-  "mhelpdesk.view.PostMessage": [],
-  "mhelpdesk.view.Search": [],
-  "mhelpdesk.view.Status": [],
-  "mhelpdesk.view.System": [],
-  "mhelpdesk.view.SystemConfig": [],
-  "mhelpdesk.view.Ticket": [],
-  "mhelpdesk.view.TicketList": [],
-  "mhelpdesk.view.Timetable": [],
-  "mhelpdesk.view.TimetableList": [],
-  "mhelpdesk.view.TimetableNew": [],
-  "mhelpdesk.view.UserTicket": [],
-  "mhelpdesk.view.ViewTicket": []
+  "com.domain.wtpropertycheck.hh.view.Main": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1644,6 +1581,17 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
+  "Ext.log.Base": [],
+  "Ext.log.Logger": [],
+  "Ext.log.filter.Filter": [],
+  "Ext.log.filter.Priority": [],
+  "Ext.log.formatter.Default": [],
+  "Ext.log.formatter.Formatter": [],
+  "Ext.log.formatter.Identity": [],
+  "Ext.log.writer.Console": [],
+  "Ext.log.writer.DocumentTitle": [],
+  "Ext.log.writer.Remote": [],
+  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -1754,18 +1702,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.ActionOverFlowMenuButton": [],
   "Ext.ux.ApplicationMenu": [],
   "Ext.ux.ContextMenu": [],
-  "Ext.ux.Fileup": [
-    "widget.fileupload"
-  ],
   "Ext.ux.MenuButton": [],
-  "Ext.ux.MessageBoxPatch": [],
-  "Ext.ux.PaintMonitor": [],
-  "Ext.ux.PathMenu": [
-    "widget.pathmenu"
-  ],
-  "Ext.ux.PullRefreshFn": [
-    "plugin.pullrefreshfn"
-  ],
   "Ext.ux.TabMenuButton": [],
   "Ext.ux.device.Analytics": [],
   "Ext.ux.device.Twitter": [],
@@ -1788,125 +1725,16 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.parse.association.Relation": [
     "association.relation"
   ],
-  "Ext.ux.touch.grid.List": [
-    "widget.touchgridpanel"
-  ],
-  "Ext.ux.touch.grid.feature.Abstract": [],
-  "Ext.ux.touch.grid.feature.CheckboxSelection": [],
-  "Ext.ux.touch.grid.feature.Editable": [],
-  "Ext.ux.touch.grid.feature.Feature": [],
-  "Ext.ux.touch.grid.feature.Paging": [],
-  "Ext.ux.touch.grid.feature.Sorter": [],
   "Ext.viewport.Android": [],
+  "Ext.viewport.AndroidStock": [],
   "Ext.viewport.Default": [
     "widget.viewport"
   ],
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
-  "mhelpdesk.component.MenuButton": [
-    "widget.menubutton"
-  ],
-  "mhelpdesk.component.MenuHome": [
-    "widget.menuhome"
-  ],
-  "mhelpdesk.controller.MainController": [],
-  "mhelpdesk.model.Client": [],
-  "mhelpdesk.model.Config": [],
-  "mhelpdesk.model.DailyTimetable": [],
-  "mhelpdesk.model.Email": [],
-  "mhelpdesk.model.Faq": [],
-  "mhelpdesk.model.LoadedImage": [],
-  "mhelpdesk.model.Message": [],
-  "mhelpdesk.model.Priority": [],
-  "mhelpdesk.model.SubjectTimetable": [],
-  "mhelpdesk.model.SystemSetting": [],
-  "mhelpdesk.model.Ticket": [],
-  "mhelpdesk.model.Topic": [],
-  "mhelpdesk.store.LocalClient": [],
-  "mhelpdesk.store.LocalConfig": [],
-  "mhelpdesk.store.LocalDailyTimetable": [],
-  "mhelpdesk.store.LocalEmail": [],
-  "mhelpdesk.store.LocalFaq": [],
-  "mhelpdesk.store.LocalLoadedImage": [],
-  "mhelpdesk.store.LocalMessage": [],
-  "mhelpdesk.store.LocalPriority": [],
-  "mhelpdesk.store.LocalSubjectTimetable": [],
-  "mhelpdesk.store.LocalSystemSetting": [],
-  "mhelpdesk.store.LocalTicket": [],
-  "mhelpdesk.store.LocalTopic": [],
-  "mhelpdesk.store.RemoteClient": [],
-  "mhelpdesk.store.RemoteConfig": [],
-  "mhelpdesk.store.RemoteEmail": [],
-  "mhelpdesk.store.RemoteFaq": [],
-  "mhelpdesk.store.RemoteMessage": [],
-  "mhelpdesk.store.RemotePriority": [],
-  "mhelpdesk.store.RemoteTicket": [],
-  "mhelpdesk.store.RemoteTopic": [],
-  "mhelpdesk.view.ClientList": [
-    "widget.clientList"
-  ],
-  "mhelpdesk.view.Faq": [
-    "widget.faq"
-  ],
-  "mhelpdesk.view.FaqList": [
-    "widget.faqList"
-  ],
-  "mhelpdesk.view.FileUpload": [
-    "widget.fileUpload"
-  ],
-  "mhelpdesk.view.HomePage": [
-    "widget.homepage"
-  ],
-  "mhelpdesk.view.Locale": [],
-  "mhelpdesk.view.Main": [
+  "com.domain.wtpropertycheck.hh.view.Main": [
     "widget.main"
-  ],
-  "mhelpdesk.view.MainPage": [
-    "widget.mainpage"
-  ],
-  "mhelpdesk.view.MessageList": [
-    "widget.messageList"
-  ],
-  "mhelpdesk.view.NoticeTicket": [
-    "widget.noticeTicket"
-  ],
-  "mhelpdesk.view.NoticeTicketFail": [
-    "widget.noticeTicketFail"
-  ],
-  "mhelpdesk.view.PostMessage": [
-    "widget.postMessage"
-  ],
-  "mhelpdesk.view.Search": [
-    "widget.search"
-  ],
-  "mhelpdesk.view.Status": [
-    "widget.status"
-  ],
-  "mhelpdesk.view.System": [],
-  "mhelpdesk.view.SystemConfig": [
-    "widget.systemConfig"
-  ],
-  "mhelpdesk.view.Ticket": [
-    "widget.ticket"
-  ],
-  "mhelpdesk.view.TicketList": [
-    "widget.ticketList"
-  ],
-  "mhelpdesk.view.Timetable": [
-    "widget.timetable"
-  ],
-  "mhelpdesk.view.TimetableList": [
-    "widget.timetableList"
-  ],
-  "mhelpdesk.view.TimetableNew": [
-    "widget.timetableNew"
-  ],
-  "mhelpdesk.view.UserTicket": [
-    "widget.userTicket"
-  ],
-  "mhelpdesk.view.ViewTicket": [
-    "widget.viewTicket"
   ]
 });
 

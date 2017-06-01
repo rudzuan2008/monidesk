@@ -37,7 +37,8 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 		}
 
 	},
-	txtHeader : 'Panel Atas',
+	txtPageTitle: 'System Setting',
+	txtHeader : 'Screen Mode',
 	txtEmail : 'Emel',
 	txtEmailDesc : 'Masukan emel',
 	txtPhone : 'Telefon',
@@ -118,8 +119,9 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 
 				layout : {
 					type : 'hbox',
-					align : 'top',
-					pack : 'stretch'
+					pack : 'center',
+					align : 'center'
+					
 				},
 				// height : 90,
 				width : '100%',
@@ -127,7 +129,8 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 					xtype : 'button',
 					itemId : 'btnSubmit',
 					name : 'btnSubmit',
-					ui : 'white',
+					ui : 'plain',
+					cls: 'r-square-button',
 					iconAlign : 'top',
 					// padding: '20px',
 					iconCls : 'fa-database',
@@ -169,6 +172,7 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 					itemId : 'btnHelp',
 					// iconCls : "list",
 					ui : "plain",
+					
 					align : 'middle',
 					docked : 'right',
 
@@ -181,6 +185,10 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 				}]
 			});
 			this.setItems([{
+				xtype: 'label',
+				cls: 'r-title',
+				html: me.txtPageTitle
+			},{
 				xtype : 'hiddenfield',
 				label : 'Company',
 				itemId : 'company',
@@ -329,20 +337,40 @@ Ext.define('mhelpdesk.view.SystemConfig', {
 						value : soundFlag,
 						hidden : false,
 						label : me.txtUseSound
+//					}, {
+//						xtype : 'togglefield',
+//						itemId : 'screen_mode',
+//						name : 'screen_mode',
+//						value : record.data.screenMode,
+//						label : me.txtHeader
 					}, {
-						xtype : 'togglefield',
+						xtype : 'selectfield',
+						label : this.txtHeader,
+						autoSelect : true,
+						readOnly : false,
+						options : [{
+									text : "Normal Mode",
+									value : 0
+								}, {
+									text : "Modern Mode",
+									value : 1
+								}, {
+									text : "Guard Mode",
+									value : 2
+								}],
 						itemId : 'screen_mode',
 						name : 'screen_mode',
 						value : record.data.screenMode,
-						label : me.txtHeader
+						required : false
 					}, {
 						xtype : 'toolbar',
-						docked : 'top',
+						docked : 'bottom',
 						ui : 'white',
 						layout : {
 							type : 'hbox',
-							align : 'stretch',
-							pack : 'left'
+							pack : 'center',
+							align : 'center',
+							
 						},
 						items : [toolbarOper]
 					}]);

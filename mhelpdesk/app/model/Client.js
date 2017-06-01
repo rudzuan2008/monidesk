@@ -6,17 +6,9 @@ Ext.define("mhelpdesk.model.Client", {
 			type : 'uuid',
 			isUnique : true
 		},
-		fields : [ 
-		          {name: 'client_id', type: 'int'}, 
-		          {name: 'client_email', type: 'string'}, 
-		          {name: 'client_firstname', type: 'string'}, 
-		          {name: 'client_lastname', type: 'string'}, 
-		          {name: 'isactive', type: 'int'}, 
-		          {name: 'client_mobile', type: 'string'}, 
-		          {name: 'client_organization', type: 'string'}, 
-		          {name: 'client_phone', type: 'string'}, 
-		          {name: 'client_product', type: 'string'}
-		         ],
+		fields : ['client_id', 'support_staff', 'noautoresp', 'client_email', 'client_firstname', 'client_lastname', 'client_password', 'client_organization', 
+			'client_dept', 'client_product', 'client_phone', 'client_mobile', 'client_fax', 'client_address', 'client_postcode', 'client_state_id', 'client_isactive', 
+			'client_created', 'client_lastlogin', 'company_id'],
 		proxy : {
 			type : 'localstorage',
 			id : 'clientModel'

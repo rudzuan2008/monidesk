@@ -3,6 +3,50 @@ $base-gradient: glossy;
 $include-default-icons: false;
 $font-family: 'Helvetica Neue';
 
+$contrast-color: #63a0d0; //#6c9804;
+$confirm-color: #799D54;
+$alert-color: #B0886D;
+$neutral-color: $base-color;
+$active-color: #3498db;
+$gray-color: #5c5c5c;
+$red-color : red;
+
+
+$form-bg-color: $base-color;
+$form-light: #e8eeef;
+
+$page-bg-color: $base-color;
+$sheet-bg-color: $base-color;
+
+
+$white-base-text: black;
+$black-base-text: white;
+
+$disabled-color: #D3D3D3;
+$text-base-color: white;
+
+// throw out default pictos font
+//$include-pictos-font: true;
+$include-default-icons: true;
+$pathmenu-base-color: $contrast-color;
+$pathmenu-icon-color: white;
+
+$button-color: #16a085;
+//$button-border: none !default;
+$button-background-focus: lighten($contrast-color, 4%) !default;
+//$button-font-size: 1.3rem !default;
+//$button-height: 50px !default;
+//$button-padding: 2 2rem !default;
+//$button-radius: 28px !default;
+
+$button-icon: white;
+$button-border-color : #0077B5;
+$button-base-color : #1770B6; //$contrast-color;
+$button-hover-color : $active-color;
+$button-text-color: #0077B5; //set-text-color($button-color);
+$button-toolbar: #4bc970;
+
+
 // throw out default pictos font
 $include-pictos-font: true;
 $include-default-icons: true;

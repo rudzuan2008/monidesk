@@ -6,10 +6,10 @@
             "cordova" : {
                 "config": {
                     // Uncomment the line below and add the platforms you wish to build for
-                    //"platforms": "ios android",
-					"platforms" : "android",
-                    "id": "com.domain.wtdesk",
-                    "name": "WtDesk"
+                    "platforms": "android",
+
+                    "id": "com.domain.wtpropertycheck.hh",
+                    "name": "WtProperty"
                 }
             }
         }
@@ -19,12 +19,22 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "WtDesk",
+    "name": "WtProperty",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
      */
     "indexHtmlPath": "index.html",
+
+    /**
+     * The Sencha Framework for this application: "ext" or "touch".
+     */
+    "framework": "touch",
+
+    "classpath": [
+        "app",
+        "app.js"
+    ],
 
     /**
      * The absolute URL to this application in development environment, i.e: the URL to run this application
@@ -33,8 +43,8 @@
      * This value is needed when build to resolve your application's dependencies if it requires server-side resources
      * that are not accessible via file system protocol.
      */
-    "url": "http://android.schoolcheck-now.com/hdesk/mhelpdesk/",
-	"classpath": "${app.dir}/app",
+    "url": "https://www.wtpropertycheck.com/mhelpdesk/",
+	
     /**
      * List of all JavaScript assets in the right execution order.
      * Each item is an object with the following format:
@@ -57,7 +67,7 @@
      */
     "js": [
         {
-            "path": "touch/sencha-touch.js",
+            "path": "../../touch/sencha-touch.js",
             "x-bootstrap": true
         },
         {
@@ -66,8 +76,8 @@
         },
         {
             "path": "app.js",
-            "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
-            "update": "delta"
+            "bundle": true  /* Indicates that all class dependencies are concatenated into this file when build */
+            //"update": "delta"
         }
     ],
 
@@ -87,8 +97,8 @@
      *
      *      }
      */
-     "css": [
-      {
+    "css": [
+         {
          "update": "delta",
          "platform": [
          	"phone",
@@ -98,31 +108,9 @@
          ],
          "theme": "Default",
          "path": "resources/css/app.css"
-      },{
-         "update": "delta",
-         "platform": [
-            "windows"
-         ],
-         "theme": "Cupertino",
-         "path": "resources/css/cupertino.css"
-      }
-      /*,{
-         "update": "delta",
-         "platform": [
-            "windows"
-         ],
-         "theme": "Windows",
-         "path": "resources/css/bb10.css"
-      }*/
-    ], 
-    /*
-    "css": [
-        {
-            "path": "resources/css/cupertino.css",
-            "update": "delta"
-        }
+      }  
     ],
-	*/
+
     /**
      * Used to automatically generate cache.manifest (HTML 5 application cache manifest) file when you build
      */
@@ -157,7 +145,7 @@
      * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
      */
     "ignore": [
-        "\.svn$"
+        "\\.svn$"
     ],
 
     /**
@@ -169,12 +157,32 @@
     /**
      * List of package names to require for the cmd build process
      */
-    "requires": [],
+    "requires": [
+    ],
+
+    /**
+     * Controls for localStorage caching
+     *   "cache": {
+     *       // This property controls whether localStorage caching of this manifest file is on or off.
+     *       // if disabled no deltas will be generated during a build and full updates will be disabled
+     *       "enable": false,
+     *
+     *       // This property allows for global toggle of deltas.
+     *       // If set to a string the value will be used as the path to where deltas will be generated relative to you build.
+     *       // If set to a Truthy Value the default path ok "deltas" will be used
+     *       // If set to a Falsey value or if this property is not present deltas will be disabled and not generated.
+     *       //
+     *       "deltas": "deltas"
+     *   }
+     */
+    "cache": {
+        "enable": true,
+        "deltas": "deltas"
+    },
 
     /**
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    /*"id": "427b641e-f557-4392-9367-3a134486b246"*/
-    "id": "200de0df-431e-4b9a-99b7-fcf5af87bbf5"
+    "id": "494e3e13-b521-414c-8186-fa35aadc31ae"
 }

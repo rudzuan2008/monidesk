@@ -21,6 +21,8 @@ Ext.define('mhelpdesk.view.Locale', {
 				msgAlert : 'Makluman',
 				msgFail : "Gagal",
 				msgThanks : "Terima Kasih",
+				msgCreated : 'diwujudkan',
+				msgReply : 'Jawapan balas',
 				msgAddSuccess : "Operasi yang dilakukan telah berjaya.",
 				msgDelSuccess : "Operasi yang dilakukan telah berjaya.",
 				msgUpdSuccess : "Operasi kemaskini yang dilakukan telah berjaya.",
@@ -47,9 +49,32 @@ Ext.define('mhelpdesk.view.Locale', {
 				NotAnswered : 'Belum Dijawab',
 				Subject : 'Perkara',
 				DateCreate : 'Tarikh Hantar',
-				Ticket : 'Tiket',
+				Ticket : 'Aduan/Maklum Balas',
 				Message : 'Pesanan / Nota',
-				Attachment : 'Lampiran'
+				Attachment : 'Lampiran',
+				ContactUs : 'Hubungi Kami',
+				Date: 'Tarikh',
+				tapMain: 'UTAMA',
+            	tapTicket: 'ADUAN / MAKLUMBALAS',
+          		tapStatus :'STATUS', 
+            	tapNotification :'MAKLUMAN',
+           		tapEvent :'AKTIVITI',
+            	tapLogin :'DAFTAR MASUK',
+            	tapLogout :'DAFTAR KELUAR',
+            	tapSetting :'SETUP',
+            	tapCallOwner : 'PENGHUNI',
+            	tapAmbulance :'AMBULAN',
+            	tapPolice : 'POLIS',
+           		tapManagement :'PENGURUSAN',
+           		tapCouncil :'MAJLIS DAERAH',
+           		tapSos :'SENARAI S-O-S',
+          		tapVisitor : 'SEMAKAN PELAWAT',
+          		tapRegister :'DAFTAR',
+            	tapVisitorList :'SENARAI PELAWAT',
+            	tapVisitorPass :'PASS PELAWAT',
+           		tapDeliveryVehicle :'KENDERAAN PENGHANTARAN',
+            	tapBack : 'KEMBALI',
+            	tapSosAlert : 'S-O-S'
 			},
 			HomePage : {
 				txtScan : 'Imbas Kod QR',
@@ -91,13 +116,28 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtConfig : "Konfigurasi",
 				txtSetting : "Konfigurasi",
 				txtHome : "Utama",
-			    txtTicket : "Tiket",
+			    txtTicket : "Aduan/Maklum Balas",
 			    txtStatus : "Status",
 			    txtSearch : "Carian",
 			    txtFaq : "FAQ"
 			},
+			MainPage2 : {
+				txtLogout : 'Exit',
+				txtMenu : 'Menu',
+				txtBack : 'Kembali',
+				txtMotto : 'doc Mobile',
+				txtCopyRight : '© 2016',
+				txtCompany : 'Domain Oracle Sdn Bhd',
+				txtSupportPhone : '+60129498134',
+				txtSupportEmail : 'rudzuan@gmail.com',
+				txtTitle : '<b>Laman Penghuni</b>: Gunakan butang dibawah untuk teruskan operasi. ' +
+						'Sebahagian dari fungsi dibawah adalah berkaitan untuk penghuni sahaja. ' ,
+				txtFooter : 'Sila klik butang diatas untuk operasi yang berkaitan..',		
+				txtWelcome : 'Selamat Datang'
+			},
 			SystemConfig : {
-				txtHeader : 'Tutup Panel Atas',
+				txtPageTitle: 'Konfigurasi Sistem',
+				txtHeader : 'Jenis Skrin',
 				txtEmail : 'Emel',
 				txtEmailDesc : 'Masukan emel',
 				txtPhone : 'Telefon',
@@ -159,7 +199,8 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtReturn : "Kembali",
 				txtSetup : "Konfigurasi Aplikasi",
 				txtTimetable : "Selenggara Jadual",
-				txtUpload : "Tukar Gambar Paparan"
+				txtUpload : "Tukar Gambar Paparan",
+				txtLogout: 'Daftar Keluar'
 			},
 			FileUpload : {
 				txtReset : 'Asal',
@@ -180,18 +221,19 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtSearchField : "Masukan kriteria carian yang berkenaan"
 			},
 			Status : {
-				txtTitle : 'Butir-Butir',
-				txtDesc : "Untuk menyemak status Pesanan Bantuan anda, masukan maklumat Emel dan id Tiket yang berkaitan dengan Pesanan Bantuan tersebut. Jika ini adalah pemohonan pertama anda atau anda kehilangan id Tiket, Sila pilih butang <b>Tiket</b> untuk membuka permohonan tiket baru.",
+				txtPageStatus : 'Konfigurasi Sistem',
+				txtTitle : 'Semakan Staus Aduan/Maklum Balas',
+				txtDesc : "Untuk menyemak status Aduan/Maklum Balas anda, masukan maklumat Emel dan id Aduan/Maklum Balas yang berkaitan dengan Aduan/Maklum Balas tersebut. Jika ini adalah pemohonan pertama anda atau anda kehilangan id Aduan/Maklum Balas, Sila pilih butang <b>Aduan</b> untuk membuka permohonan baru.",
 				txtView : "Semak",
-				txtCreate : "Tiket",
+				txtCreate : "Aduan",
 				txtEmail : "Emel",
 				txtEmailDesc : "Masukan emel anda",
-				txtTicket : "Tiket",
-				txtTicketDesc : "Masukan no tiket anda"
+				txtTicket : "No Aduan / Maklum Balas",
+				txtTicketDesc : "Masukan no aduan / maklum balas anda"
 			},
 			Ticket : {
-				txtTitle : "Isi Borang",
-				txtDesc : "Sila lengkapkan maklumat seperti diruangan bawah agar kami dapat membantu anda sebaik mungkin.",
+				txtTitle : "Borang Aduan/Maklumbalas",
+				txtDesc : "Sila lengkapkan maklumat seperti diruangan diatas agar kami dapat membantu anda sebaik mungkin.",
 				txtSubmit : "Hantar",
 				txtName : "Nama Penuh",
 				txtNameDesc : "Masukan nama penuh anda",
@@ -201,19 +243,21 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtTelDesc : "Masukan no telefon anda",
 				txtBusiness : "Kategori",
 				txtBusinessDesc : "Masukan kategori bantuan",
-				txtSubject : "Tajuk/Subjek/Model/No Siri Perkakasan",
+				txtSubject : "Tajuk / Subjek",
 				txtSubjectDesc : "Masukan perkara yang berkaitan",
-				txtMsg : "Permasalahan/Pertanyaan/Isu/Laporan",
+				txtMsg : "Permasalahan / Pertanyaan / Isu /Laporan",
 				txtMsgDesc : "Masukan pesana/pertanyaan yang hendak diajukan",
 				txtPriority : "Keutamaan",
 				txtPriorityDesc : "Pilih tahap keutamaan pesanan",
 				txtCaptcha : "Teks Captcha",
 				txtCaptchaDesc : 'Masukan Teks image',
-				txtAttachment : 'Pilih Fail Lampiran',
-				txtUpload : 'Tukar Fail Lampiran'
+				txtAttachment : 'Lampiran',
+				txtUpload : 'Tukar Fail Lampiran',
+				txtProduct : 'No Unit',
+				txtProductDesc : 'Pilih No Unit'
 			},
 			PostMessage : {
-				txtTitle : 'PesPermasalahan /ta Jawapan',
+				txtTitle : 'Hantar Jawapan',
 				txtDesc : 'Masukan pesanan / nota jawapan',
 				txtPost : 'Hantar',
 				txtCancel : 'Batal',
@@ -221,7 +265,7 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtUpload : 'Tukar Lampiran'
 			},
 			ViewTicket : {
-				txtDesc : 'Tiket #',
+				txtDesc : 'Aduan/Maklum Balas #',
 				txtCreated : 'Tarikh',
 				txtName : 'Nama',
 				txtEmail : 'Email',
@@ -233,22 +277,47 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtDown : 'Papar'
 			},
 			UserTicket : {
-				txtView: 'Buka Tiket'
+				txtView: 'Buka'
 			},
 			NoticeTicketFail : {
-				txtDesc : 'Tiket Permohonan Bantuan GAGAL diwujudkan'
+				txtDesc : 'Permohonan Aduan/Maklum Balas Bantuan GAGAL diwujudkan',
+				txtClose : 'Kembali'
 			},
 			NoticeTicket : {
-				txtDesc : 'Tiket Permohonan Bantuan BERJAYA diwujudkan.',
+				txtDesc : 'Permohonan Aduan/Maklum Balas Bantuan BERJAYA diwujudkan.',
 				txtPara1 : 'Terima kasih kerana telah menghubungi kami',
-				txtPara2 : 'Tiket Permohonan Bantuan',
+				txtPara2 : 'Permohonan Aduan/Maklum Balas',
 				txtPara3 : 'telah diwujudkan dan wakil kami akan menghubungi tuan dalam masa terdekat.</p>',
 				txtPara4 : 'Kami juga telah emel ke <b><a href="mailto://',
-				txtPara5 : 'nombor rujukan Tiket Permohonan Bantuan',
-				txtPara6 : 'Nombor rujukan Tiket Permohonan Bantuan ini dan alamat emel tuan adalah diperlukan untuk tuan menyemak status dan kemajuan permohonan tuan.',
+				txtPara5 : 'nombor rujukan Permohonan Aduan/Maklum Balas',
+				txtPara6 : 'Nombor rujukan Permohonan Aduan/Maklum Balas ini dan alamat emel tuan adalah diperlukan untuk tuan menyemak status dan kemajuan permohonan tuan.',
 				txtPara7 : 'Sila ikut arahan di emel tersebut sekiranya tuan ingin menambah maklumat atau komen mengenai isu yang sama.',
 				txtThanks : 'Terima Kasih',
-				txtHelpdesk : 'Meja Bantuan WtDesk'
+				txtHelpdesk : 'Meja Bantuan WtDesk',
+				txtClose : 'Kembali'
+			},
+			Login : {
+				txtTitle : "Daftar Masuk",
+				txtUserID : 'ID Pengguna',
+				txtPasswd : 'Kata Laluan',
+				txtLoginFail : 'Daftar masuk gagal. Sila masukkan maklumat sekuriti yang tepat.',
+				txtRememberMe : 'Kekal Kemasukan',
+				txtLoginIn : 'Log In',
+				txtSignIn : 'Sign Up',
+				txtRecoverPasswd : 'Lupa kata laluan?',
+				txtClickHere : 'Klik Disini..',
+				txtUserType : 'Jenis Pengguna'
+			},
+			SosAction : {
+				txtFilter: 'Cari',
+				txtAction : 'Tindakan Segera',
+				txtCallResident: "PENGHUNI",
+				txtCallMgmt: "PENGURUSAN",
+				txtVisitUnit: "LAWAT UNIT",
+				txtClose: "KEMBALI",
+				txtSOSUnit: 'SOS Dari Unit ',
+				txtSOSDetail: 'Maklumat SOS: ',
+				txtSOSInfo: 'Perincian SOS yang dihantar'
 			}
 		},
 		en : {
@@ -271,6 +340,8 @@ Ext.define('mhelpdesk.view.Locale', {
 				msgAlert : 'Notification',
 				msgFail : "Fail",
 				msgThanks : "Thank You",
+				msgCreated : 'created',
+				msgReply : 'Post reply',
 				msgAddSuccess : "Operation successful.",
 				msgDelSuccess : "Operation successful.",
 				msgUpdSuccess : "Operation successful.",
@@ -299,7 +370,30 @@ Ext.define('mhelpdesk.view.Locale', {
 				DateCreate : 'Create Date',
 				Ticket : 'Ticket',
 				Message : 'Enquiry / Note',
-				Attachment : 'Attachment'
+				Attachment : 'Attachment',
+				ContactUs : 'Contact Us',
+				Date: 'Date',
+				tapMain: 'HOME',
+            	tapTicket: 'COMPLAINT / FEEDBACK',
+          		tapStatus :'STATUS', 
+            	tapNotification :'NOTIFICATION',
+           		tapEvent :'EVENTS', 
+            	tapLogin :'LOGIN',
+            	tapLogout :'LOGOUT',
+            	tapSetting :'SETTING',
+            	tapCallOwner : 'CALL RESIDENT',
+            	tapAmbulance :'CALL AMBULANCE', 
+            	tapPolice : 'CALL POLICE', 
+           		tapManagement :'CALL MANAGEMENT', 
+           		tapCouncil :'CALL LOCAL COUNCIL', 
+           		tapSos :'S-O-S LIST',
+          		tapVisitor : 'VISITOR CHECK',
+          		tapRegister :'REGISTER NEW', 
+            	tapVisitorList :'VISITOR LIST',
+            	tapVisitorPass :'VISITOR PASS', 
+           		tapDeliveryVehicle :'DELIVERY VEHICLE', 
+            	tapBack : 'BACK TO MAIN',
+            	tapSosAlert : 'S-O-S'
 			},
 			HomePage : {
 				txtScan : 'Scan Code QR',
@@ -346,8 +440,23 @@ Ext.define('mhelpdesk.view.Locale', {
 			    txtSearch : "Search",
 			    txtFaq : "FAQ"
 			},
+			MainPage2 : {
+				txtLogout : 'Exit',
+				txtMenu : 'Menu',
+				txtBack : 'Back',
+				txtMotto : 'doc Mobile',
+				txtCopyRight : '© 2016',
+				txtCompany : 'Domain Oracle Sdn Bhd',
+				txtSupportPhone : '+60129498134',
+				txtSupportEmail : 'rudzuan@gmail.com',
+				txtTitle : '<b>Resident Page</b>: Use below button to execute related operations. ' +
+						'Certain operations are restricted to Resident only. ' ,
+				txtFooter : 'Click on the items above to execute the related operation...',		
+				txtWelcome : 'Welcome'
+			},
 			SystemConfig : {
-				txtHeader : 'Hide Top Panel',
+				txtPageTitle: 'System Setting',
+				txtHeader : 'Screen Mode',
 				txtEmail : 'Email',
 				txtEmailDesc : 'Enter email',
 				txtPhone : 'Phone',
@@ -409,7 +518,8 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtReturn : "Return",
 				txtSetup : "System Setup",
 				txtTimetable : "Maintain Timetable",
-				txtUpload : "Change Background Picture"
+				txtUpload : "Change Background Picture",
+				txtLogout: 'Logout'
 			},
 			FileUpload : {
 				txtReset : 'Reset',
@@ -430,18 +540,18 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtSearchField : "Enter search criteria"
 			},
 			Status : {
-				txtTitle : 'Particulars',
+				txtTitle : 'Check Report/Feedback Status',
 				txtDesc : "To view the status of a ticket, provide us with your login data below. If this is your first time contacting us or you've lost the ticket ID, please click button <b>Create</b> to open a new ticket.",
 				txtView : "Check",
 				txtCreate : "Create",
 				txtEmail : "Email",
 				txtEmailDesc : "Enter valid email",
-				txtTicket : "Ticket",
+				txtTicket : "Report / Feedback",
 				txtTicketDesc : "Enter valid ticket"
 			},
 			Ticket : {
-				txtTitle : "Fill Form",
-				txtDesc : "Please complete the fields below as detailed as possible for your queries, <br>so we can help you as best as possible.",
+				txtTitle : "Complaint/Feedback Form",
+				txtDesc : "Please fill-in the fields above as detailed as possible for your submission, <br>so we can help you as best as possible.",
 				txtSubmit : "Submit",
 				txtName : "Full Name",
 				txtNameDesc : "Enter Full Name",
@@ -451,16 +561,18 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtTelDesc : "Enter telephone number",
 				txtBusiness : "Category",
 				txtBusinessDesc : "Choose category",
-				txtSubject : "Title/Subject/Model/Part No",
+				txtSubject : "Title / Subject",
 				txtSubjectDesc : "Enter related matters",
-				txtMsg : "Enquiry/Question/Complaint/Report",
+				txtMsg : "Enquiry / Question / Complaint / Report",
 				txtMsgDesc : "Enter related issue",
 				txtPriority : "Priority",
 				txtPriorityDesc : "Choose priority",
 				txtCaptcha : "Captcha",
 				txtCaptchaDesc : 'Enter image text',
 				txtAttachment : 'Attach File',
-				txtUpload : 'Change File'
+				txtUpload : 'Attach',
+				txtProduct : 'Unit No',
+				txtProductDesc : 'Select Unit No'
 			},
 			PostMessage : {
 				txtTitle : 'Message / Post Note',
@@ -483,22 +595,47 @@ Ext.define('mhelpdesk.view.Locale', {
 				txtDown : 'Show'
 			},
 			UserTicket : {
-				txtView: 'View Ticket'
+				txtView: 'View Report / Feedback'
 			},
 			NoticeTicketFail : {
-				txtDesc : 'Requested Ticket Fail to Generate'
+				txtDesc : 'Requested Report/Feedback Fail to Generate',
+				txtClose : 'Return'
 			},
 			NoticeTicket : {
-				txtDesc : 'Help Ticket Application SUCCESSFUL created.',
+				txtDesc : 'Report/Feedback Application SUCCESSFUL created.',
 				txtPara1 : 'Thank you for contacting us',
-				txtPara2 : 'Help Ticket Application',
+				txtPara2 : 'Report/Feedback Application',
 				txtPara3 : 'has been established and our representatives will contact you in the near future.</p>',
 				txtPara4 : 'We also have e-mail to <b><a href="mailto://',
-				txtPara5 : 'Ticket Application reference number',
-				txtPara6 : 'Ticket Application reference number and your email address is required to check the status and progress of your application.',
+				txtPara5 : 'Report/Feedback Application reference number',
+				txtPara6 : 'Report/Feedback Application reference number and your email address is required to check the status and progress of your application.',
 				txtPara7 : 'Please follow the instructions in the e-mail if you would like to add or comment on the same issue.',
 				txtThanks : 'Thank You',
-				txtHelpdesk : 'WtDesk Support'
+				txtHelpdesk : 'WtDesk Support',
+				txtClose : 'Return'
+			},
+			Login : {
+				txtTitle : "Login Form",
+				txtUserID : 'User',
+				txtPasswd : 'Password',
+				txtLoginFail : 'Login failed. Please enter the correct credentials.',
+				txtRememberMe : 'Remember Me',
+				txtLoginIn : 'Log In',
+				txtSignIn : 'Sign Up',
+				txtRecoverPasswd : 'Forgot your password?',
+				txtClickHere : 'Click Here...',
+				txtUserType : 'Type'
+			},
+			SosAction : {
+				txtFilter: 'Find',
+				txtAction : 'Immediate Action',
+				txtCallResident: "RESIDENT",
+				txtCallMgmt: "MGMT",
+				txtVisitUnit: "VISIT UNIT",
+				txtClose: "RETURN",
+				txtSOSUnit: 'SOS From Unit ',
+				txtSOSDetail: 'SOS Details: ',
+				txtSOSInfo: 'SOS information details'
 			}
 			
 		}
@@ -527,6 +664,31 @@ Ext.define('mhelpdesk.view.Locale', {
 					}
 					if (mhelpdesk.component[view]) {
 						Ext.apply(mhelpdesk.component[view].prototype,
+								translations[view]);
+					}
+					if (mhelpdesk.view.client[view]) {
+						// console.warn(mhelpdesk.view[view]);
+						Ext.apply(mhelpdesk.view.client[view].prototype,
+								translations[view]);
+					}
+					if (mhelpdesk.view.event[view]) {
+						// console.warn(mhelpdesk.view[view]);
+						Ext.apply(mhelpdesk.view.event[view].prototype,
+								translations[view]);
+					}
+					if (mhelpdesk.view.notification[view]) {
+						// console.warn(mhelpdesk.view[view]);
+						Ext.apply(mhelpdesk.view.notification[view].prototype,
+								translations[view]);
+					}
+					if (mhelpdesk.view.ticket[view]) {
+						// console.warn(mhelpdesk.view[view]);
+						Ext.apply(mhelpdesk.view.ticket[view].prototype,
+								translations[view]);
+					}
+					if (mhelpdesk.view.visitor[view]) {
+						// console.warn(mhelpdesk.view[view]);
+						Ext.apply(mhelpdesk.view.visitor[view].prototype,
 								translations[view]);
 					}
 				}

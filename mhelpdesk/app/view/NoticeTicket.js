@@ -4,6 +4,7 @@ Ext.define('mhelpdesk.view.NoticeTicket', {
 	requires : ['Ext.TitleBar'],
 	config : {
 		itemId : 'noticeTicket',
+		cls: 'p-notice-ticket',
 		title : '',
 		user : '',
 		email : '',
@@ -31,6 +32,7 @@ Ext.define('mhelpdesk.view.NoticeTicket', {
 	txtPara7 : 'Sila ikut arahan di emel tersebut sekiranya tuan ingin menambah maklumat atau komen mengenai isu yang sama.',
 	txtThanks : 'Terima Kasih',
 	txtHelpdesk : 'Meja Bantuan EDC',
+	txtClose : 'Closed',
 	initialize : function() {
 		var me = this;
 		try {
@@ -51,8 +53,35 @@ Ext.define('mhelpdesk.view.NoticeTicket', {
 				+ me.txtThanks + '<br>'
 				+ system.getMembers()
 				+ '</div>';
-			
+			var toolbarOper = Ext.create("Ext.Container", {				
+				layout: {
+					type: 'hbox',
+					pack: 'center',
+					align: 'stretch'
+				},
+				items : [{
+					xtype : 'button',
+					itemId : 'btnReturnMain',
+					name : 'btnReturnMain',
+					ui : 'plain',
+					cls : 'r-square-button',
+					iconAlign : 'top',
+					iconCls : 'fa-times',
+					//style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
+					text : me.txtClose
+				}]
+			});
 			me.setItems([{
+				xtype : 'toolbar',
+				docked : 'bottom',
+				ui : 'white',
+				layout : {
+					type : 'vbox',
+					pack : 'top',
+					align : 'stretch'
+				},
+				items : [toolbarOper]
+			},{
 				xtype : 'fieldset',
 				title : me.txtDesc,
 				defaults : {

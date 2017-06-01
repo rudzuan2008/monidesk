@@ -4,6 +4,7 @@ Ext.define('mhelpdesk.view.Status', {
 	requires : ['Ext.TitleBar'],
 	config : {
 		itemId : 'status',
+		cls: 'p-form-status',
 		title : '',
 		scrollable : true,
 		pinHeaders : true
@@ -22,15 +23,17 @@ Ext.define('mhelpdesk.view.Status', {
 			var toolbarOper = Ext.create("Ext.Container", {				
 				layout: {
 					type: 'hbox',
-					align: 'top',
-					pack: 'stretch'
+					pack: 'center',
+					align: 'center'
+					
 				},
 				width : '100%',
 				items : [{
 					xtype : 'button',
 					itemId : 'btnSubmit',
 					name : 'btnSubmit',
-					ui : 'white',
+					ui : 'plain',
+					cls : 'r-square-button',
 					iconAlign : 'top',
 					iconCls : 'fa-search',
 					style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
@@ -46,7 +49,8 @@ Ext.define('mhelpdesk.view.Status', {
 					xtype : 'button',
 					itemId : 'btnCreate',
 					name : 'btnCreate',
-					ui : 'white',
+					ui : 'plain',
+					cls : 'r-square-button',
 					iconAlign : 'top',
 					iconCls : 'fa-envelope-o',
 					style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
@@ -73,7 +77,8 @@ Ext.define('mhelpdesk.view.Status', {
 					title : me.txtTitle,
 					instructions : me.txtDesc,
 					defaults : {
-						labelAlign : 'top',
+						labelAlign : 'left',
+						labelWidth: '40%',
 						labelWrap : true,
 						minWidth : 100,
 						anchor : '100%'
@@ -113,12 +118,13 @@ Ext.define('mhelpdesk.view.Status', {
 		        cls : 'error'
 	        },pnlContent, {
 				xtype : 'toolbar',
-				docked : 'top',
+				docked : 'bottom',
 				ui : 'white',
 				layout : {
 					type : 'hbox',
-					align : 'stretch',
-					pack : 'left'
+					pack : 'center',
+					align : 'center'
+					
 				},
 				items : [toolbarOper]
 			}]);

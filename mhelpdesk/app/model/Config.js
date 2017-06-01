@@ -33,6 +33,8 @@ Ext.define("mhelpdesk.model.Config", {
 		          {name : 'default_priority_id', type: 'int'}, 
 		          {name : 'default_template_id', type: 'int'}, 
 		          {name : 'default_smtp_id', type: 'int'}, 
+		          {name : 'default_ambulance', type: 'string'}, 
+		          {name : 'default_police', type: 'string'}, 
 		          {name : 'spoof_default_smtp', type: 'int'}, 
 		          {name : 'clickable_urls', type: 'int'}, 
 		          {name : 'allow_priority_change', type: 'int'}, 
@@ -91,7 +93,8 @@ Ext.define("mhelpdesk.model.Config", {
 		          {name : 'helpdesk_url', type: 'string'}, 
 		          {name : 'api_passphrase', type: 'string'}, 
 		          {name : 'ktsversion', type: 'string'}, 
-		          {name : 'updated', type: 'date', dateFormat : 'Y-m-d H:i:s'}		          
+		          {name : 'updated', type: 'date', dateFormat : 'Y-m-d H:i:s'},
+		          {name : 'company_id', type: 'int'}
 		         ],
 		proxy : {
 			type : 'localstorage',

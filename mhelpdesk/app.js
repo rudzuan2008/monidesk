@@ -23,6 +23,11 @@ Ext.Loader.setPath({
 			'mhelpdesk.view' : 'app/view',
 			'mhelpdesk.view.profile' : 'app/view/profile',
 			'mhelpdesk.view.user' : 'app/view/user',
+			'mhelpdesk.view.notification' : 'app/view/notification',
+			'mhelpdesk.view.event' : 'app/view/event',
+			'mhelpdesk.view.ticket' : 'app/view/ticket',
+			'mhelpdesk.view.client' : 'app/view/client',
+			'mhelpdesk.view.visitor' : 'app/view/visitor',
 			'mhelpdesk.controller' : 'app/controller',
 			'mhelpdesk.model' : 'app/model',
 			'mhelpdesk.store' : 'app/store',
@@ -31,6 +36,16 @@ Ext.Loader.setPath({
 Ext.override('Ext.Window', {
 			closeAction : 'hide'
 		});
+var mainController = null;
+var app = null;
+var locale = null;
+var system = null;
+var utils = null;
+var isLogin = false;
+var isDebug = true;
+var user = null;
+var defaultServer = null;
+var _debugLine=0;
 Ext.application({
 	name : 'mhelpdesk',
 	appFolder : 'app',
@@ -59,25 +74,40 @@ Ext.application({
 			'Ext.field.Toggle',
 			'Ext.ux.MessageBoxPatch',
 			'Ext.ux.PaintMonitor',
+			'Ext.ux.picker.Time',
+			'Ext.ux.field.TimePicker',
 			'Ext.field.Number',
 			'Ext.field.Hidden',
 			'Ext.ux.Fileup',
 			'Ext.Carousel',
 			'Ext.field.Search',
+			'Ext.field.Password',
 			//'Ext.ux.touch.grid.List',
 			'mhelpdesk.component.MenuButton',
-			'mhelpdesk.component.MenuHome'],
+			'mhelpdesk.component.MenuHome',
+			'mhelpdesk.component.MenuNotification',
+			'mhelpdesk.component.MenuActivity'],
+			
 	controllers : ['MainController'],
-	views : ['Main', 'MainPage', 'HomePage', 'System', 'Locale', 'SystemConfig',
-	         'Timetable', 'TimetableNew', 'TimetableList','FileUpload',
-	         'Status','Search', 'Faq', 'FaqList', 'Ticket', 'ClientList',
-	         'UserTicket', 'TicketList', 'ViewTicket', 'MessageList', 'PostMessage', 'NoticeTicket', 'NoticeTicketFail'],
-	models : ['DailyTimetable','SubjectTimetable', 'SystemSetting', 'LoadedImage',
-	          'Faq', 'Client', 'Topic', 'Priority', 'Ticket', 'Message', 'Config', 'Email'],
-	stores : ['LocalDailyTimetable','LocalSubjectTimetable','LocalSystemSetting','LocalLoadedImage',
-	          'LocalFaq', 'RemoteFaq', 'LocalClient', 'RemoteClient', 'LocalTopic', 'RemoteTopic',
-	          'LocalPriority', 'RemotePriority', 'LocalTicket', 'RemoteTicket', 'LocalMessage', 'RemoteMessage',
-	          'LocalConfig', 'RemoteConfig', 'LocalEmail', 'RemoteEmail'],
+	views : ['Main', 'MainPage', 'MainPage2', 'HomePage', 'System', 'Utils', 'Locale', 'SystemConfig','NotificationPage','notification.Notification','EventPage','event.Event',
+	         'Timetable', 'TimetableNew', 'TimetableList','FileUpload', 'Login', 'SosPage','ticket.SosList','ticket.SosAction', 'VisitorPage'
+	         ,'Status','Search', 'Faq', 'FaqList', 'Ticket', 'ClientList', 'Intercom', 'CallList','OccupantPage','client.OccupantList', 'visitor.Register'
+	         ,'UserTicket', 'TicketList', 'ViewTicket', 'MessageList', 'PostMessage', 'NoticeTicket', 'NoticeTicketFail', 'GuardPage', 'StatusPage'
+	         ,'VisitorListPage', 'visitor.VisitorList','visitor.ViewVisitor','visitor.RegisterDelivery','visitor.ViewDelivery' 
+	         ,'VisitorResidentPage', 'visitor.VisitorResidentList','visitor.ViewVisitorResident', 'visitor.ViewDeliveryResident','visitor.RegisterVisitorResident'
+	        ],
+	        
+	models : ['DailyTimetable','SubjectTimetable', 'SystemSetting', 'LoadedImage','Notification','Event','Product', 'Intercom', 'GuardIcon', 'VisitorIcon','ResidentIcon',
+	          'Faq', 'Client', 'Topic', 'Priority', 'Ticket', 'TicketSOS', 'TicketVisitor', 'Message', 'Config', 'Email', 'Page', 'PageDetail', 'ClientUnit'
+	        ],
+	        
+	stores : ['LocalDailyTimetable','LocalSubjectTimetable','LocalSystemSetting','LocalLoadedImage','LocalNotification','LocalEvent', 'LocalConfig',  'LocalEmail',  'LocalAllClient' 
+	          ,'LocalFaq', 'LocalClient',  'LocalTopic',  'LocalPage',  'LocalPageDetail', 'LocalPriority', 'LocalTicket',  'LocalMessage',  'LocalProduct',  'LocalIntercom'
+	          ,'LocalSosTicket', 'LocalVisitorTicket', 'LocalGuardIcon', 'LocalVisitorIcon', 'LocalResidentIcon'
+	          ,'RemoteFaq','RemoteEvent','RemoteClient','RemoteTopic','RemotePage','RemotePageDetail', 'RemotePriority','RemoteTicket','RemoteMessage','RemoteProduct'
+	          ,'RemoteConfig','RemoteEmail','RemoteCommon', 'RemoteAllClient','RemoteSosTicket', 'RemoteVisitorTicket', 'RemoteNotification'
+	        ],
+	        
 	icon : {
 		'57' : 'resources/icons/Icon.png',
 		'72' : 'resources/icons/Icon~ipad.png',
@@ -99,7 +129,18 @@ Ext.application({
 	launch : function() {
 		// Destroy the #appLoadingIndicator element
 		//Ext.fly('appLoadingIndicator').destroy();
+		var locMod = "app.launch";
+		var me = this;
+    	app=mhelpdesk.app;
+    	app.dh('Start','...',locMod);
+    	console.error('App Launch');
+    	
 		mainController = this.getController('MainController');
+		
+		locale = mhelpdesk.view.Locale;
+		system = mhelpdesk.view.System;
+		utils = mhelpdesk.view.Utils;
+		
 		Ext.override(Ext.LoadMask, {
 			getTemplate : function() {
 				var prefix = Ext.baseCSSPrefix;
@@ -209,6 +250,7 @@ Ext.application({
 	initialize : function() {
 		console.log('APP initialize');
 		// Add a Listener. Listen for [Viewport ~ Orientation] Change.
+		
 		Ext.Viewport.on('orientationchange', 'onOrientationChange', this);
 		this.callParent(arguments);
 	},
@@ -259,15 +301,63 @@ Ext.application({
 		}
 
 	},
+	eh: function(err, module) {
+		var me = this;
+		me.errHandler(err,module);
+	},
+	errHandler : function(err, module) {
+		try {
+			if (Ext.isEmpty(module)) { module=""; } else { module+=": "; }
+			console.error(module + err);
+		} catch (ex) {
+		}
+	},
+	dh: function(title, msg, module, msgtype) {
+		var me = this;
+		me.debugHandler(title, msg, module, msgtype);
+	},
+	debugHandler : function(title, msg, module, msgtype) {
+		var me = this;
+		try {
+			_debugLine += 1;
+			
+			if (Ext.isEmpty(module)) { module=""; } else { module+=": "; }
+			if (Ext.isEmpty(msg)) { msg=""; } else { title+=" "; }
+			
+			if (msgtype == "error") { console.error("#" + _debugLine + " " + module + title + msg);
+			} else if (msgtype == "log") { console.log(title + msg);
+			} else if (msgtype == "warn") { console.warn("#" + _debugLine + " " + module + title + msg);
+			} else { // info
+				console.info("#" + _debugLine + " " + module + title + msg);
+			}
+		} catch (ex) {
+		}
+	},
 	onUpdated : function() {
-		Ext.Msg
-				.confirm(
-						"Application Update",
-						"This application has just successfully been updated to the latest version. Reload now?",
-						function(buttonId) {
-							if (buttonId === 'yes') {
-								window.location.reload();
-							}
-						});
+		Ext.Msg.confirm(
+		"WT-Property Update",
+		"WT-Property application has just successfully been updated to the latest version. Reload now?",
+		function(buttonId) {
+			if (buttonId === 'yes') {
+				window.location.reload();
+			}
+		});
+	},
+	initDebug: function(isDebug) {
+		system.setIsDebug(isDebug);
+		system.setUrlPicturePath('https://www.wtpropertycheck.com/');
+		system.setUrlPostPicture('https://www.wtpropertycheck.com/remote/getfile.php');
+		system.setPortalServer('https://www.wtpropertycheck.com/');
+		console.error('SINI DAH');
+		if (isDebug) {
+			console.error("HERERERERER");
+			system.setIsDebug(isDebug);
+			system.setUrlPicturePath('http://www.wtpropertycheck.com/');
+			system.setUrlPostPicture('http://www.wtpropertycheck.com/remote/getfile.php');
+			system.setPortalServer('http://www.wtpropertycheck.com/');
+			console.error(system.getPortalServer());
+		}
+		defaultServer=system.getDefaultServer();
+	
 	}
 });

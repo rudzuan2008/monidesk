@@ -4,10 +4,10 @@ Ext.define('mhelpdesk.view.HomePage', {
 	requires : ['Ext.TitleBar'],
 	config : {
 		itemId : 'homepage',
-		cls : 'landingpage',
+		cls : 'p-landingpage',
 		//styleHtmlContent : true,
 		// fullscreen: true,
-        //    layout: 'fit',
+        layout: 'fit',
 //		layout : {
 //			type : 'vbox',
 //			pack : 'center',
@@ -43,406 +43,127 @@ Ext.define('mhelpdesk.view.HomePage', {
 	txtColumn3 : "",
 	initialize : function() {
 		var me = this;
+		
 		var system = mhelpdesk.view.System;
-		var carousel = Ext.create('Ext.Carousel', {
-					
-					width : '100%',
-					height : '100%',
-					//flex : 1,
-					indicator : true,
-					direction : 'horizontal',
+		
+//		var carousel = Ext.create('Ext.Carousel', {
+//					
+//					width : '100%',
+//					height : '100%',
+//					indicator : true,
+//					direction : 'horizontal',
+//					defaultType: 'panel',
+//					defaults : {
+//						
+//					},
+//					items : [{
+//						title : 'Tab 1',
+//						html : '<table width="100%" cellspacing="5px" border=0>'
+//								+ '<tr><td><span style="font-weight:bold;">'
+//								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
+//								+ '</span></td></tr>'
+//								+ '<tr><td>'
+//								+ me.txtColumn1
+//								+ '</td></tr>'
+//								+ '</table>'
+//					}, {
+//						title : 'Tab 2',
+//						html : '<table width="100%"" cellspacing="5px" border=0>'
+//								+ '<tr><td><span style="font-weight:bold;">'
+//								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
+//								+ '</span></td></tr>'
+//								+ '<tr><td>'
+//								+ me.txtColumn2
+//								+ '</td></tr>' 
+//								+ '</table>'
+//					}, {
+//						title : 'Tab 3',
+//						html : '<table width="100%"" cellspacing="5px" border=0>'
+//								+ '<tr><td><span style="font-weight:bold;">'
+//								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
+//								+ '</span></td></tr>'
+//								+ '<tr><td>'
+//								+ me.txtColumn3
+//								+ '</td></tr>' 
+//								+ '</table>'
+//					}]
+//				});
+//		var nav = Ext.create('Ext.Container', {
+//					// cls : 'nav',
+//					width : '100%',
+//					layout : {
+//						type : 'hbox',
+//						align : 'end',
+//						pack : 'start'
+//					},
+//					style : 'padding-left: 30px;',
+//					items : [{
+//								xtype : "button",
+//								ui : "plain",
+//								// width : 20,
+//								text : "<<",
+//								handler : function() {
+//									carousel.previous();
+//								}
+//							}, {
+//								xtype : "button",
+//								// width : 20,
+//								ui : "plain",
+//								text : ">>",
+//								handler : function() {
+//									carousel.next();
+//								}
+//							}, {
+//								xtype : 'spacer',
+//								flex : 1
+//							}]
+//				});
+//		var content = Ext.create('Ext.Panel', {
+//					itemId : 'pnlContent',
+//					//border : 2,
+//					
 //					layout : {
 //						type : 'vbox',
-//						align : 'stretch',
-//						pack : 'top'
+//						pack : 'start',
+//						align : 'center'
+//					
 //					},
-					defaultType: 'panel',
-					defaults : {
-						
-					},
-					items : [{
-						title : 'Tab 1',
-						html : '<table width="100%" cellspacing="5px" border=0>'
-								+ '<tr><td><span style="font-weight:bold;">'
-								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
-								+ '</span></td></tr>'
-								+ '<tr><td>'
-								+ me.txtColumn1
-								+ '</td></tr>'
-								+ '</table>'
-					}, {
-						title : 'Tab 2',
-						html : '<table width="100%"" cellspacing="5px" border=0>'
-								+ '<tr><td><span style="font-weight:bold;">'
-								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
-								+ '</span></td></tr>'
-								+ '<tr><td>'
-								+ me.txtColumn2
-								+ '</td></tr>' 
-								+ '</table>'
-					}, {
-						title : 'Tab 3',
-						html : '<table width="100%"" cellspacing="5px" border=0>'
-								+ '<tr><td><span style="font-weight:bold;">'
-								+ "<div id='subheader'>" + me.txtFeatures + '</div>'
-								+ '</span></td></tr>'
-								+ '<tr><td>'
-								+ me.txtColumn3
-								+ '</td></tr>' 
-								+ '</table>'
-					}]
-				});
-		var nav = Ext.create('Ext.Container', {
-					// cls : 'nav',
-					width : '100%',
-					layout : {
-						type : 'hbox',
-						align : 'end',
-						pack : 'start'
-					},
-					style : 'padding-left: 30px;',
-					items : [{
-								xtype : "button",
-								ui : "plain",
-								// width : 20,
-								text : "<<",
-								handler : function() {
-									carousel.previous();
-								}
-							}, {
-								xtype : "button",
-								// width : 20,
-								ui : "plain",
-								text : ">>",
-								handler : function() {
-									carousel.next();
-								}
-							}, {
-								xtype : 'spacer',
-								flex : 1
-							}]
-				});
-		var content = Ext.create('Ext.Panel', {
-					itemId : 'pnlContent',
-					//border : 2,
-					
-					layout : {
-						type : 'vbox',
-						pack : 'start',
-						align : 'center'
-					
-					},
-					//flex : 1,
-					//height : 210,
-					width : '100%',
-					style : 'border-top: 1px solid rgba(0, 0, 0, 0.23) !important;',
-//					defaults : {
-//						height : 200,
-//						width : '100%'
-//					},
-					//styleHtmlContent : true,
-					items : [{
-						cls: 'welcome-page',
-						html : "<div style='padding-left: 10px; padding-top: 20px;text-align: center;'>"
-								//+ "<img width='100px' height='50px' src='"+ system.getDefaultServer() +"images/logo-small-edc.png' />"
-								+ "<img width='80px' height='80px' src='data:image/png;base64,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' />"
-								+ "<div id='title'>"
-								+ me.txtWelcome
-								+ "</div>"
-								+ "</div>"
-								+ "<div id='subtitle'>" + me.txtIntro + "</div><br><br>"
-					}, {
-						xtype : 'panel',
-						cls : 'carousel',
-						//width : '100%',
-						//height : 300,
-						//layout : 'vbox',
-						//style : 'border-top: 1px solid rgba(0, 0, 0, 0.23) !important;',
-						items : [carousel]
-						
-//					},{
-//						html : '.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>'
-//						//flex : 1
-					}]
-				});
-		me.setItems([content]);
+//					//flex : 1,
+//					//height : 210,
+//					width : '100%',
+//					style : 'border-top: 1px solid rgba(0, 0, 0, 0.23) !important;',
+////					defaults : {
+////						height : 200,
+////						width : '100%'
+////					},
+//					//styleHtmlContent : true,
+//					items : [{
+//						cls: 'welcome-page',
+//						html : "<div style='padding-left: 10px; padding-top: 20px;text-align: center;'>"
+//								//+ "<img width='100px' height='50px' src='"+ system.getDefaultServer() +"images/logo-small-edc.png' />"
+//								+ "<img width='80px' height='80px' src='data:image/png;base64,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' />"
+//								+ "<div id='title'>"
+//								+ me.txtWelcome
+//								+ "</div>"
+//								+ "</div>"
+//								+ "<div id='subtitle'>" + me.txtIntro + "</div><br><br>"
+//					}, {
+//						xtype : 'panel',
+//						cls : 'carousel',
+//						//width : '100%',
+//						//height : 300,
+//						//layout : 'vbox',
+//						//style : 'border-top: 1px solid rgba(0, 0, 0, 0.23) !important;',
+//						items : [carousel]
+//						
+////					},{
+////						html : '.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>.&nbsp;<br>'
+////						//flex : 1
+//					}]
+//				});
+//		me.setItems([content]);
 	},
-	// txtScan : 'Imbas Kod QR',
-	// initialize : function() {
-	// var me = this;
-	// try {
-	// var system = mhelpdesk.view.System;
-	// //adjust display text base on device screen
-	// var h = screen.height;
-	// var w = screen.width;
-	// var picW = w;
-	// var picH = h-195;
-	// var labelH = h/2;
-	// var padT = (h/4)-100;
-	// if (padT < 1) {
-	// padT = 0;
-	// }
-	// var content2 = Ext.create('Ext.Panel', {
-	// xtype : 'panel',
-	// itemId : 'pnlResult',
-	// hidden : true,
-	// width : '100%',
-	// height : '100%',
-	// layout : 'vbox',
-	// items : [{
-	// itemId : 'lblNotice',
-	// name : 'lblNotice',
-	// styleHtmlContent:'true',
-	// styleHtmlCls: 'mainContent',
-	// scrollable : false,
-	// height : '100%',
-	// pinHeaders : true,
-	// padding : 0,
-	// layout : 'fit',
-	//					
-	// hidden : false,
-	// style : "color: white; background-color:white;text-align: -webkit-center;
-	// font-size: x-large;height:100%;",
-	//					
-	// html : '',
-	// //height : '100%',
-	// flex : 1,
-	// items : [{
-	// xtype : 'label',
-	// html : 'Nota',
-	// itemId : 'msgLabel',
-	// style : 'padding-top: '+padT+'px;font-size: 2.5em;',
-	// hidden : false,
-	// hideAnimation : 'fadeOut',
-	// showAnimation : 'fadeIn'// ,
-	// // style: 'color:#990000;margin:5px 0px;'
-	// },{
-	// xtype : 'panel',
-	// style : 'padding-top: 10%',
-	// layout : {
-	// type : 'hbox',
-	// pack : 'middle',
-	// align : 'top'
-	// },
-	// items : [{
-	// itemId : 'lblMessage',
-	// name : 'lblMessage',
-	// cls : 'my-notice',
-	// hidden: false,
-	// html: 'asdasdasd'
-	// }]
-	// },{
-	// xtype : 'textfield',
-	// hidden : true,
-	// // cls : 'absent-student-panel',
-	// style : 'font-family: "FontAwesome";margin-top: 1em;padding: 10px;
-	// background-color:transparent;text-shadow: 2px 2px 0 white, 4px 4px 0
-	// black;',
-	// labelAlign : 'top',
-	// label : "",
-	// labelWrap : true,
-	// required : false,
-	// height : '500',
-	// itemId : 'qr_code',
-	// name : 'qr_code'
-	// }]
-	// }]
-	// });
-	// var content1 = Ext.create('Ext.Panel', {
-	// xtype : 'panel',
-	// itemId : 'pnlMain',
-	// hidden : false,
-	// width : '100%',
-	// height : '100%',
-	// layout : 'vbox',
-	// items : [{
-	// itemId : 'backPanel',
-	// styleHtmlContent:'true',
-	// styleHtmlCls: 'mainContent',
-	// scrollable : false,
-	// height : '100%',
-	// pinHeaders : true,
-	// padding : 0,
-	// layout : 'fit',
-	// html : '<img style="background-size:100%;width:100%;
-	// min-height:200px;margin:auto;display:block;padding:2px;"
-	// src="images/mhelpdesk.png" />',
-	// items: [{
-	// xtype : 'panel',
-	// style : 'padding-top:10px;',
-	// layout : {
-	// type : 'hbox',
-	// pack : 'middle',
-	// align : 'top'
-	// },
-	// items : [{
-	// xtype : 'image',
-	// itemId : 'img_path',
-	// name : 'img_path',
-	// cls : 'logo-style',
-	// src : 'images/smhelpdesk.png'
-	// //style : 'width:100%; height:100px;'
-	// }]
-	//
-	// },{
-	// xtype : 'panel',
-	// style : 'padding-top: 30%;',
-	// layout : {
-	// type : 'hbox',
-	// pack : 'middle',
-	// align : 'top'
-	// },
-	// items : [{
-	// itemId : 'lblTitle',
-	// name : 'lblTitle',
-	// cls : 'my-new-ticker',
-	// hidden: false,
-	// html: 'asdasdasd'
-	// }]
-	// }]
-	// }, {
-	// xtype : 'image',
-	// itemId : 'img_path',
-	// name : 'img_path',
-	// cls : 'logo-style'
-	// // style : 'width:100%; height:100px;'
-	// // },{
-	// // xtype : 'panel',
-	// // styleHtmlContent:'true',
-	// // styleHtmlCls: 'mainContent',
-	// // scrollable : false,
-	// // //height : '100%',
-	// // pinHeaders : true,
-	// // padding : 0,
-	// // layout : 'fit',
-	// // html: '<img
-	// style="background-size:100%;height:700px;max-width:100%;max-height:100%;margin:auto;display:block;"
-	// src="images/default.jpg" />',
-	// //
-	// // height: '70%',
-	// // itemId: 'popupwidget',
-	// // left: '5%',
-	// // //padding: 10,
-	// // top: '10%',
-	// // width: '90%',
-	// // hideOnMaskTap: true,
-	// // //layout: 'vbox',
-	// // //modal: true,
-	// // style : 'padding: 50px;background-color: transparent'
-	// // //html : 'test',
-	//					
-	//			        
-	// }]
-	// });
-	// var toolBar = Ext.create('Ext.Toolbar', {
-	// hidden : false,
-	// docked : 'bottom',
-	// layout : {
-	// type : 'hbox',
-	// pack : 'middle',
-	// align : 'center'
-	// },
-	// items : [{
-	// xtype : 'button',
-	// text : this.txtScan,
-	// ui : 'confirm',
-	// flex : 1,
-	// minWidth : 100,
-	// maxWidth : 150,
-	// iconCls : 'fa-qrcode fa-2x',
-	// style : 'text-align: center; font-family: "FontAwesome";margin: .5em .5em
-	// .5em;padding-left: 5px; height: 50px;',
-	// listeners : {
-	// tap : function(thisButton, e, eOpts) {
-	// var dispLocation = me.down('#qr_code');
-	// me.fireEvent('scanQR', me, thisButton,
-	// dispLocation);
-	//
-	// }
-	// }
-	// }]
-	// });
-	// var panel = Ext.create('Ext.Panel', {
-	// // fullscreen: true,
-	// // layout: 'fit',
-	// // ui : 'white',
-	// width : '100%',
-	// height : '100%',
-	// padding : 2,
-	// items : [toolBar, content1, content2]
-	// });
-	//
-	//
-	// me.setItems([panel]);
-	//			
-	// var lblNotice = me.down('#lblNotice');
-	// me._count = 1;
-	// var ticker_interval = system.getTickerInterval();
-	// var ticker = function() {
-	// me._tickerTask = Ext.create('Ext.util.DelayedTask',
-	// function() {
-	// // Ext.Animator.run({
-	// // element: lblNotice,
-	// // preserveEndState: true,
-	// // duration: 1000,
-	// // easing: 'fade',
-	// // to: {
-	// // //opacity : 1
-	// // },
-	// // onEnd: function () {
-	// // //opacity : 0
-	// // }
-	// // });
-	// if (me.bgColor==me.setColor){
-	// me.bgColor="white";
-	// }else{
-	// me.bgColor=me.setColor;
-	// }
-	// // var strHtml = '<div style="color:black;background-color:'+ bgColor
-	// +';">'
-	// // + 'TESTING '+me._count;
-	// // + '</div>';
-	// // lblNotice.setHtml(strHtml);
-	// lblNotice.setStyle('color: white; background-color:'+ me.bgColor
-	// +';text-align: -webkit-center; font-size: large;height:100%;');
-	// lblNotice.setHidden(false);
-	// me._count++;
-	// ticker.call(this);
-	// }, me);
-	// me._tickerTask.delay(ticker_interval);
-	//
-	// }
-	//
-	// ticker();
-	//			
-	// var localStore = Ext.getStore('localLoadedImageStore');
-	// if (localStore) {
-	// localStore.load({
-	// callback : function(records, operation, success) {
-	// console.log("STORE FILE LOADED!!!"+records.length);
-	// if (records.length > 0) {
-	// var record = records[0];
-	// var file = record.get("src");
-	// console.log("FILE FOUND!!!!"+file);
-	// var backPanel = me.down('#backPanel');
-	// backPanel.setHtml('<img style="background-size:100%;width:100%;
-	// height:'+picH+'px;min-height:200px;margin:auto;display:block;padding:2px;"
-	// src="'+file+'" />');
-	// }
-	// }
-	// });
-	// }
-	// // Ext.Anim.run(lblNotice, 'fade', {
-	// // out : false,
-	// // reverse : true,
-	// // easing : 'ease-in-out',
-	// // duration : 1000, // 3000,
-	// // autoClear : false
-	// // });
-	// } catch (ex) {
-	// console.error(ex);
-	// }
-	// },
+	
 	setTitle : function(title) {
 		var me = this;
 		var dispText = me.down("#lblTitle");

@@ -1,18 +1,56 @@
-$base-color: white;
+$base-color: #0062AF; //
 $base-gradient: glossy;
 $include-default-icons: false;
 $font-family: 'Helvetica Neue';
 
+$contrast-color: #63a0d0; //#6c9804;
+$confirm-color: #799D54;
+$alert-color: #B0886D;
+$neutral-color: $base-color;
+$active-color: #3498db;
+$gray-color: #5c5c5c;
+$red-color : red;
+
+
+$form-bg-color: $base-color;
+$form-light: #e8eeef;
+
+$page-bg-color: $base-color;
+$sheet-bg-color: $base-color;
+
+
+$white-base-text: black;
+$black-base-text: white;
+
+$disabled-color: #D3D3D3;
+$text-base-color: white;
+
 // throw out default pictos font
 //$include-pictos-font: true;
 $include-default-icons: true;
+$pathmenu-base-color: $contrast-color;
+$pathmenu-icon-color: white;
+
+$button-color: #16a085;
+//$button-border: none !default;
+$button-background-focus: lighten($contrast-color, 4%) !default;
+//$button-font-size: 1.3rem !default;
+//$button-height: 50px !default;
+//$button-padding: 2 2rem !default;
+//$button-radius: 28px !default;
+
+$button-icon: white;
+$button-border-color : #0077B5;
+$button-base-color : #1770B6; //$contrast-color;
+$button-hover-color : $active-color;
+$button-text-color: #0077B5; //set-text-color($button-color);
+$button-toolbar: #4bc970;
 
 // The following two lines import the default Sencha Touch theme. If you are building
 // a new theme, remove them and the add your own CSS on top of the base CSS (which
 // is already included in your app.json file).
 @import 'sencha-touch/default';
 @import 'sencha-touch/default/all';
-
 // Custom code goes here..
 //@import 'pathmenu';
 // Examples of using the icon mixin:
@@ -33,7 +71,11 @@ $include-default-icons: true;
 @import "rotated-flipped";
 @import "stacked";
 @import "icons";
+@import "tabbars";
+@import "toolbars";
 @import "fileup";
+@import "mystyle";
+ 
   
 @include sencha-toolbar-ui('white', #FFFFFF, 'glossy');
 @include sencha-button-ui('white', #FFFFFF,'glossy');
@@ -117,19 +159,6 @@ $include-default-icons: true;
     100%{   transform: rotate(330deg); }
 }
 
-.landingpage {
-	background-color : ghostwhite;
-	background-image:url('../images/background-home.jpg');
-	background-repeat:no-repeat;
-	background-position:center;
-	background-size: contain;
-  
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .85em;
-  text-decoration: none;
-  border: none;
-  font-weight: normal;
-}
 @include sencha-button-ui('pathmenu', #ffffff, 'glossy');
 
 .x-button {
@@ -202,3 +231,24 @@ $include-default-icons: true;
 		}
 	}
 }
+
+
+.x-button .x-button-icon:before {
+	font-family: "FontAwesome" !important;
+	padding-top : .35em;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+//.x-tabbar-dark.x-docked-bottom .x-tab {
+	//background-image: -webkit-linear-gradient(top, #ffffff,#ffffff 50%,#ffffff 51%,#C7C4C4);
+//    text-shadow: rgba(255,255,255,0.25) 0 0.08em 0;
+//   cursor: pointer;
+//}
+
+//.x-toggle-on,.x-toggle-off {
+//	background-size:100% 100%;
+//}
+
+
+	

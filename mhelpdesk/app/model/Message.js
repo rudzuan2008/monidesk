@@ -20,7 +20,8 @@ Ext.define("mhelpdesk.model.Message", {
 		          {name: 'source', type: 'string'}, 
 		          {name: 'ip_address', type: 'string'}, 
 		          {name: 'created', type: 'date', dateFormat : 'Y-m-d H:i:s'},
-		          {name: 'attachments', type: 'int'}
+		          {name: 'attachments', type: 'int'},
+		          'visitor_name','visitor_phone','visitor_vehicle','pass_no'
 		          ],
 		proxy : {
 			type : 'localstorage',

@@ -542,6 +542,7 @@ Ext.define('Ext.ux.Fileup', {
         // Create FormData object
         var form = new FormData();
         
+        //form.append("username", me.getUsername());
         form.append("refid", me.getRefid());
         form.append("ticketid", me.getTicketid());
         form.append("opertype", me.getOpertype());
@@ -550,7 +551,7 @@ Ext.define('Ext.ux.Fileup', {
         
         // Send form with file using XMLHttpRequest POST request
         //+ ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime()
-        //console.error("POST URL:"+me.getUrl());
+        console.error("POST URL:"+me.getUrl());
         http.open('POST', me.getUrl());
         http.send(form);
     },

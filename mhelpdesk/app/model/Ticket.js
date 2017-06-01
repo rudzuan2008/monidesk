@@ -22,7 +22,7 @@ Ext.define("mhelpdesk.model.Ticket", {
 		          {name: 'status', type: 'string'}, 
 		          {name: 'source', type: 'string'}, 
 		          {name: 'isoverdue', type: 'int'}, 
-		          {name: 'isanswerd', type: 'int'}, 
+		          {name: 'isanswered', type: 'int'}, 
 		          {name : 'duedate', type: 'date', dateFormat : 'Y-m-d H:i:s'},
 		          {name : 'reopened', type: 'date', dateFormat : 'Y-m-d H:i:s'},
 		          {name : 'closed', type: 'date', dateFormat : 'Y-m-d H:i:s'},
@@ -34,7 +34,8 @@ Ext.define("mhelpdesk.model.Ticket", {
 		          {name: 'topic', type: 'string'}, 
 		          {name: 'lock_id', type: 'int'}, 
 		          {name: 'priority_desc', type: 'string'}, 
-		          {name : 'fcreated', type: 'string'}
+		          {name : 'fcreated', type: 'string'},
+		          'client_id','asset_id','asset_name', 'asset_address', 'asset_unit'
 		         ],
 		proxy : {
 			type : 'localstorage',

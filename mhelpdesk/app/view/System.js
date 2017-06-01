@@ -7,7 +7,9 @@ Ext.define('mhelpdesk.view.System', {
 		sysRole: null,
 		school: null,
 		schoolLogo: null,
+		companyName: null,
 		company: null,
+		companyId: null,
 		language: 'en',
 		sound: true,
 		storeMonth: null,
@@ -17,8 +19,9 @@ Ext.define('mhelpdesk.view.System', {
 		tickerInterval: 350,
 		workingStartTime: '8:00:00',
 		workingEndTime: '18:00:00',
-		urlPostPicture : "http://android.schoolcheck-now.com/hdesk/remote/getfile.php", //"http://localhost/sc-now-android/remote/getfile.php", //
-		urlPicturePath : "http://android.schoolcheck-now.com/hdesk/", //"http://localhost/sc-now/", //
+		urlPostPicture : "http://www.wtpropertycheck.com/remote/getfile.php", //"http://localhost/sc-now-android/remote/getfile.php", //
+		urlPicturePath : "http://www.wtpropertycheck.com/", //"http://localhost/sc-now/", //
+		portalServer : "http://www.wtpropertycheck.com/",
 //		urlPostPicture : "http://localhost/hdesk/remote/getfile.php", //
 //		urlPicturePath : "http://localhost/hdesk/", //
 		build: null,
@@ -33,8 +36,15 @@ Ext.define('mhelpdesk.view.System', {
 		colorFalse: 'red',
 		email : '',
 		phone : '',
-		theme : 'default'
-		
+		theme : 'app.css',
+		isLogin : false,
+		remember : false,
+		lastId : null,
+		ambulance: null,
+		police: null,
+		council: null,
+		management: null,
+		isDebug: true
 	},
 	dataTimeout: function(loadType){
 		switch (loadType) {
@@ -58,8 +68,19 @@ Ext.define('mhelpdesk.view.System', {
 	    return Math.floor(Math.random()*(max-min+1)+min);
 	},
 	getDefaultServer: function() {
-		return 'http://android.schoolcheck-now.com/hdesk/'; //  "http://localhost/sc-now/"; //
-		//return 'http://localhost/hdesk/'; //  "http://localhost/sc-now/"; //
+		//This for production
+		return 'https://www.wtpropertycheck.com/';
+		
+		//return 'http://www.wtpropertycheck.com/';
+		
+		
+		//console.error(mhelpdesk.app.isDebug);
+		//if (this.getIsDebug()) {
+		//	return 'http://www.wtpropertycheck.com/mhelpdesk/';
+		//}else{
+		//	return 'https://www.wtpropertycheck.com/mhelpdesk/'; //'http://www.wtpropertycheck.com/'; //  "http://localhost/sc-now/"; //
+		//}
+//		//return 'http://localhost/wt-property/'; //  "http://localhost/sc-now/"; //
 	},
 	getLangTranslation : function(text) {
 		var locale = mhelpdesk.view.Locale;

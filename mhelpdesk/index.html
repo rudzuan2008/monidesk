@@ -1,35 +1,33 @@
 <!DOCTYPE HTML>
 <html manifest="" lang="en-US">
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" 
-content="default-src *; 
+content="default-src data: gap: https://ssl.gstatic.com https://wtpropertycheck.onesignal.com *; 
+img-src 'self' data: *;
+font-src 'self' data: *;
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/css *; 
-script-src 'self' 'unsafe-inline' 'unsafe-eval' http://android.schoolcheck-now.com http://www.schoolcheck-now.com *; 
-frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.com http://www.schoolcheck-now.com https://maps.google.com *;">
+media-src *;
+script-src 'self' 'unsafe-inline' 'unsafe-eval' https://wtpropertycheck.onesignal.com https://www.wtpropertycheck.com https://www.wtpropertycheck.com/mhelpdesk http://139.162.47.214 http://139.162.47.214/hdesk-v2 *; 
+frame-src 'self' https://wtpropertycheck.onesignal.com https://cordova.apache.org https://www.wtpropertycheck.com https://www.wtpropertycheck.com/mhelpdesk http://139.162.47.214 http://139.162.47.214/hdesk-v2 https://maps.google.com *;">
 	<meta name="apple-mobile-web-app-status-bar-style" content="translucent" />
 	<meta name="viewport" content="width=device-width" />
-    <title>MyEDC Johor</title>
+    <title>wtpropertycheck Helpdesk</title>
+    <link rel="manifest" href="/manifest.json">
     <style type="text/css">
          /**
          * Example of an initial loading indicator.
          * It is recommended to keep this as minimal as possible to provide instant feedback
          * while other resources are still being loaded for the first time
          */
-        html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+         html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
 		{
 			margin: 0;
 			padding: 0;
+			border-style: inherit;
 			border: 0;
 			/*font-size: 100%;*/
-			font-family: Arial, Helvetica, sans-serif;
-			font: inherit;
+			font-family: arial, helvetica, sans-serif;
 			vertical-align: baseline
-		}
-		.ticket_hdr {
-			margin-top: 0px;
-  			padding: 15px 0 15px 0px;
-  			border: 1px solid rgba(0, 0, 0, 0.23) !important;
 		}
 		.panel-box-with-logo {
 			width: 100% !important;
@@ -62,27 +60,7 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 	    	font-family: Arial, Helvetica, sans-serif;
 	      	font-size: .85em;
 	    }
-		#title {
-	       /*display:block;*/
-	       text-align: center;
-	       font-family: Arial, Helvetica, sans-serif;
-	       font-size: 1.3em;
-	       text-decoration: none;
-	       border: none;
-	       font-weight: bold;
-	       padding-bottom:10px;
-	       padding-left:30px;
-	       padding-right: 30px;
-	    }
-	    #subheader {
-	    	text-align: center;
-	    }
-	    #subtitle {
-		   overflow: auto;
-		   margin: 5px;
-	 	   padding-left: 30px;
-	 	   padding-right: 30px;
-    	}
+		
     	.nav {
     		cursor: pointer;
     		font-weight: bold;
@@ -243,41 +221,6 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 			font-size: 1em;
 		}
 		
-		.x-form-fieldset {
-			/*padding-top: 5px !important;
-			padding: 15px !important;*/
-			font-size: .8em;
-			margin: .5em .5em .5em .5em !important; /* .5em .5em .5em; */
-		}
-		
-		.x-form-fieldset .x-form-fieldset-inner {
-			border: 1px solid #D8CECB !important;
-			background: rgba(255, 255, 255, 0) !important;
-			padding: 10px !important;
-			/* margin: 2px;
-			padding-bottom: 2px !important; */
-			-webkit-border-radius: 0.4em;
-			-moz-border-radius: 0.4em;
-			-ms-border-radius: 0.4em;
-			-o-border-radius: 0.4em;
-			border-radius: 1em !important;
-		}
-		
-		.x-form-fieldset-title .x-innerhtml {
-			white-space: normal !important;
-			overflow: visible;
-			text-overflow: ellipsis;
-			padding-bottom: 5px;
-		}
-		
-		.x-form-fieldset-title {
-			text-shadow: #fff 0 1px 1px;
-			color: #333333;
-			/*margin: 1em 0.7em 0.3em;*/
-			color: #16035A;
-			/*font-size: .8em !important;*/
-		}
-		
 		.x-form-label {
 			font-size: 1em;
 			background-color: transparent !important;
@@ -328,27 +271,8 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 			overflow: visible;
 			text-overflow: ellipsis;
 		}
-		.x-toolbar .x-button .x-button-label,.x-toolbar .x-button .x-badge {
-			font-size: .7em;
-		}
-		.x-list .x-list-item {
-			min-height: 0;
-			color: black;
-			font-size: .65em !important;
-		}
-		.x-toolbar {
-			padding: 0px !important;
-			margin:0px !important;
-		}
-		.x-toolbar-white .x-label, .x-toolbar-white .x-form-label {
-		  font-weight: bold;
-		  color: #262626;
-		  text-shadow: rgba(255,255,255,0.25) 0 0.08em 0;
-		  text-align: center;
-		}
-		.x-container .x-toolbar-dark .x-toolbar .x-stretched .white-toolbar .x-dock-item .x-docked-top {
-			background-color: white !important;
-		}
+		
+		
 		.x-toast .x-mask-inner {
 		      background-color:Black;
 		      font-size:0.9em;
@@ -379,23 +303,6 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 			.x-button {
 				cursor: pointer;
 			}
-			.x-button .x-button-icon:before {
-				font-family: "FontAwesome" !important;
-				padding-top : .35em;
-			    font-size: 1em !important;
-			    line-height: 1em !important;
-			}
-			
-			.x-toolbar-white .x-label, .x-toolbar-white .x-form-label {
-			  	font-weight: bold;
-			  	color: #262626;
-			  	text-shadow: rgba(255,255,255,0.25) 0 0.08em 0;
-			  	align-content: center;
-			  	width: 100%;
-			}
-			/*x-button x-button-filebrowse x-iconalign-top x-fileup x-layout-box-item x-stretched
-			x-button x-iconalign-top x-stretched x-fileup-ready x-button-fileready
-			*/
 			.x-button.x-fileup-ready {
 				border: 3px solid #fff !important;
 			  	-webkit-box-shadow: 0px 0px 5px #999;
@@ -800,7 +707,7 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 			.menu-bar:active span{
 			    -webkit-transform: translate(0, 5px); /* depth of button press */
 			}
-        #appLoadingIndicator {
+       #appLoadingIndicator {
             position: absolute;
             top: 50%;
             margin-top: -15px;
@@ -1028,16 +935,11 @@ frame-src 'self' http://www.schoolcheck-now.com http://android.schoolcheck-now.c
 				color:rgb(255,255,255);
 			}
 		}
-				
     </style>
-    
-   <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script> 
-    <!--
-	<link rel="stylesheet" href="resources/css/app.css" type="text/css">
-    <script type="text/javascript" src="touch/sencha-touch.js"></script>
-    <script type="text/javascript" src="app.js"></script>-->
-    
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script> 	
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 </head>
 <body>
     <div id="appLoadingIndicator">

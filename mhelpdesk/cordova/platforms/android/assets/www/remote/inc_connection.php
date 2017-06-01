@@ -1,15 +1,14 @@
 <?php
-header('Access-Control-Allow-Origin: *'); 
-header('Access-Control-Allow-Headers: Content-Type, x-requested-with'); 
-header('Access-Control-Allow-Methods: *'); 
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Content-Type, x-requested-with');
+header('Access-Control-Allow-Methods: *');
+define('DBHOST','localhost');
+define('DBUSER','helpdesk');
+define('DBPASS','password$1');
+define('DBNAME','wt-property');
 //Connect To Database
-$hostname='localhost'; //'103.21.34.233'; //
-$username='helpdesk';//myusername';
-$password='password$1';//mypassword';
-$dbname='hdesk';//testdb';
 
-$db_handle=mysql_pconnect($hostname,$username, $password);
+$db_handle=mysql_pconnect(DBHOST,DBUSER, DBPASS);
 if (!$db_handle) {
 	$response = array();
 	//$db_handle=mysql_pconnect("127.0.0.1:3306",$username, $password) or die('Unable to connect to database! Please try again later.');
@@ -18,6 +17,6 @@ if (!$db_handle) {
 	echo json_encode($response);
 	exit();
 }
-mysql_select_db($dbname);
+mysql_select_db(DBNAME);
 
 ?>

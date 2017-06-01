@@ -1,15 +1,19 @@
+system = mhelpdesk.view.System;
 Ext.define('mhelpdesk.view.Ticket', {
 	extend : 'Ext.form.Panel', // 'Ext.navigation.View',
 	xtype : 'ticket',
 	requires : ['Ext.TitleBar'],
 	config : {
+		method : 'post',
+		url : system.getDefaultServer() + 'mopen.php',
 		itemId : 'ticket',
+		cls: 'p-form-ticket',
 		title : '',
 		scrollable : true,
 		pinHeaders : true
 	},
-	txtTitle : "Fill Form",
-	txtDesc : "Please complete the fields below as detailed as possible for your queries, <br>so we can help you as best as possible.",
+	txtTitle : "Complaint/Feedback Form",
+	txtDesc : "Please fill-in the fields below as detailed as possible for your submission, <br>so we can help you as best as possible.",
 	txtSubmit : "Hantar",
 	txtName : "Full Name",
 	txtNameDesc : "Enter Full Name",
@@ -29,71 +33,36 @@ Ext.define('mhelpdesk.view.Ticket', {
 	txtCaptchaDesc : 'Enter image text',
 	txtAttachment : 'Attach File',
 	txtUpload : 'Change File',
-	
+	txtFilename : 'Attachment File',
+	txtProduct : 'Unit No',
+	txtProductDesc : 'Select Unit No',
 	initialize : function() {
 		var me = this;
 		var system = mhelpdesk.view.System;
 		try {
-			function getText(){
-			    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-				var text = "";
+			var localStore = Ext.getStore('localClientStore');
+			var isLogin = false;
+			var clientId = null;
+			var localConfigStore = Ext.getStore('localConfigStore');
 			
-			    for( var i=0; i < 5; i++ )
-			        text += possible.charAt(Math.floor(Math.random() * possible.length));
-			        
-			    return text;    
+			if (system.getIsLogin()){
+				isLogin=true;
+				clientId = system.getLastId();
 			}
-			function getImage(){
-				var img = "";
-				var imgIndex = Math.ceil(Math.random() * 9);
-				switch (imgIndex) {
-				  case 0:
-				    img = "bubbles.png";
-				    break;
-				  case 1:
-				    img = "cottoncandy.png";
-				    break;
-				  case 2:
-				    img = "crackle.png";
-				    break;
-				  case 3:
-				    img = "grass.png";
-				    break;
-				  case 4:
-				    img = "lines.png";
-				    break;
-				  case 5:
-				    img = "ripple.png";
-				    break;
-				  case 6:
-				    img = "sand.png";
-				    break;
-				  case 7:
-				    img = "silk.png";
-				    break;
-				  case 8:
-				    img = "snakeskin.png";
-				    break;  
-	    		  default:
-				    img = "whirlpool.png";
-				}
-				return img;
-			}
-			
-			var text = getText();
-			var img = getImage();
 			var toolbarOper = Ext.create("Ext.Container", {				
 				layout: {
 					type: 'hbox',
-					align: 'top',
-					pack: 'stretch'
+					pack: 'center',
+					align: 'center',
+					
 				},
 				width : '100%',
 				items : [{
 					xtype : 'button',
 					itemId : 'btnSubmit',
 					name : 'btnSubmit',
-					ui : 'white',
+					ui : 'plain',
+					cls : 'r-square-button',
 					iconAlign : 'top',
 					iconCls : 'fa-envelope-o',
 					style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
@@ -107,14 +76,13 @@ Ext.define('mhelpdesk.view.Ticket', {
 					}
 				},{
 					xtype : 'fileupload',
+					cls : 'r-file-upload',
 					itemId : 'fileBtnTicket',
 					name : 'fileBtnTicket',
-					ui : 'white',
+					ui : 'plain',
+					cls : 'r-square-button',
 					iconAlign : 'top',
-					iconCls : 'fa-fa-paperclip',
-					//style : 'padding-top:5px;',
-					style : 'font-family: "FontAwesome";margin: .5em .5em .5em; padding-top: 1.5em; padding-left: 5px; text-align: -webkit-center; height: 62px;',
-					//height : 45,
+					iconCls : 'fa-paperclip',
 					autoUpload : false,
 					captionBrowse : '<i class="fa fa-paperclip"></i><br>'+ me.txtAttachment+'<br>',
 					captionReady : '<i class="fa fa-file-o"></i><br>'+ me.txtUpload+'<br>',
@@ -122,9 +90,89 @@ Ext.define('mhelpdesk.view.Ticket', {
 					refid : 0,
 					ticketid : 0,
 					opertype : 'M',
-					//align : 'center',
 					hidden: true
 				}]
+			});
+			var panelCaptcha = Ext.create('Ext.Container',{
+				name : 'panelCaptcha',
+				itemId : 'panelCaptcha',
+				layout : {
+					type : 'hbox',
+					pack : 'start',
+					align : 'center'
+					
+				},
+				items : [{
+					xtype : 'label',
+					cls: 'r-captcha',
+					itemId : 'imgCaptcha',
+					style : 'background: transparent;'
+				},{
+					xtype : 'button',
+					text : 'Change',
+					cls: 'r-button-inside',
+					listeners : {
+						tap : function(thisButton, e, eOpts) {
+							me.fireEvent('captcha', me);
+							me.down('#imgCaptcha').setStyle('background: url(../images/captcha/'+img+');width: 100px;text-align: center;font-size:bold;');
+						}
+					}						
+				},{
+					xtype : 'spacer',
+					width: 5
+				},{
+					xtype : 'textfield',
+					flex: 1,
+					required : true,
+					itemId : 'captcha',
+					name : 'captcha',
+					placeHolder : me.txtCaptchaDesc
+				},{
+					xtype : 'spacer',
+					width: 5
+				},{
+					xtype : 'hiddenfield',
+					itemId : 'captchaValue',
+					name : 'captchaValue'
+				}]
+			});
+			var pnlCaptcha = Ext.create("Ext.Panel", {
+				itemId : 'pnlCaptcha',
+				layout: {
+					type: 'vbox',
+					pack: 'center',
+					align: 'center'
+				},
+				items: [{
+						xtype: 'label',
+						cls: 'r-label-title',
+						itemId : 'labelCaptcha',
+						name : 'labelCaptcha',
+						html : me.txtCaptcha
+					},panelCaptcha]
+				
+			});
+			var pnlAttachment = Ext.create("Ext.Panel", {
+				itemId : 'pnlAttachment',
+				layout: {
+					type: 'vbox',
+					pack: 'center',
+					align: 'center'
+				},
+				items: [{
+						xtype: 'label',
+						itemId: 'labelFilenameTicket',
+						cls: 'r-label-title',
+						html: me.txtFilename
+					},{
+						xtype: 'label',
+						itemId: 'filenameTicket',
+						style: 'font-size:.7em;background: transparent;padding-top:5px;padding-left:10px;',
+					    styleHtmlCls: 'fieldset-item-title',
+					    html: "No file selected ...",
+		                styleHtmlContent: true,
+		                hidden: true
+					}]
 			});
 			var pnlContent = Ext.create("Ext.Panel", {
 				itemId : 'pnlTicket',
@@ -141,15 +189,28 @@ Ext.define('mhelpdesk.view.Ticket', {
 					instructions : me.txtDesc,
 					defaults : {
 						//labelWidth : '25%',
-						labelAlign : 'top',
+						labelAlign : 'left',
 						labelWrap : true,
 						minWidth : 100,
 						anchor : '90%'
 					},
 					items : [{
 						xtype : 'textfield',
+						itemId : 'company_id',
+						name : 'company_id',
+						value: system.getCompanyId(),
+						hidden : true
+					},{
+						xtype : 'textfield',
+						itemId : 'client_id',
+						name : 'client_id',
+						value: clientId,
+						hidden : true
+					},{
+						xtype : 'textfield',
 						label : me.txtName,
 						required : true,
+						readOnly: true,
 						itemId : 'name',
 						name : 'name',
 						placeHolder : me.txtNameDesc,
@@ -165,6 +226,7 @@ Ext.define('mhelpdesk.view.Ticket', {
 						required : true,
 						itemId : 'email',
 						name : 'email',
+						hidden : isLogin,
 						placeHolder : me.txtEmailDesc,
 						listeners : {
 							focus : function(thisField, e, eOpts) {
@@ -178,6 +240,7 @@ Ext.define('mhelpdesk.view.Ticket', {
 						required : true,
 						itemId : 'phone',
 						name : 'phone',
+						hidden : isLogin,
 						placeHolder : me.txtTelDesc,
 						listeners : {
 							focus : function(thisField, e, eOpts) {
@@ -187,22 +250,50 @@ Ext.define('mhelpdesk.view.Ticket', {
 						}
 					},{
 						xtype : 'selectfield',
-						label : me.txtBusiness,
+						label : me.txtProduct,
 						autoSelect : true,
-						store : 'localTopicStore',
-						placeHolder : me.txtBusinessDesc,
-						valueField : 'topic_id',
-						displayField : 'topic',
-						// value: 'school_id',
-						itemId : 'topicId',
-						name : 'topicId',
+						store : 'localProductStore',
+						placeHolder : me.txtProductDesc,
+						valueField : 'asset_id',
+						displayField : 'serial_no',
+						itemId : 'asset_id',
+						name : 'asset_id',
 						required : false,
+						usePicker: true,
 						listeners : {
 							focus : function(thisField, e, eOpts) {
 								var label = this.getLabel();
 								me.setInstruction(this,label,"Choose");
+							},
+							change : function( thisSelect, newValue, oldValue, eOpts ) {
 							}
 						}
+					},{
+						xtype : 'selectfield',
+						label : me.txtBusiness,
+						autoSelect : false,
+						store : 'localTopicStore',
+						placeHolder : me.txtBusinessDesc,
+						valueField : 'topic_id',
+						displayField : 'topic',
+						itemId : 'topic_id',
+						name : 'topic_id',
+						required : false,
+						usePicker: true,
+						listeners : {
+							focus : function(thisField, e, eOpts) {
+								var label = this.getLabel();
+								me.setInstruction(this,label,"Choose");
+							},
+							change : function( thisSelect, newValue, oldValue, eOpts ) {
+								var category = me.down('#topicId');
+								category.setValue(newValue);
+							}
+						}
+					},{
+						xtype : 'hiddenfield',
+						itemId : 'topicId',
+						name : 'topicId'
 					},{
 						xtype : 'textfield',
 						label : me.txtSubject,
@@ -222,6 +313,7 @@ Ext.define('mhelpdesk.view.Ticket', {
 						required : true,
 						itemId : 'message',
 						name : 'message',
+						maxRows: 3,
 						placeHolder : me.txtMsgDesc,
 						listeners : {
 							focus : function(thisField, e, eOpts) {
@@ -241,97 +333,38 @@ Ext.define('mhelpdesk.view.Ticket', {
 						name : 'pri',
 						required : false,
 						hidden : true,
+						usePicker: true,
 						listeners : {
 							focus : function(thisField, e, eOpts) {
 								var label = this.getLabel();
 								me.setInstruction(this,label,"Choose");
 							}
 						}
-					},{
-						xtype: 'label',
-						itemId : 'labelCaptcha',
-						name : 'labelCaptcha',
-						html : me.txtCaptcha,
-						style : 'font-size: .8em;margin: 10px 10px 5px;font-weight:bold;' +
-								'font-size: 0.8em;'
-					},{
-						xtype: 'panel',
-						itemId : 'panelCaptcha',
-						name : 'panelCaptcha',
-						layout : {
-							type : 'hbox',
-							pack : 'left',
-							align : 'center'
-							
-						},
-						items : [{
-							xtype : 'button',
-							text : 'Change',
-							listeners : {
-								tap : function(thisButton, e, eOpts) {
-									text = getText();
-									img = getImage();
-									me.down('#captchaValue').setValue(text);
-									me.down('#imgCaptcha').setHtml(text);
-									me.down('#imgCaptcha').setStyle('background: url(../images/captcha/'+img+');width: 100px;text-align: center;font-size:bold;');
-								}
-							}						
-						},{
-							xtype : 'spacer',
-							width: 5
-						},{
-							xtype : 'label',
-							itemId : 'imgCaptcha',
-							style : 'background: url(../images/captcha/'+img+');width: 100px;text-align: center;font-size:bold;',
-							html: text
-						},{
-							xtype : 'spacer',
-							width: 5
-						},{
-							xtype : 'textfield',
-							required : true,
-							itemId : 'captcha',
-							name : 'captcha',
-							placeHolder : me.txtCaptchaDesc,
-							listeners : {
-								focus : function(thisField, e, eOpts) {
-									me.setInstruction(this.parent,me.txtCaptcha,"Enter");
-								}
-							}
-						},{
-							xtype : 'hiddenfield',
-							itemId : 'captchaValue',
-							name : 'captchaValue',
-							value : text
-						
-						}]
 					}]
-				},{
-					xtype: 'label',
-					itemId: 'filenameTicket',
-					style: 'font-size:.7em;background: transparent;padding-top:5px;padding-left:10px;',
-				    //cls : 'title',
-				    styleHtmlCls: 'fieldset-item-title',
-				    html: "No file selected ...",
-	                styleHtmlContent: true,
-	                hidden: true
 				}]
 			});
 			me.setItems([{
 				xtype : 'toolbar',
-				docked : 'top',
+				docked : 'bottom',
 				ui : 'white',
 				layout : {
 					type : 'hbox',
-					align : 'stretch',
-					pack : 'left'
+					pack : 'center',
+					align : 'center'
+					
 				},
 				items : [toolbarOper]
 			},{
 		        xtype: 'label',
 		        itemId: 'errorMessage',
 		        cls : 'error'
-	        },pnlContent]);
+	        },pnlContent,pnlAttachment,pnlCaptcha]);
+	        
+	        
+	        me.on('painted', function(){
+	        	me.fireEvent('captcha', me);
+	        });
+
 		} catch (ex) {
 			console.error(ex);
 		}

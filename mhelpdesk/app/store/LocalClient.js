@@ -13,7 +13,7 @@ Ext.define('mhelpdesk.store.LocalClient', {
 				//return '<span style="font-size:large;font-weight:bold;color:black">'+ record.get('topic') +'</span><br /><br />';
 			},
 			direction:'ASC',
-			sortProperty: 'client_organization'
+			sortProperty: 'client_id'
 		}
 
 	}

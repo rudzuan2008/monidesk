@@ -53,16 +53,16 @@ module.exports = {
     vibrate: function(param) {
 
         /* Aligning with w3c spec */
-        
+
         //vibrate
-        if ((typeof param == 'number') && param != 0)
+        if ((typeof param == 'number') && param !== 0)
             exec(null, null, "Vibration", "vibrate", [param]);
 
         //vibrate with array ( i.e. vibrate([3000]) )
         else if ((typeof param == 'object') && param.length == 1)
         {
             //cancel if vibrate([0])
-            if (param[0] == 0)
+            if (param[0] === 0)
                 exec(null, null, "Vibration", "cancelVibration", []);
 
             //else vibrate
@@ -108,7 +108,7 @@ module.exports = {
      */
     vibrateWithPattern: function(pattern, repeat) {
         repeat = (typeof repeat !== "undefined") ? repeat : -1;
-        pattern.unshift(0); //add a 0 at beginning for backwards compatibility from w3c spec
+        pattern = pattern.unshift(0); //add a 0 at beginning for backwards compatibility from w3c spec
         exec(null, null, "Vibration", "vibrateWithPattern", [pattern, repeat]);
     },
 

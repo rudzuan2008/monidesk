@@ -18,7 +18,15 @@ Ext.define("mhelpdesk.model.SystemSetting", {
 		          {name: 'phone', type: 'string'},
 		          {name: 'screen_mode', type: 'int'},
 		          {name: 'theme', type: 'string'},
-		          {name: 'company', type: 'string'}
+		          {name: 'company', type: 'string'},
+		          {name: 'company_id', type: 'int'},
+		          {name: 'login_flag', type: 'int'},
+		          {name: 'login_remember', type: 'int'},
+		          {name: 'last_clientid', type: 'int'},
+		          {name: 'company_name', type: 'string'},
+		          {name: 'user', type: 'string'},
+		          {name: 'fullname', type: 'string'},
+		          {name: 'group', type: 'string'}
 		          ],
 		proxy : {
 			type : 'localstorage',

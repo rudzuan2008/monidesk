@@ -4,6 +4,7 @@ Ext.define('mhelpdesk.view.NoticeTicketFail', {
 	requires : ['Ext.TitleBar'],
 	config : {
 		itemId : 'noticeTicketFail',
+		cls : 'p-notice-fail-ticket',
 		title : '',
 		user : '',
 		email : '',
@@ -33,9 +34,36 @@ Ext.define('mhelpdesk.view.NoticeTicketFail', {
 				+ msg 
 				+ '</div>';
 			//strHtml=msg;
-		
+			var toolbarOper = Ext.create("Ext.Container", {				
+				layout: {
+					type: 'hbox',
+					pack: 'center',
+					align: 'stretch'
+				},
+				items : [{
+					xtype : 'button',
+					itemId : 'btnReturnMain',
+					name : 'btnReturnMain',
+					ui : 'plain',
+					cls : 'r-square-button',
+					iconAlign : 'top',
+					iconCls : 'fa-times',
+					//style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
+					text : me.txtClose
+				}]
+			});
 			
 			me.setItems([{
+				xtype : 'toolbar',
+				docked : 'bottom',
+				ui : 'white',
+				layout : {
+					type : 'vbox',
+					pack : 'top',
+					align : 'stretch'
+				},
+				items : [toolbarOper]
+			},{
 				xtype : 'fieldset',
 				title : me.txtDesc,
 				defaults : {

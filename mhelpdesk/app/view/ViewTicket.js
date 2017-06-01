@@ -4,13 +4,11 @@ Ext.define('mhelpdesk.view.ViewTicket', {
 	requires : ['Ext.TitleBar'],
 	config : {
 		itemId : 'viewTicket',
+		cls: 'p-view-ticket',
 		title : '',
 		scrollable : true,
 		pinHeaders : true,
 		layout : 'fit',
-//		defaults : {
-//			width : '100%'
-//		},
 		listeners : [{
 					fn : 'onSwipe',
 					event : 'swipe',
@@ -38,40 +36,22 @@ Ext.define('mhelpdesk.view.ViewTicket', {
 		var me = this;
 		var system = mhelpdesk.view.System;
 		try {
-//			var pnlList = Ext.create("Ext.Panel", {
-//				itemId : 'userAccess',
-//				hidden : false,
-//				layout : {
-//					type : 'vbox',
-//					align : 'stretch',
-//					pack : 'top'
-//				},
-//				items : [{
-//					//html: "this is a test"
-//					xtype : 'messageList',
-//					width : '100%',
-//					height : '100%'
-//				}]
-//			});
-
 			var toolbarOper = Ext.create("Ext.Container", {				
 				layout: {
 					type: 'hbox',
-					align: 'top',
-					pack: 'stretch'
+					pack: 'center',
+					align: 'stretch'
 				},
-				width : '100%',
 				items : [{
 					xtype : 'hiddenfield',
-					//label : "ticket_id",
-					//labelWrap : true,
 					itemId : 'ticket_id',
 					name : 'ticket_id'
 				},{
 					xtype : 'button',
 					itemId : 'btnPost',
 					name : 'btnPost',
-					ui : 'white',
+					ui : 'plain',
+					cls : 'r-square-button',
 					iconAlign : 'top',
 					iconCls : 'fa-envelope-o',
 					style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
@@ -83,15 +63,22 @@ Ext.define('mhelpdesk.view.ViewTicket', {
 	
 						}
 					}
-				},{
-					xtype : 'button',
-					itemId : 'btnShowHide',
-					name : 'btnShowHide',
-					ui : 'white',
-					iconAlign : 'top',
-					iconCls : 'fa-arrow-up',
-					style : 'font-family: "FontAwesome";margin: .5em .5em .5em;padding-left: 5px; width: 80px; text-align: -webkit-center;',
+				}]
+			});
+			me.setItems([{
+				xtype : 'toolbar',
+				docked : 'top',
+				ui : 'white',
+				layout : {
+					type : 'vbox',
+					pack : 'top',
+					align : 'stretch'
+				},
+				items : [{
+					xtype: 'button',
+					cls: 'r-button',
 					text : me.txtUp,
+					iconCls : 'fa-arrow-up',
 					listeners : {
 						tap : function(thisButton, e, eOpts) {
 							var clsNow = thisButton.getIconCls();
@@ -110,29 +97,31 @@ Ext.define('mhelpdesk.view.ViewTicket', {
 	
 						}
 					}
-				}]
-			});
-			me.setItems([{
-				xtype : 'toolbar',
-				docked : 'top',
-				ui : 'white',
-				layout : {
-					type : 'vbox',
-					align : 'stretch',
-					pack : 'top'
-				},
-				items : [toolbarOper,{
+				},{
 					xtype: 'label',
+					itemId : 'btnShowHide',
+					name : 'btnShowHide',
 					border: 2,
 					itemId : 'hdrSummary',
 					style : 'border: 1px solid rgba(0, 0, 0, 0.23) !important;',
     				html: 'My label!'
 				}]
 			},{
+				xtype : 'toolbar',
+				docked : 'bottom',
+				ui : 'white',
+				layout : {
+					type : 'vbox',
+					pack : 'top',
+					align : 'stretch'
+				},
+				items : [toolbarOper]
+			},{
 					//html: "this is a test"
 					xtype : 'messageList',
-					width : '100%',
-					height : '100%'
+					cls: 'r-list',
+					width : '99%',
+					height : '99%'
 				}]);
 			
 		} catch (ex) {
