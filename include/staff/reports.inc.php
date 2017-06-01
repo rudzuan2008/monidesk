@@ -60,8 +60,58 @@ if ($result) {
 $sql='SELECT dept_id, dept_name FROM '.DEPT_TABLE.' ORDER BY dept_name';
 $result = db_query($sql);
 
+date_default_timezone_set('Asia/Kuala_Lumpur');
+//$timestamp = time()+date("Z");
+//$gmdate = gmdate("Y-m-d\TH:i:s\Z",$timestamp);
+//Sys::console_log('debug',$gmdate);
+
+$gmtTimezone = new DateTimeZone('Asia/Kuala_Lumpur');
+$date1 = new DateTime(date("H:i:s"), $gmtTimezone);
+$todaydate = $date1->format("Y-m-d");
+$todaytime = $date1->format("H:i:s");
+//Sys::console_log('debug', $date1->format("H:i:s"));
+
+$sqltip = "SELECT * FROM ".NOTIFICATION_TABLE . " WHERE isactive=1 AND indicator='TIPS' AND role_id=". $thisuser->getRoleId().
+" AND (DATE(sdatetime) <= " . db_input($todaydate) . " AND DATE(edatetime) >= " . db_input($todaydate) . ")".
+" AND (TIME(stime) <= " . db_input($todaytime) . " AND TIME(etime) >= " . db_input($todaytime) . ")";
+$arytips = db_query($sqltip);
+$ary = db_assoc_array($arytips);
+$sizetip = sizeof($ary);
+$k = array_rand($ary);
+$tip = $ary[$k];
+
+Sys::console_log('debug', $sqltip);
+
+$sqlnotice = "SELECT * FROM ".NOTIFICATION_TABLE . " WHERE isactive=1 AND indicator='NOTICE' AND role_id=". $thisuser->getRoleId().
+" AND (DATE(sdatetime) <= " . db_input($todaydate) . " AND DATE(edatetime) >= " . db_input($todaydate) . ")".
+" AND (TIME(stime) <= " . db_input($todaytime) . " AND TIME(etime) >= " . db_input($todaytime) . ")";
+$notices = db_query($sqlnotice);
+$sizenotice = db_num_rows($notices);
+Sys::console_log('debug', $todaydate . ' ' . $todaytime);
 // display the page
 ?>
+<?php 
+//Display Tips here...
+if ($sizetip>0) {?>
+<b><?=_('Tips Of The Day')?></b><br/>
+<div id="tipofday">
+	<span style="font-size: 12pt; font-weight: bold;"><?=$tip['title']?></span>
+	<?=$tip['message']?><br/>
+</div>
+<?php }?>
+
+<?php 
+//Display Notice here...
+if ($sizenotice>0) {?>
+<b><?=_('Notices')?></b><br/>
+<div id="noticeboard">	
+	<?php while ($row = db_fetch_array($notices)) {?>
+		<span style="font-size: 12pt; font-weight: bold;"><?=$row['title']?></span>
+	    <?=$row['message']?><br/>
+	<?php } ?>
+</div>
+<?php }?>
+
 <div class="msg"><?= _('Ticket Reports') ?></div>
 <br />
 <div id='filter'>

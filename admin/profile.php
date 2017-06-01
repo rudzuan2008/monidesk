@@ -93,23 +93,15 @@ if(!$errors && $_POST) { //Handle post
             }
 
             if(!$errors) {
-
-                $sql='UPDATE '.STAFF_TABLE.' SET updated=NOW() '.
-                        ',firstname='.db_input(Format::striptags($_POST['firstname'])).
-                        ',lastname='.db_input(Format::striptags($_POST['lastname'])).
-                        ',email='.db_input($_POST['email']).
-                        ',phone="'.db_input($_POST['phone'],false).'"'.
-                        ',mobile="'.db_input($_POST['mobile'],false).'"'.
-                        ',signature='.db_input(Format::striptags($_POST['signature'])).
-                        ' WHERE staff_id='.db_input($thisuser->getId());
-                if(db_query($sql) && db_affected_rows()) {
-                    $msg=_('Profile Updated Successfully');
-                }else {
-                    $errors['err']=_('Error(s) occured. Profile NOT updated');
-                }
+            	$staff = new Staff($thisuser->getId());
+            	if ($staff->update($_POST, $errors)) {
+            		$msg=_('Profile Updated Successfully');
+            	}
             }else {
-                $errors['err']=_('Error(s) below occured. Try again');
+            	$errors['err']=_('Error(s) below occured. Try again');
             }
+            
+            
             break;
         default:
             $errors['err']=_('Uknown action');
@@ -124,9 +116,9 @@ if(!$errors && $_POST) { //Handle post
 
 //Tab and Nav options.
 $nav->setTabActive('profile');
-$nav->addSubMenu(array('desc'=>_('MY PROFILE'),'href'=>'profile.php','iconclass'=>'user'));
-$nav->addSubMenu(array('desc'=>_('PREFERENCES'),'href'=>'profile.php?t=pref','iconclass'=>'userPref'));
-$nav->addSubMenu(array('desc'=>_('CHANGE PASSWORD'),'href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
+// $nav->addSubMenu(array('desc'=>_('MY PROFILE'),'href'=>'profile.php','iconclass'=>'user'));
+// $nav->addSubMenu(array('desc'=>_('PREFERENCES'),'href'=>'profile.php?t=pref','iconclass'=>'userPref'));
+// $nav->addSubMenu(array('desc'=>_('CHANGE PASSWORD'),'href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
 //Warnings if any.
 if($thisuser->onVacation()) {
     $warn.=_('Welcome back! You are listed as \'on vacation\' Please let admin or your manager know that you are back.');

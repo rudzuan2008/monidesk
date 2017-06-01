@@ -1,20 +1,57 @@
 <?php
 if(!defined('KTKADMININC') || !$thisuser->isadmin()) die(_('Access Denied'));
+$pmenu=_('FAQ ITEMS');
 
 //List all help faqs
-$sql='SELECT faq_id,isactive,topic,question,answer,category,created,updated FROM rz_faq';
-$services=db_query($sql.' ORDER BY faq_id'); 
+$sql='SELECT faq_id,isactive,topic,question,language,answer,category,created,updated FROM '. FAQ_TABLE. ' faq ';
+$sql.=' WHERE faq_id IS NOT NULL ';
+if ($thisuser->getUserName()!='admin') {
+	$sql.= ' AND faq.company_id='.$thisuser->getCompanyId();
+}else{
+	$curco = (isset($_POST['sel_company_id']) ? $_POST['sel_company_id'] : $_GET['sid']);
+
+	$selcompanyid=($curco?$curco:"");
+	$companies = db_query('SELECT company_id, name FROM '.COMPANY_TABLE);
+	if ($_POST['filter'] && $_POST['sel_company_id']!=0){
+		$selcompanyid=$_POST['sel_company_id'];
+		$sql.= ' AND company_id='.$selcompanyid;
+	}elseif ($selcompanyid!="") {
+		$sql.= ' AND company_id='.$selcompanyid;
+	}
+}
+$services=db_query($sql.' ORDER BY faq_id');
 ?>
 <div class="msg"><?= _('FAQ Items') ?></div>
-<form action="admin.php?t=settings" method="POST" name="faq" onSubmit="return checkbox_checker(document.forms['faq'],1,0);">
+
+<?php if ($thisuser->getUserName()=="admin") {?>
+<form action="admin.php?t=faq" method="POST" id="form_filter" name="form_filter" >
+	<input type=hidden name='a' value='filter'>
+  	<input type=hidden name='do' value='filter'>
+  	<select name="sel_company_id">
+    	<option value=0><?= _('Select Company') ?></option>
+        <?php
+             while (list($id,$name) = db_fetch_row($companies)){
+                      $selected = ($selcompanyid==$id)?'selected':''; ?>
+             <option value="<?=$id?>" <?=$selected?>><?=$name?> </option>
+        <?php }?>
+    </select>
+  	<input class='button' type="submit" name="filter" value="<?=_('Filter')?>"></input>
+</form>
+<?php }?>
+
+<form action="admin.php" method="POST" id="form" name="faq" onSubmit="return checkbox_checker(document.forms['faq'],1,0);">
   <input type='hidden' name='t' value='faq'>
   <input type=hidden name='do' value='mass_process'>
-  <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
+  <input type="hidden" name="menu" value="<?=$pmenu?>">
+  <input type="hidden" name="randcheck" value="<?= $rand ?>">
+  <input type="hidden" name="sel_company_id" value="<?= $selcompanyid ?>">
+  <table class="dtable">
       <tr>
         <th width="7px">&nbsp;</th>
-        	  <th width="150px"><?= _('Topic') ?></th>
-              <th width="150px"><?= _('Question') ?></th>
-              <th><?= _('Answer') ?></th>
+        	  <th align="left" width="150px"><?= _('Topic') ?></th>
+              <th align="left" width="150px"><?= _('Question') ?></th>
+              <th align="left" ><?= _('Answer') ?></th>
+              <th><?= _('Language') ?></th>
               <th><?= _('Status') ?></th>
               <th><?= _('Sequence') ?></th>
               <th nowrap><?= _('Last Updated') ?></th>
@@ -26,26 +63,28 @@ $services=db_query($sql.' ORDER BY faq_id');
       if($services && db_num_rows($services)):
           while ($row = db_fetch_array($services)) {
               $sel=false;
-              if(($ids && in_array($row['faq_id'],$ids)) or ($row['faq_id']==$faqID)){
+              if(($ids && in_array($row['faq_id'],$ids)) or ($row['faq_id']==$uID)){
                   $class="$class highlight";
                   $sel=true;
               }
+              $menu=_('EDIT FAQ ITEM');
               ?>
           <tr class="<?=$class?>" id="<?=$row['faq_id']?>">
               <td width=7px>
                <input type="checkbox" name="tids[]" value="<?=$row['faq_id']?>" <?=$sel?'checked':''?>  onClick="highLight(this.value,this.checked);">
               </td>
               <td><?=$row['topic']?></td>
-              <td><a href="admin.php?t=faq&id=<?=$row['faq_id']?>"><?=Format::htmlchars(Format::truncate($row['question'],30))?></a></td>
+              <td><a href="admin.php?t=faq&menu=<?=$menu?>&id=<?=$row['faq_id']?>"><?=Format::htmlchars(Format::truncate($row['question'],30))?></a></td>
               <td><?=$row['answer']?></td>
-              <td><?=$row['isactive']?_('Active'):_('<b>Disabled</b>')?></td>
-              <td><?=$row['category']?></td>
-              <td><?=Format::db_datetime($row['updated'])?></td>
+              <td align="center"><?=$row['language']?></td>
+              <td align="center"><?=$row['isactive']?_('Active'):_('<b>Disabled</b>')?></td>
+              <td align="center"><?=$row['category']?></td>
+              <td align="center"><?=Format::db_datetime($row['updated'])?></td>
           </tr>
           <?php
           $class = ($class =='row2') ?'row1':'row2';
           } //end of while.
-      else: //notthing! ?> 
+      else: //notthing! ?>
           <tr class="<?=$class?>"><td colspan=8><b><?= _('Query returned 0 results') ?></b></td></tr>
       <?php
       endif; ?>
@@ -60,12 +99,13 @@ $services=db_query($sql.' ORDER BY faq_id');
           [<a href="#" onclick="return toogle_all(document.forms['faq'],true)"><?= _('Toggle') ?></a>]&nbsp;&nbsp;
       </div>
       <div class="centered">
-          <input class="button" type="submit" name="enable" value="<?= _('Enable') ?>"
-              onClick=' return confirm("<?= _('Are you sure you want to make selected services active?') ?>");'>
-          <input class="button" type="submit" name="disable" value="<?= _('Disable') ?>"
-              onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected services?') ?>");'>
-          <input class="button" type="submit" name="delete" value="<?= _('Delete') ?>"
-              onClick=' return confirm("<?= _('Are you sure you want to DELETE selected services?') ?>");'>
+      <input type="hidden" id="operation" name="operation" value="">
+          <input class="button" type="button" name="enable" value="<?= _('Enable') ?>"
+              onClick=' return swalSubmit($("#form"),$("#operation"),"enable","<?= _('Are you sure you want to make selected services active?') ?>");'>
+          <input class="button" type="button" name="disable" value="<?= _('Disable') ?>"
+              onClick=' return swalSubmit($("#form"),$("#operation"),"disable","<?= _('Are you sure you want to DISABLE selected services?') ?>");'>
+          <input class="button" type="button" name="delete" value="<?= _('Delete') ?>"
+              onClick=' return swalSubmit($("#form"),$("#operation"),"delete","<?= _('Are you sure you want to DELETE selected services?') ?>");'>
       </div>
   <?php
   endif;

@@ -269,6 +269,16 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
 
 //YOU BREAK IT YOU FIX IT.
 ?>
+<script type="text/javascript">
+window.onload=function(){
+	var msg = "<?php echo $msg ?>";
+	var error = "<?php echo $errors['err'] ?>";
+	var warn = "<?php echo $warn ?>";
+	//console.log('here'+msg);
+	swalInitiate(msg,error,warn);
+}
+</script>
+
 <div>
     <?php if($errors['err']) { ?>
         <p align="center" id="errormessage"><?=$errors['err']?></p>
@@ -388,24 +398,23 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
 <!-- SEARCH FORM: END -->
 
 <div class="msg" style="padding-left:12px">
-  <a href="" class="Icon refresh"></a>
-  <?=$showing?>&nbsp;&nbsp;&nbsp;<?=$results_type?>
+  <a href="" class="Icon refresh"></a><?=$showing?>&nbsp;&nbsp;&nbsp;<?=$results_type?>
 </div>
-<form action="tickets.php" method="POST" name='tickets' onSubmit="return checkbox_checker(this,1,0);">
+<form action="tickets.php" method="POST"  id='tickets' name='tickets' onSubmit="return checkbox_checker(this,1,0);">
   <input type="hidden" name="a" value="mass_process" >
-  <input type="hidden" name="status" value="<?=$statusss?>" >
-  <table width="100%" border="0" cellspacing=0 cellpadding=2 class="dtable" align="center">
+  <input type="hidden" name="status" value="<?=$status?>" >
+  <table style="width:100%;border:0px solid;" class="dtable">
     <tr>
       <?php if($canDelete || $canClose) { ?>
         <th class="box" width="8px">&nbsp;</th>
       <?php } ?>
-      <th width="68" nowrap>&nbsp;<?= _('Status') ?></th>
-      <th width="54"><a href="tickets.php?sort=ID&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Ticket ID') ?> <?=$negorder?>">&nbsp;<?= _('Ticket') ?></a></th>
-      <th width="72"><a href="tickets.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Date') ?> <?=$negorder?>"><?= _('Date') ?></a></th>
-      <th width="270"><?= _('Subject') ?></th>
-      <th width="170"><?= _('From') ?></th>
-      <th width="124"><a href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Category') ?> <?=$negorder?>"><?= _('Department') ?></a></th>
-      <th width="58"><a href="tickets.php?sort=pri&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Priority') ?> <?=$negorder?>"><?= _('Priority') ?></a></th>
+      <th width="10%"  align="center" ><a href="tickets.php?sort=ID&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Ticket ID') ?> <?=$negorder?>">&nbsp;<?= _('Ticket') ?></a></th>
+      <th width="10%" align="center" ><a href="tickets.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Date') ?> <?=$negorder?>"><?= _('Date') ?></a></th>
+      <th width="10%" align="center" nowrap>&nbsp;<?= _('Status') ?></th>
+      <th width="30%"><?= _('Subject') ?></th>
+      <th width="20%"><?= _('From') ?></th>
+      <th width="10%" align="center"><a href="tickets.php?sort=pri&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort By Priority') ?> <?=$negorder?>"><?= _('Priority') ?></a></th>
+      <th width="10%" align="center" nowrap>&nbsp;<?= _('Indicator') ?></th>
     </tr>
     <?php
     $class = "row1";
@@ -420,6 +429,14 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 $tid=sprintf('<b>%s</b>',$tid);
                 //$subject=sprintf('<b>%s</b>',Format::truncate($row['subject'],40)); // Making the subject bold is too much for the eye
             }
+            $now = time(); // or your date as well
+            $tiket_date = strtotime($row['created']);
+            $datediff = $now - $tiket_date;
+            $duration=floor($datediff/(60*60*24));
+            $day="day";
+            if ($duration > 1) {
+            	$day="days";
+            }
             ?>
         <tr class="<?=$class?>" id="<?=$row['ticket_id']?>">
             <?php if($canDelete || $canClose) { ?>
@@ -427,19 +444,51 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 <input type="checkbox" name="tids[]" value="<?=$row['ticket_id']?>" onClick="highLight(this.value,this.checked);">
             </td>
             <?php } ?>
+            <td align="center" nowrap><a title="<?=$row['source']?> <?= _('Ticket from:') ?> <?=$row['email']?>"
+                href="tickets.php?id=<?=$row['ticket_id']?>"><?=$tid?></a>
+            </td>
+            <td align="center" nowrap>
+            	<?php
+            		if ($row['status']=="closed") {
+            			print('<div style="color: gray;">'.Format::db_date($row['created']).'</div>');
+            		}else{
+            			print(Format::db_date($row['created']).'<br><div style="color: gray;">'.$duration.' '.$day.' '._('ago').'</div>');
+            		}
+            	?>
+            </td>	
+            <td align="center" nowrap>
+            
+            	<?php
+            		if ($row['status']=="closed") {
+            			print('<div style="color:darkgray;">'._('Closed').' <br/>'._('on').' '.Format::db_date($row['closed']).'</div>');
+            		}else{
+            			if ($row['isoverdue']) {
+            				print('<div style="color:red;">'._('Overdue').'</div>');
+            			}else{
+	            			if ($row['staff_id']) {
+		            			if ($row['isanswered']) {
+		            					print('<div style="color:green;">'._('Replied').'</div>');
+		            			}else{
+		            					print('<div style="color:orange;">'._('Assigned').'</div>');
+		           				}
+		            		}else{
+		            			print('<div style="color:darkblue;">'._('New').'</div>');
+		            			
+		            		}
+            			}
+            		}
+            	?>
+            </td>
+            <td><a <?php if($row['lock_id']) { ?> class="Icon lockedTicket"  title="<?=_('Locked Ticket')?>" <?php } ?>
+                href="tickets.php?id=<?=$row['ticket_id']?>"><?=$subject?></a>
+                &nbsp;<?=$row['attachments']?"<span class='Icon file'>&nbsp;</span>":''?></td>
+            <td nowrap><?=Format::truncate($row['name'],30,strpos($row['name'],'@'))?><br><div style="color: gray;"><?=$row['email']?></div></td>
+            <td class="nohover" align="center" style="color:<?=$row['priority_color']?>;"><?=$row['priority_desc']?></td>
             <td><?php $row['isoverdue']? print('<img src="images/icons/overdue_ticket.gif" title="'._('Overdue').'">'):print('<img src="images/icons/void8.gif" title="" >')?>
                 <?php $row['isanswered']? print('<img src="images/icons/answered_tickets.gif" title="'._('Answered on').' '.Format::db_date($row['lastresponse']).'">'):print('<img src="images/icons/void12.gif" title="" >')?>
                 <?php $row['staff_id']? print('<img src="images/icons/assigned_ticket.gif" title="'._('Assigned to').' '.$row['firstname'].' '.$row['lastname'].'">'):print('<img src="images/icons/void.gif" title="" >')?>
                 <img src="images/icons/ticket_source_<?=strtolower($row['source'])?>.gif" title="<?=$row['source']?> ticket"></td>
-            <td align="center" nowrap><a title="<?=$row['source']?> <?= _('Ticket from:') ?> <?=$row['email']?>"
-                href="tickets.php?id=<?=$row['ticket_id']?>"><?=$tid?></a></td>
-            <td align="center" nowrap><?=Format::db_date($row['created'])?></td>
-            <td><a <?php if($row['lock_id']) { ?> class="Icon lockedTicket"  title="<?=_('Locked Ticket')?>" <?php } ?>
-                href="tickets.php?id=<?=$row['ticket_id']?>"><?=$subject?></a>
-                &nbsp;<?=$row['attachments']?"<span class='Icon file'>&nbsp;</span>":''?></td>
-            <td nowrap><?=Format::truncate($row['name'],22,strpos($row['name'],'@'))?>&nbsp;</td>
-            <td nowrap><?=Format::truncate($row['dept_name'],30)?></td>
-            <td class="nohover" align="center" style="color:<?=$row['priority_color']?>;"><?=$row['priority_desc']?></td>
+            
         </tr>
         <?php
         $class = ($class =='row2') ?'row1':'row2';
@@ -462,6 +511,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     <span style="float:right; padding-right:4px;"><?= _('page:') ?><?=$pageNav->getPageLinks()?></span>
     <?php if($canClose or $canDelete) { ?>
     <div id="buttonsline" style="text-align:center">
+    <input type="hidden" id="operation" name="operation" value="">
       <?php
       $status=$_REQUEST['status']?$_REQUEST['status']:$status;
 
@@ -469,30 +519,32 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
       //If they can delete tickets...they are allowed to close--reopen..etc.
       switch (strtolower($status)) {
           case 'closed': ?>
-            <input class="button" type="submit" name="reopen" value="<?= _('Reopen') ?>"
-                 onClick=' return confirm("<?= _('Are you sure you want to reopen selected tickets?') ?>");'>
+            <input class="button" type="button" name="reopen" value="<?= _('Reopen') ?>"
+                 onClick=' return swalSubmit($("#tickets"),$("#operation"),"reopen","<?= _('Are you sure you want to reopen selected tickets?') ?>");'>
               <?php
               break;
           case 'open':
           case 'assigned':
               ?>
-            <input class="button" type="submit" name="overdue" value="<?= _('Overdue') ?>"
-                  onClick=' return confirm("<?= _('Are you sure you want to mark selected tickets overdue/stale?') ?>");'>
-            <input class="button" type="submit" name="close" value="<?= _('Close') ?>"
-                  onClick=' return confirm("<?= _('Are you sure you want to close selected tickets?') ?>");'>
+            <!-- <input class="button" type="submit" name="overdue" value="<?= _('Overdue') ?>"
+                  onClick=' return confirm("<?= _('Are you sure you want to mark selected tickets overdue/stale?') ?>");'>  -->
+            <input class="button" type="button" name="overdue" value="<?= _('Overdue') ?>"
+                  onClick='return swalSubmit($("#tickets"),$("#operation"),"overdue","<?= _("Are you sure you want to mark selected tickets overdue/stale?") ?>")'>      
+            <input class="button" type="button" name="close" value="<?= _('Close') ?>"
+                  onClick=' return swalSubmit($("#tickets"),$("#operation"),"close","<?= _("Are you sure you want to close selected tickets?") ?>");'>
               <?php
               break;
           default: //search??
               ?>
-            <input class="button" type="submit" name="close" value="<?= _('Close') ?>"
-                  onClick=' return confirm("<?= _('Are you sure you want to close selected tickets?') ?>");'>
-            <input class="button" type="submit" name="reopen" value="<?= _('Reopen') ?>"
-                  onClick=' return confirm("<?= _('Are you sure you want to reopen selected tickets?') ?>");'>
+            <input class="button" type="button" name="close" value="<?= _('Close') ?>"
+                  onClick=' return swalSubmit($("#tickets"),$("#operation"),"close","<?= _('Are you sure you want to close selected tickets?') ?>");'>
+            <input class="button" type="button" name="reopen" value="<?= _('Reopen') ?>"
+                  onClick=' return swalSubmit($("#tickets"),$("#operation"),"reopen","<?= _('Are you sure you want to reopen selected tickets?') ?>");'>
       <?php
       }
       if($canDelete) {?>
-          <input class="button" type="submit" name="delete" value="<?= _('Delete') ?>"
-              onClick=' return confirm("<?= _('Are you sure you want to DELETE selected tickets?') ?>");'>
+          <input class="button" type="button" name="delete" value="<?= _('Delete') ?>"
+              onClick=' return swalSubmit($("#tickets"),$("#operation"),"delete","<?= _('Are you sure you want to DELETE selected tickets?') ?>");'>
       <?php } ?>
     </div>
     <?php }

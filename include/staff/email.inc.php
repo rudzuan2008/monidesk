@@ -15,6 +15,9 @@ if($email && $_REQUEST['a']!='new'){
    $title=_('New Email');
    $action='create';
    $info['smtp_auth']=isset($info['smtp_auth'])?$info['smtp_auth']:1;
+   $info['smtp_encryption']=isset($info['smtp_encryption'])?$info['smtp_encryption']:0;
+   $info['smtp_type']=(isset($info['smtp_type']) && !$info['smtp_type']=="" )?$info['smtp_type']:'swift';
+   Sys::console_log('debug', $info);
 }
 
 $info=Format::htmlchars($info);
@@ -86,13 +89,14 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.PRIORITY_TABLE);
           <td colspan=2 ><?= _('<b>Login info (optional)</b>: Required when IMAP/POP and/or SMTP are enabled.') ?></td>
       </tr>
       <tr><th><?= _('Username') ?></th>
-          <td><input type="text" name="userid" size=35 value="<?=$info['userid']?>" autocomplete='off' >
+          <td><input type="text" name="userid" size=35 value="<?=$info['userid']?>">
               &nbsp;<font class="error">&nbsp;<?=$errors['userid']?></font>
           </td>
       </tr>
       <tr><th><?= _('Password') ?></th>
           <td>
-             <input type="password" name="userpass" size=35 value="<?=$info['userpass']?>" autocomplete='off'>
+             <input type="text" name="userpass" id="userpass" size=35 value="<?=$info['userpass']?>">&nbsp;
+             <input type="checkbox" checked onchange="document.getElementById('userpass').type = this.checked ? 'text' : 'password'">&nbsp;<?=_('Show password')?>
               &nbsp;<font class="error">&nbsp;<?=$errors['userpass']?></font>
           </td>
       </tr>
@@ -177,6 +181,22 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.PRIORITY_TABLE);
       <tr><th><?= _('SMTP Port') ?></th>
           <td><input type="text" name="smtp_port" size=6 value="<?=$info['smtp_port']?$info['smtp_port']:''?>">
               &nbsp;<font class="error">&nbsp;<?=$errors['smtp_port']?></font>
+          </td>
+      </tr>
+      <tr><th><?= _('Drivers Type') ?></th>
+          <td>
+              <label><input type="radio" name="smtp_type"  value="pear"   <?=($info['smtp_type']=='pear')?'checked':''?> /><?= _('Pear') ?></label>
+              <label><input type="radio" name="smtp_type"  value="swift"  <?=($info['smtp_type']=='swift')?'checked':''?> /><?= _('Swift') ?></label>
+              &nbsp;<font class="error">&nbsp;<?=$errors['smtp_active']?></font>
+          </td>
+      </tr>
+      <tr><th><?= _('Encryption') ?></th>
+          <td>
+               <label><input type="radio" name="smtp_encryption"  value="0"
+                  <?=($info['smtp_encryption']==0)?'checked':''?> /><?= _('None') ?></label>
+               <label><input type="radio" name="smtp_encryption"  value="1"
+                  <?=($info['smtp_encryption']==1)?'checked':''?> /><?= _('STARTTLS') ?></label>
+              <font class="error">&nbsp;<?=$errors['smtp_encryption']?></font>
           </td>
       </tr>
       <tr><th><?= _('Authentication Required?') ?></th>

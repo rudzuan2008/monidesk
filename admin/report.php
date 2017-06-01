@@ -35,9 +35,9 @@ if(!$errors && $_POST) { //Handle post
 }
 //Tab and Nav options.
 $nav->setTabActive('staffreport');
-$nav->addSubMenu(array('desc'=>_('DAILY'),'href'=>'report.php','iconclass'=>'user'));
-$nav->addSubMenu(array('desc'=>_('MONTHLY'),'href'=>'report.php?t=monthly','iconclass'=>'userPref'));
-$nav->addSubMenu(array('desc'=>_('YEARLY'),'href'=>'report.php?t=yearly','iconclass'=>'userPasswd'));
+// $nav->addSubMenu(array('desc'=>_('DAILY'),'href'=>'report.php','iconclass'=>'user'));
+// $nav->addSubMenu(array('desc'=>_('MONTHLY'),'href'=>'report.php?t=monthly','iconclass'=>'userPref'));
+// $nav->addSubMenu(array('desc'=>_('YEARLY'),'href'=>'report.php?t=yearly','iconclass'=>'userPasswd'));
 //Warnings if any.
 if($thisuser->onVacation()) {
     $warn.=_('Welcome back! You are listed as \'on vacation\' Please let admin or your manager know that you are back.');

@@ -21,22 +21,22 @@ msgstr ""
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/index.php:22
-msgid "Welcome to Helpdesk-Support Center"
-msgstr "Selamat Datang ke Sistem Meja Bantuan <b>WtDesk</b>"
+msgid "Welcome to ABT-Helpdesk Support Center"
+msgstr "Selamat Datang ke Sistem Meja Bantuan <b>ABT-Helpdesk</b>"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/index.php:24
 msgid ""
-"WtDesk  is an user friendly, easy to use HelpDesk solution that offers direct online submission of require support within your database and real-time monitoring is make available to mobile devices and Web. <br>Based on our experience of implementing large scale projects, an effective and efficient Helpdesk contributes significantly to the success of an IT project, more so for one that is implemented on a national or international basis. This is because a very important stakeholder of the project, i.e. the Users, are ensured that they have access to professional support services besides just making a quick telephone call or sending email to a known and helpful destination.<br>A problem ticket will be raised for each problem reported to WtDesk Helpdesk, and the problem ticket is then tracked until the problem is fully resolved. In the event that WtDesk Helpdesk personnel taking the call cannot resolve the problem, the problem will be escalated to the second level Project Helpdesk for resolution, followed by the third level Support Team if necessary, until the issues solved."
-msgstr "<b>WtDesk</b> adalah mudah dan mesra pengguna untuk digunakan bagi penyelesaian meja bantuan yang menawarkan perkhidmatan dalam talian secara langsung "
+"abt-helpdesk  is an user friendly, easy to use HelpDesk solution that offers direct online submission of require support within your database and real-time monitoring is make available to mobile devices and Web. <br>Based on our experience of implementing large scale projects, an effective and efficient Helpdesk contributes significantly to the success of an IT project, more so for one that is implemented on a national or international basis. This is because a very important stakeholder of the project, i.e. the Users, are ensured that they have access to professional support services besides just making a quick telephone call or sending email to a known and helpful destination.<br>A problem ticket will be raised for each problem reported to abt-helpdesk Helpdesk, and the problem ticket is then tracked until the problem is fully resolved. In the event that abt-helpdesk Helpdesk personnel taking the call cannot resolve the problem, the problem will be escalated to the second level Project Helpdesk for resolution, followed by the third level Support Team if necessary, until the issues solved."
+msgstr "<b>abt-helpdesk</b> adalah mudah dan mesra pengguna untuk digunakan bagi penyelesaian meja bantuan yang menawarkan perkhidmatan dalam talian secara langsung "
 "dan pemantauan sepanjang masa yang tersedia untuk peranti mudah alih dan Web.<br>"
 "Berdasarkan pengalaman kami melaksanakan projek berskala besar, Meja Bantuan yang cekap dan berkesan menyumbang dengan ketara kepada kejayaan projek IT, "
 "lebih-lebih lagi untuk salah satu yang dilaksanakan di peringkat nasional atau antarabangsa. Ini kerana pihak berkepentingan yang sangat penting dalam "
 "projek itu, iaitu Pengguna, dipastikan bahawa mereka mempunyai akses kepada perkhidmatan sokongan profesional selain dari hanya membuat panggilan telefon "
 "cepat atau menghantar e-mel ke destinasi yang dikenali dan membantu.<br>"
-"Satu tiket permasalahan akan dinaikkan bagi setiap masalah yang dilaporkan kepada <b>WtDesk</b>, dan tiket itu kemudian dikesan sehingga masalah itu "
+"Satu tiket permasalahan akan dinaikkan bagi setiap masalah yang dilaporkan kepada <b>abt-helpdesk</b>, dan tiket itu kemudian dikesan sehingga masalah itu "
 "diselesaikan sepenuhnya. Sekiranya kakitangan Meja Bantuan mengambil yang mengambil panggilan tidak boleh menyelesaikan masalah ini, masalah ini akan "
-"dibawa ke peringkat kedua Meja Bantuan <b>WtDesk</b> untuk penyelesaian berikutnya, diikuti oleh tahap Sokongan pasukan ketiga jika perlu, sehingga isu-isu "
+"dibawa ke peringkat kedua Meja Bantuan <b>abt-helpdesk</b> untuk penyelesaian berikutnya, diikuti oleh tahap Sokongan pasukan ketiga jika perlu, sehingga isu-isu "
 "diselesaikan."
 
 #: C:\Program Files\Apache Software
@@ -122,7 +122,7 @@ msgstr "<b>Fungsi</b>"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/index.php:25
 msgid "Staff Control Panel"
-msgstr "Ruang Kerja Dalaman Pekerja WtDesk"
+msgstr "Ruang Kerja Dalaman Pekerja abt-helpdesk"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/index.php:24
@@ -187,7 +187,7 @@ msgstr "*Rujukan kepada usahawan, maklumat semua agensi, skim initiatif yang dit
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/index.php:25
 msgid "A valid email address is required to access the support system."
-msgstr ""
+msgstr "Alamat email yang sah diperlukan untuk mengakses sistem sokongan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:17
@@ -195,35 +195,34 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/user.inc.php:30
 #: Foundation\Apache2.2\htdocs\Katak/admin/staff.inc.php:33
 msgid "Fatal error!"
-msgstr ""
+msgstr "Ralat!"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:27
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:31
 #: Foundation\Apache2.2\htdocs\Katak/admin/staff.inc.php:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Pengesahan Sekuriti Diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:36
 #: Foundation\Apache2.2\htdocs\Katak/login.php:102
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:36
 msgid "Invalid login"
-msgstr ""
+msgstr "Login Tidak Sah"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:39
 #: Foundation\Apache2.2\htdocs\Katak/login.php:105
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:39
 msgid "Excessive failed login attempts"
-msgstr ""
+msgstr "Percubaan login masuk yang gagal melebihi limit"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:40
 msgid ""
-"You've reached maximum failed login attempts allowed. Try again later or <a "
-"href=\"open.php\">open a new ticket</a>"
-msgstr ""
+"You've reached maximum failed login attempts allowed. Try again later or <a href=\"open.php\">open a new ticket</a>"
+msgstr "Anda telah mencapai maksimum percubaan login dibenarkan. Cuba lagi atau <a href=\"open.php\">buka tiket baru</a>"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:63
@@ -231,18 +230,17 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:58
 #, php-format
 msgid "logged in"
-msgstr ""
+msgstr "Login masuk"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:77
-msgid ""
-"Forgot your login info? Please <a href=\"open.php\">open a new ticket</a>."
-msgstr ""
+msgid "Forgot your login info? Please <a href=\"open.php\">open a new ticket</a>."
+msgstr "Lupa maklumat log masuk anda? Sila <a href=\"open.php\">buka tiket baru</a>."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:79
 msgid "Excessive login attempts by a user"
-msgstr ""
+msgstr "Cubaan login berlebihan oleh pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:80
@@ -253,13 +251,13 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:86
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:48
 msgid "Email"
-msgstr ""
+msgstr "Emel"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:81
 #: Foundation\Apache2.2\htdocs\Katak/login.php:89
 msgid "Ticket No."
-msgstr ""
+msgstr "No. Tiket"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:83
@@ -267,7 +265,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:76
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:83
 msgid "Time"
-msgstr ""
+msgstr "Masa"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:84
@@ -277,17 +275,17 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:77
 #: Foundation\Apache2.2\htdocs\Katak/admin/login.php:84
 msgid "Attempts No."
-msgstr ""
+msgstr "No. Percubaan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:87
 msgid "Failed login attempts by a user"
-msgstr ""
+msgstr "Percubaan login gagal oleh pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:106
 msgid "You've reached maximum failed login attempts allowed. Try again later."
-msgstr ""
+msgstr "Anda telah mencapai maksimum gagal cubaan login dibenarkan. Cuba lagi nanti."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:137
@@ -330,12 +328,12 @@ msgstr "Capaian Tidak dibenarkan"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:138
 msgid "Forgot your login info? Please ask at the customer service."
-msgstr ""
+msgstr "Lupa maklumat login masuk anda? Sila tanya di perkhidmatan pelanggan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:140
 msgid "Excessive login attempts by a client"
-msgstr ""
+msgstr "Percubaan login yang berlebihan oleh pelanggan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:142
@@ -349,36 +347,35 @@ msgstr "Kata Laluan"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/login.php:148
 msgid "Failed login attempts by a client"
-msgstr ""
+msgstr "Percubaan login gagal oleh pelanggan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/logout.php:20
 #: Foundation\Apache2.2\htdocs\Katak/admin/logout.php:18
 #, php-format
 msgid "logged out"
-msgstr ""
+msgstr "login keluar"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/main.inc.php:76
 msgid "Error loading settings. Contact admin."
-msgstr ""
+msgstr "Ralat untuk buka pilihan. Hubungi admin."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/offline.php:26
 msgid "Support Ticket System Offline"
-msgstr ""
+msgstr "Sistem Sokongan Tiket Offline"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/offline.php:28
 msgid "Thank you for your interest in contacting us."
-msgstr ""
+msgstr "Terima kasih kerana berminat dengan menghubungi kami"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/offline.php:29
-msgid ""
-"Our Support System is offline at the moment, please check back at a later "
+msgid "Our Support System is offline at the moment, please check back at a later "
 "time."
-msgstr ""
+msgstr "Sistem Sokongan kami adalah di luar talian pada masa ini, sila semak semula pada kemudian."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/open.php:28
@@ -460,31 +457,30 @@ msgstr "Tindakan salah"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/user.inc.php:44
 msgid "System is offline for an upgrade."
-msgstr ""
+msgstr "Sistem sedang dinaik taraf."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/user.inc.php:64
 #: Foundation\Apache2.2\htdocs\Katak/admin/staff.inc.php:81
 msgid "Access Disabled. Contact Admin"
-msgstr ""
+msgstr "Capaian Tidak Dibenarkan. Sila hubungi Penyelia"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:29
 #, php-format
 msgid "The script is version %s while the database is version %s. "
-msgstr ""
+msgstr "Skrip ini adalah versi% s manakala pangkalan data adalah versi% s."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:31
 msgid "Possibly caused by incomplete upgrade."
-msgstr ""
+msgstr "Mungkin disebabkan oleh naik taraf yang tidak lengkap."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:36
 msgid ""
-"Please take a minute to delete <strong>setup/install</strong> directory for "
-"security reasons."
-msgstr ""
+"Please take a minute to delete <strong>setup/install</strong> directory for security reasons."
+msgstr "Sila ambil satu minit untuk memadamkan <strong> setup/pemasangan </ strong> direktori diatas sebab-sebab keselamatan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:44
@@ -502,7 +498,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:72
 msgid "Preferences Updated Successfully"
-msgstr ""
+msgstr "Pilihan Keutamaan Berjaya Dikemaskini"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:75
@@ -512,20 +508,18 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:428
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:485
 msgid "Internal error"
-msgstr ""
+msgstr "Ralat Dalaman Sistem"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:80
 msgid "Attachments settings updated"
-msgstr ""
+msgstr "Pilihan Lampiran dikemaskini"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:83
 #: Foundation\Apache2.2\htdocs\Katak/include/class.client.php:88
 #: Foundation\Apache2.2\htdocs\Katak/include/class.msgtpl.php:83
 #: Foundation\Apache2.2\htdocs\Katak/include/class.staff.php:285
-msgid "Internal Error"
-msgstr ""
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:91
@@ -580,28 +574,28 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:205
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:258
 msgid "Unknown command"
-msgstr ""
+msgstr "Arahan tidak sah"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:128
 #, php-format
 msgid "Unknown action %s"
-msgstr ""
+msgstr "Tindakan %s tidak sah"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:136
 msgid "Please enter a valid email."
-msgstr ""
+msgstr "Sila masukan emel yang betul"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:138
 msgid "Email already banned"
-msgstr ""
+msgstr "Emel telah dihalang"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:141
 msgid "Email added to banlist"
-msgstr ""
+msgstr "Emel dimasukan kedalam senarai larangan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:143
@@ -987,59 +981,59 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:563
 #: Foundation\Apache2.2\htdocs\Katak/admin/profile.php:128
 msgid "PREFERENCES"
-msgstr ""
+msgstr "KETETAPAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:564
 msgid "ATTACHMENTS"
-msgstr ""
+msgstr "LAMPIRAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:565
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:582
 msgid "REPORTS"
-msgstr ""
+msgstr "LAPORAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:583
 msgid "SYSTEM LOGS"
-msgstr ""
+msgstr "LOG SISTEM"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:597
 msgid "EMAIL ADDRESSES"
-msgstr ""
+msgstr "ALAMAT EMEL"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:598
 msgid "ADD NEW EMAIL"
-msgstr ""
+msgstr "DAFTAR ALAMAT EMEL"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:599
 msgid "TEMPLATES"
-msgstr ""
+msgstr "TEMPLAT"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:599
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:5
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:35
 msgid "Email Templates"
-msgstr ""
+msgstr "TEMPLAT EMEL"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:600
 msgid "BANLIST"
-msgstr ""
+msgstr "SENARAI HALANGAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:600
 msgid "Banned Email"
-msgstr ""
+msgstr "Senarai Halangan Emel"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:610
@@ -1058,6 +1052,9 @@ msgstr ""
 msgid "HELP TOPICS"
 msgstr ""
 
+msgid "SUBJECT"
+msgstr "SUBJEK"
+
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:638
 msgid "ADD NEW TOPIC"
@@ -1073,7 +1070,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:656
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:19
 msgid "STAFF MEMBERS"
-msgstr ""
+msgstr "SENARAI PENGGUNA"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/admin.php:657
@@ -1194,13 +1191,13 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:61
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:71
 msgid "Search for"
-msgstr ""
+msgstr "Carian untuk"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:62
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:351
 msgid "Dept."
-msgstr ""
+msgstr "Jabatan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:64
@@ -1212,14 +1209,14 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:33
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staffmembers.inc.php:16
 msgid "Staff Members"
-msgstr ""
+msgstr "Senarai Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:80
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:16
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:47
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:81
@@ -1228,7 +1225,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staffmembers.inc.php:29
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/topic.inc.php:69
 msgid "Dept"
-msgstr ""
+msgstr "Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:82
@@ -1251,12 +1248,12 @@ msgstr "Status"
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:84
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:47
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:85
 msgid "Mobile"
-msgstr ""
+msgstr "Tel. Bimbit"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/directory.php:94
@@ -1442,12 +1439,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/profile.php:127
 msgid "MY PROFILE"
-msgstr ""
+msgstr "PROFAIL SAYA"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/profile.php:129
 msgid "CHANGE PASSWORD"
-msgstr ""
+msgstr "TUKAR KATALALUAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/profile.php:132
@@ -1512,7 +1509,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staffmembers.inc.php:78
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:142
 msgid "Enable"
-msgstr ""
+msgstr "Aktif"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/stdreply.php:29
@@ -1573,12 +1570,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/stdreply.php:108
 msgid "STANDARD REPLIES"
-msgstr ""
+msgstr "PILIHAN JAWAPAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/stdreply.php:109
 msgid "NEW STANDARD REPLY"
-msgstr ""
+msgstr "DAFTAR PILIHAN JAWAPAN"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:29
@@ -1663,7 +1660,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:48
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/topic.inc.php:65
 msgid "Select Department"
-msgstr ""
+msgstr "Pilih Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:105
@@ -1673,7 +1670,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:112
 msgid "Ticket already in the Dept."
-msgstr ""
+msgstr "Tiket telah pun wujud dijabatan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:115
@@ -1684,13 +1681,13 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:121
 #, php-format
 msgid "Dept. Transfer from %s to %s"
-msgstr ""
+msgstr "Tukar jabatan dari %s ke %s"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:123
 #, php-format
 msgid "Ticket transfered sucessfully to %s Dept."
-msgstr ""
+msgstr "Tiket berjaya dihantar kepada jabatan %s."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:130
@@ -2059,23 +2056,23 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:440
 #, php-format
 msgid "OPEN TICKETS (%s)"
-msgstr ""
+msgstr "TIKET BARU (%s)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:440
 msgid "Open Tickets"
-msgstr ""
+msgstr "Tiket Baru"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:445
 msgid "assigned to you!"
-msgstr ""
+msgstr "yang diberikan kepada anda!"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:447
 #, php-format
 msgid "MY TICKETS (%s)"
-msgstr ""
+msgstr "TIKET SAYA(%s)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:447
@@ -2084,13 +2081,13 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:112
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:130
 msgid "Assigned Tickets"
-msgstr ""
+msgstr "Tiket yang Ditugaskan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:452
 #, php-format
 msgid "OVERDUE (%s)"
-msgstr ""
+msgstr "TERTUNGGAK (%s)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:452
@@ -2100,23 +2097,23 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:456
 msgid "overdue tickets!"
-msgstr ""
+msgstr "tiket yang tertunggak!"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:459
 msgid "CLOSED TICKETS"
-msgstr ""
+msgstr "TIKET DITUTUP"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:459
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:51
 msgid "Closed Tickets"
-msgstr ""
+msgstr "Tiket yang Ditutup"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/admin/tickets.php:463
 msgid "NEW TICKET"
-msgstr ""
+msgstr "DAFTAR TIKET BARU"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/api/cron.php:20
@@ -2217,17 +2214,17 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:474
 msgid "Default Dept. required"
-msgstr ""
+msgstr "Jabatan Pilihan diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:475
 msgid "Default email required"
-msgstr ""
+msgstr "Emel pilihan diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:476
 msgid "You must select template."
-msgstr ""
+msgstr "Sila pilih templat."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:477
@@ -2243,17 +2240,17 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:480
 msgid "Date format required"
-msgstr ""
+msgstr "Format Tarikh diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:481
 msgid "Datetime format required"
-msgstr ""
+msgstr "Format Tarikh dan Masa diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:482
 msgid "Day, Datetime format required"
-msgstr ""
+msgstr "Format Hari, Tarikh dan Masa diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.config.php:483
@@ -2355,7 +2352,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.dept.php:250
 msgid " Dept. Error occured"
-msgstr ""
+msgstr "Ralat untuk Jabatan berlaku"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.dept.php:256
@@ -2380,18 +2377,18 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.email.php:277
 msgid "You must select a Dept."
-msgstr ""
+msgstr "Sila pilih jabatan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.email.php:280
 #: Foundation\Apache2.2\htdocs\Katak/include/class.topic.php:134
 msgid "You must select a priority"
-msgstr ""
+msgstr "Sila pilih keutamaan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.email.php:284
 msgid "Username missing"
-msgstr ""
+msgstr "Pengguna tiada"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.email.php:293
@@ -2519,7 +2516,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.msgtpl.php:173
 msgid "Name already in use"
-msgstr ""
+msgstr "Nama telah digunakan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.msgtpl.php:212
@@ -2563,6 +2560,9 @@ msgstr ""
 msgid "Help Topics"
 msgstr ""
 
+msgid "Subject"
+msgstr "Tajuk/Subjek"
+
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:33
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:107
@@ -2589,33 +2589,33 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:38
 msgid "Standard Replies"
-msgstr ""
+msgstr "Pilihan Jawapan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:40
 msgid "Directory"
-msgstr ""
+msgstr "Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:40
 msgid "Staff Directory"
-msgstr ""
+msgstr "Senarai Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:41
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/header.inc.php:56
 msgid "My Account"
-msgstr ""
+msgstr "Profail Saya"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.nav.php:41
 msgid "Personal data of my account"
-msgstr ""
+msgstr "Maklumat data peribadi"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.pagenate.php:75
 msgid "Showing"
-msgstr ""
+msgstr "Paparan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.role.php:36
@@ -2761,7 +2761,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/class.ticket.php:1093
 #: Foundation\Apache2.2\htdocs\Katak/include/class.ticket.php:1166
 msgid "Invalid Priority"
-msgstr ""
+msgstr "Keutamaan Salah"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.ticket.php:1094
@@ -2811,7 +2811,7 @@ msgstr "Pilih tahap perniagaan"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.ticket.php:1160
 msgid "Dept. required"
-msgstr ""
+msgstr "Jabatan diperlukan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/class.ticket.php:1161
@@ -3030,7 +3030,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:127
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:85
 msgid "Query returned 0 results"
-msgstr ""
+msgstr "Kriteria menghasilkan 0 keputusan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/api.inc.php:82
@@ -3064,7 +3064,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/roles.inc.php:64
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:144
 msgid "Disable"
-msgstr ""
+msgstr "Tutup"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/api.inc.php:97
@@ -3080,7 +3080,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:146
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:494
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/api.inc.php:101
@@ -3287,7 +3287,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:287
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:299
 msgid "Query:"
-msgstr ""
+msgstr "Kriteria:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:63
@@ -3330,7 +3330,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:136
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:456
 msgid "Select:"
-msgstr ""
+msgstr "Pilih:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:125
@@ -3345,7 +3345,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:91
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:457
 msgid "All"
-msgstr ""
+msgstr "Semua"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:126
@@ -3358,7 +3358,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:138
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:459
 msgid "Toggle"
-msgstr ""
+msgstr "Beralih"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:127
@@ -3384,7 +3384,7 @@ msgstr "Tiada"
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:142
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:462
 msgid "page:"
-msgstr ""
+msgstr "laman:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/banlist.inc.php:132
@@ -3399,24 +3399,24 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/changepasswd.inc.php:5
 msgid "Change Password"
-msgstr ""
+msgstr "Tukar Katalaluan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/changepasswd.inc.php:11
 msgid "Current Password:"
-msgstr ""
+msgstr "Kata Laluan Sekarang:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/changepasswd.inc.php:17
 msgid "New Password:"
-msgstr ""
+msgstr "Kata Laluan Baru:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/changepasswd.inc.php:23
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/client.inc.php:69
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:112
 msgid "Confirm Password:"
-msgstr ""
+msgstr "Sahkan Kata Laluan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/changepasswd.inc.php:31
@@ -3504,7 +3504,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/client.inc.php:38
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:78
 msgid "Name (First, Last):"
-msgstr ""
+msgstr "Nama Penuh:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/client.inc.php:45
@@ -3516,7 +3516,7 @@ msgstr "Syarikat:"
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:34
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:90
 msgid "Office Phone:"
-msgstr ""
+msgstr "Telefon Pejabat:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/client.inc.php:57
@@ -3668,42 +3668,42 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:57
 msgid "Dept Manager:"
-msgstr ""
+msgstr "Pengurus Jabatan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:61
 msgid "-------None-------"
-msgstr ""
+msgstr "------Tiada-------"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:62
 msgid "Select Manager (optional)"
-msgstr ""
+msgstr "Pilih Pengurus (Jika Perlu)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:70
 msgid "No Users in this dept. (Add Users)"
-msgstr ""
+msgstr "Tiada Pengguna di jabatan ini. (Daftar Pengguna)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:77
 msgid "Dept Type"
-msgstr ""
+msgstr "Jenis Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:79
 msgid "Public"
-msgstr ""
+msgstr "Umum"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:80
 msgid "Private (Hidden to the user/client)"
-msgstr ""
+msgstr "Dalaman (Untuk capaian/kegunaan dalaman sahaja)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:85
 msgid "Dept Signature:"
-msgstr ""
+msgstr "Pengenalan Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:87
@@ -3720,12 +3720,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:94
 msgid "Email Templates:"
-msgstr ""
+msgstr "Templat Emel:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:97
 msgid "Select Template"
-msgstr ""
+msgstr "Pilih Templat"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/dept.inc.php:98
@@ -3782,7 +3782,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/depts.inc.php:17
 msgid "Dept. Name"
-msgstr ""
+msgstr "Nama Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/depts.inc.php:18
@@ -3903,19 +3903,12 @@ msgstr ""
 msgid "Priority:"
 msgstr "Keutamaan:"
 
-#: Foundation\Apache2.2\htdocs\Katak/include/user/open.inc.php:100
-msgid "Category:"
-msgstr "Kategori:"
-
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/editticket.inc.php:103
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:149
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/topic.inc.php:30
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/viewticket.inc.php:70
 #: Foundation\Apache2.2\htdocs\Katak/include/user/open.inc.php:56
-msgid "Help Topic:"
-msgstr "Tajuk Bantuan:"
-
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/editticket.inc.php:108
 msgid "(deleted)"
@@ -3973,12 +3966,12 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:36
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/emails.inc.php:19
 msgid "Email Address"
-msgstr ""
+msgstr "Alamat Emel"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:41
 msgid "Email Name:"
-msgstr ""
+msgstr "Nama Emel:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:44
@@ -3988,23 +3981,23 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:47
 msgid "New Ticket Priority"
-msgstr ""
+msgstr "Daftar Keutamaan Tiket"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:50
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/topic.inc.php:51
 msgid "Select Priority"
-msgstr ""
+msgstr "Pilih Keutamaan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:60
 msgid "New Ticket Dept."
-msgstr ""
+msgstr "Daftar Tiket Jabatan."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:73
 msgid "Auto Response"
-msgstr ""
+msgstr "Jawab Secara automatik"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/email.inc.php:75
@@ -4202,7 +4195,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:349
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:408
 msgid "Priority"
-msgstr ""
+msgstr "Keutamaan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/emails.inc.php:23
@@ -4210,7 +4203,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/roles.inc.php:20
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:96
 msgid "Last Updated"
-msgstr ""
+msgstr "Kemaskini Terakhir"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/emails.inc.php:73
@@ -4225,12 +4218,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/header.inc.php:41
 msgid "Admin Panel"
-msgstr ""
+msgstr "Skrin Pengurusan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/header.inc.php:43
 msgid "Staff Panel"
-msgstr ""
+msgstr "Skrin Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/header.inc.php:45
@@ -4241,7 +4234,7 @@ msgstr "Keluar"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/header.inc.php:56
 msgid "My Preference"
-msgstr ""
+msgstr "Pilihan Saya"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/helptopics.inc.php:17
@@ -4294,7 +4287,7 @@ msgstr "Login"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/mypref.inc.php:4
 msgid "My Preferences"
-msgstr ""
+msgstr "Pilihan Keutamaan Saya"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/mypref.inc.php:10
@@ -4340,13 +4333,13 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:5
 msgid "My Profile Info"
-msgstr ""
+msgstr "Profail Peribadi Saya"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:11
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:40
 msgid "Username:"
-msgstr ""
+msgstr "Nama Pengguna:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:15
@@ -4362,50 +4355,50 @@ msgstr "Jabatan:"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:19
 msgid "First Name:"
-msgstr ""
+msgstr "Nama (Firstname)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:24
 msgid "Last Name:"
-msgstr ""
+msgstr "Nama (Lastname)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:41
 msgid "Cell Phone:"
-msgstr ""
+msgstr "Telefon Bimbit"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:46
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:185
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/staff.inc.php:102
 msgid "Signature:"
-msgstr ""
+msgstr "Pengenalan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/myprofile.inc.php:52
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:180
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:17
 msgid "Please fill in the form below to open a new ticket."
-msgstr ""
+msgstr "Sila isi borang di bawah untuk membuka tiket baru."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:25
 msgid "Send alert to user."
-msgstr ""
+msgstr "Hantar makluman kepada pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:43
 msgid "Ticket Source:"
-msgstr ""
+msgstr "Sumber Ticket"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:46
 msgid "Select Source"
-msgstr ""
+msgstr "Pilih Sumber"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:49
@@ -4415,12 +4408,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:78
 msgid "Issue Summary:"
-msgstr ""
+msgstr "Ringkasan Isu"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:80
 msgid "Visible to user/client as answer to the ticket."
-msgstr ""
+msgstr "Boleh dilihat oleh pengguna / pelanggan sebagai jawapan kepada tiket"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:86
@@ -4430,7 +4423,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:89
 msgid "Select a standard reply/issue"
-msgstr ""
+msgstr "Pilih jawapan / isu pilihan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:93
@@ -4447,18 +4440,18 @@ msgstr "Lampiran:"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:108
 msgid "Optional Internal note(s)."
-msgstr ""
+msgstr "Nota Dalaman (jika Perlu)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:115
 #, php-format
 msgid "Time is based on your time zone (GMT + %s)"
-msgstr ""
+msgstr "Masa adalah berdasarkan kepada zon masa anda (GMT +% s)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:166
 msgid "Assign To:"
-msgstr ""
+msgstr "Diberikan Kepada:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:169
@@ -4468,7 +4461,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:181
 msgid "Send alert to assigned staff."
-msgstr ""
+msgstr "Hantar makluman kepada pengguna yang ditugaskan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:188
@@ -4484,13 +4477,13 @@ msgstr "Tanda Tangan"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:195
 msgid "Dept Signature (if any)"
-msgstr ""
+msgstr "Pengenalan Jabatan (Jika Perlu)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/newticket.inc.php:203
 #: Foundation\Apache2.2\htdocs\Katak/include/user/open.inc.php:147
 msgid "Submit Ticket"
-msgstr ""
+msgstr "Hantar Tiket"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:11
@@ -4515,12 +4508,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:31
 msgid "System Preferences and Settings"
-msgstr ""
+msgstr "Pilihan dan Ketetapan Sistem"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:35
 msgid "General Settings"
-msgstr ""
+msgstr "Ketetapan Umum"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:37
@@ -4567,22 +4560,22 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:51
 msgid "Support System Name/Title:"
-msgstr ""
+msgstr "Nama Sistem/Tajuk"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:54
 msgid "Default Email Templates:"
-msgstr ""
+msgstr "Pilihan Templat Emel:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:57
 msgid "Select Default Template"
-msgstr ""
+msgstr "Pilih Jawapan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:67
 msgid "Default Department:"
-msgstr ""
+msgstr "Jabatan Pilihan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:70
@@ -4637,12 +4630,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:108
 msgid "Months"
-msgstr ""
+msgstr "Bulan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:108
 msgid "Month"
-msgstr ""
+msgstr "Bulan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:114
@@ -4755,7 +4748,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:215
 msgid "Date &amp; Time"
-msgstr ""
+msgstr "Tarikh dan Masa"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:217
@@ -4772,22 +4765,22 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:225
 msgid "Date Format:"
-msgstr ""
+msgstr "Format Tarikh:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:231
 msgid "Date &amp; Time Format:"
-msgstr ""
+msgstr "Format Tarikh dan Masa:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:237
 msgid "Day, Date &amp; Time Format:"
-msgstr ""
+msgstr "Format Hari, Tarikh dan Masa:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:243
 msgid "Default Timezone:"
-msgstr ""
+msgstr "Timezone:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:258
@@ -5160,7 +5153,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:490
 msgid "Send alert to assigned staff"
-msgstr ""
+msgstr "Hantar makluman kepada pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/preference.inc.php:495
@@ -5212,7 +5205,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:8
 msgid "Add New Standard Reply"
-msgstr ""
+msgstr "Tambah Pilihan Jawapan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:33
@@ -5228,7 +5221,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:41
 msgid "Department under which the 'answer' will be made available."
-msgstr ""
+msgstr "Jabatan dibenarkan capaian."
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:43
@@ -5240,12 +5233,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:54
 msgid "Answer:"
-msgstr ""
+msgstr "Jawapan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reply.inc.php:55
 msgid "Standard Reply - Ticket's base variables are supported."
-msgstr ""
+msgstr "Balasan - Pembolehubah boleh digunakan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/reports.inc.php:65
@@ -5308,12 +5301,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/role.inc.php:28
 msgid "Role Name:"
-msgstr ""
+msgstr "Nama Peranan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/role.inc.php:35
 msgid "Role Status:"
-msgstr ""
+msgstr "Status Peranan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/role.inc.php:37
@@ -5463,12 +5456,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/roles.inc.php:16
 msgid "Role Name"
-msgstr ""
+msgstr "Nama Peranan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/roles.inc.php:18
 msgid "Members"
-msgstr ""
+msgstr "Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/roles.inc.php:63
@@ -5570,8 +5563,8 @@ msgstr ""
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:72
-msgid "category"
-msgstr ""
+msgid "Category:"
+msgstr "Kategori:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:84
@@ -5587,12 +5580,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:93
 msgid "Reply Title"
-msgstr ""
+msgstr "Tajuk Jawapan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:95
 msgid "Category/Dept"
-msgstr ""
+msgstr "Kategori/Jabatan"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/stdreply.inc.php:96
@@ -5650,26 +5643,26 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:80
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:324
 msgid "Date Span:"
-msgstr ""
+msgstr "Julat Tarikh:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:81
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:325
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:406
 msgid "From"
-msgstr ""
+msgstr "Dari"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:84
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:328
 msgid "to"
-msgstr ""
+msgstr "hingga"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:89
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:336
 msgid "Type:"
-msgstr ""
+msgstr "Jenis:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/syslogs.inc.php:94
@@ -5710,7 +5703,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:27
 msgid "User"
-msgstr ""
+msgstr "Pengguna"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:29
@@ -5743,10 +5736,6 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:142
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:405
 #: Foundation\Apache2.2\htdocs\Katak/include/user/tickets.inc.php:71
-msgid "Subject"
-msgstr "Tajuk/Subjek"
-
-#: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:41
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:56
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/template.inc.php:71
@@ -5962,7 +5951,7 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:148
 msgid "Assigned staff (if any)"
-msgstr ""
+msgstr "Diberikan kepada (Jika Perlu)"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/templates.inc.php:150
@@ -6017,17 +6006,17 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:290
 msgid "Advanced"
-msgstr ""
+msgstr "Perician"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:300
 msgid "Dept:"
-msgstr ""
+msgstr "Jabatan:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:312
 msgid "Status is:"
-msgstr ""
+msgstr "Status:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:315
@@ -6039,7 +6028,7 @@ msgstr ""
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:430
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:479
 msgid "Overdue"
-msgstr ""
+msgstr "Terlambat"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:339
@@ -6067,7 +6056,7 @@ msgstr "#Tiket"
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:350
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:404
 msgid "Date"
-msgstr ""
+msgstr "Tarikh"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:354
@@ -6082,12 +6071,12 @@ msgstr ""
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:358
 msgid "Results Per Page:"
-msgstr ""
+msgstr "Paparan Per Mukasurat Laman:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:369
 msgid "Basic"
-msgstr ""
+msgstr "Biasa"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:403
@@ -6135,16 +6124,13 @@ msgstr ""
 msgid "Reopen"
 msgstr ""
 
-#: C:\Program Files\Apache Software
-#: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:473
-#: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:490
 msgid "Are you sure you want to reopen selected tickets?"
-msgstr ""
+msgstr "Adakah anda pasti untuk membuka semula tiket yang dipilih ini?"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:480
 msgid "Are you sure you want to mark selected tickets overdue/stale?"
-msgstr ""
+msgstr "Adakah anda pasti untuk menanda tiket yang dipilih sebagai lewat?"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:481
@@ -6157,12 +6143,12 @@ msgstr "Tutup"
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:482
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:488
 msgid "Are you sure you want to close selected tickets?"
-msgstr ""
+msgstr "Adakah anda pasti untuk menutup tiket yang dipilih ini?"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/tickets.inc.php:495
 msgid "Are you sure you want to DELETE selected tickets?"
-msgstr ""
+msgstr "Adakah anda pasti untuk HAPUS tiket yang dipilih ini?"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/topic.inc.php:6
@@ -6380,7 +6366,7 @@ msgstr "Kaitan Tiket"
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/viewticket.inc.php:333
 #: Foundation\Apache2.2\htdocs\Katak/include/user/viewticket.inc.php:157
 msgid "Post Reply"
-msgstr "Hantar"
+msgstr "Hantar Maklumbalas"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/viewticket.inc.php:284
@@ -6400,7 +6386,7 @@ msgstr "Lampiran:"
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/viewticket.inc.php:312
 msgid "Append signature to e-mail:"
-msgstr ""
+msgstr "Tambah pengenalan kepada emel:"
 
 #: C:\Program Files\Apache Software
 #: Foundation\Apache2.2\htdocs\Katak/include/staff/viewticket.inc.php:318
@@ -6708,4 +6694,81 @@ msgstr "Produk:"
 msgid "Frequently Asked Questions"
 msgstr "Soalan-Soalan Lazim"
 
+# header.inc.php
+msgid "Logged in as"
+msgstr "Daftar masuk sebagai"
 
+msgid "Log Out"
+msgstr "Keluar"
+
+msgid "Today"
+msgstr "Hari Ini"
+
+msgid "Reports"
+msgstr "Laporan"
+
+msgid "DAILY"
+msgstr "HARIAN"
+
+msgid "MONTHLY"
+msgstr "BULANAN"
+
+msgid "YEARLY"
+msgstr "TAHUNAN"
+
+msgid "Title:"
+msgstr "Tajuk:"
+
+msgid "Selection Date:"
+msgstr "Pilihan Tarikh:"
+
+msgid "Date Created"
+msgstr "Tarikh Didaftar"
+
+msgid "Print"
+msgstr "Cetak"
+
+msgid "Export"
+msgstr "Eksport"
+
+msgid "Daily Reports"
+msgstr "Laporan Harian"
+
+msgid "Monthly Reports"
+msgstr "Laporan Bulanan"
+
+msgid "Yearly Reports"
+msgstr "Laporan Tahunan"
+
+msgid "Selection:"
+msgstr "Pilihan"
+
+msgid "Year"
+msgstr "Tahun"
+
+msgid "Staff Login"
+msgstr "Login Pengguna"
+
+msgid "Client Login"
+msgstr "Login Klien"
+
+msgid "TICKET INFORMATION"
+msgstr "MAKLUMAT TIKET"
+
+msgid "REPORTED STATEMENT/PROBLEM"
+msgstr "LAPORAN KES/PERMASALAHAN"
+
+msgid "INTERNAL NOTES AND EVENTS"
+msgstr "NOTA DALAMAN DAN AKTIVITI KES"
+
+msgid "MESSAGES AND RESPONSES"
+msgstr "MAKLUMAN DAN MAKLUMBALAS"
+
+msgid "OPERATIONAL ACTIONS"
+msgstr "TINDAKAN DAN OPERASI"
+
+msgid "Testimonials Products - Product Demo:"
+msgstr "Testimoni produk - Produk Demo"
+
+msgid "Please sign up with %s or use Google sign up before fill-in the ticket."
+msgstr "Sila daftar dengan %s atau guna Google login anda sebelum mengisi ticket."

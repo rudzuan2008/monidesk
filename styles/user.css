@@ -15,13 +15,16 @@
 
 body {
   font-family:arial, helvetica, sans-serif;
-  font-size:10.5pt;
+  font-size:9pt;
   margin:0;
   padding-left: 10%;
   padding-right: 10%;
   text-align:center;
 }
-
+p, ul, ol, dl {
+    margin: 0 0 1em;
+    font-size: 0.9em;
+}
 img {
 	border:None;
 }
@@ -46,9 +49,9 @@ table.tgrid td {
 table.tgrid th {
   font-size:11pt; 
   font-weight:bold;
-  -webkit-border-radius:8px;
-  -moz-border-radius:8px;
-  border-radius:8px;
+  -webkit-border-radius:1px;
+  -moz-border-radius:1px;
+  border-radius:1px;
 }
 
 hr { border:none; border-bottom:1px solid; margin:8px 0 12px 0; }
@@ -110,6 +113,12 @@ table.dtable th a, table.dtable th a:hover {
 .row1 td { background-color: #F4F4F4; }
 .row2 td { background-color: #FFFFFF; }
 
+.ticketinfo {
+    border:0px solid;
+    padding:2px 2px 2px 2px;
+    /*background-color: #FCFCFC;*/
+    border-color: #EEE1CA;
+}
 
 #container {
   min-width:800px;
@@ -131,42 +140,57 @@ table.dtable th a, table.dtable th a:hover {
   }
 
   #left-top-block {
-    background:url(../images/pagebg.jpg);
-    padding:0 10px 0 0;
-    height:70px;
-    display:block;
+    height:135px;
   }
-
+  #left-top-block a {
+	color: black;
+	text-decoration: none;
+  }
+  #left-top-block a:hover {
+	color: #DB8606;
+	text-decoration: none;
+  }
   #logo { 
       width:150px;
       height:54px;
   }
 
   #right-top-block {
-      margin:0 0 8px 0;
-      padding:0 2px 0 0;
-      display:inline;
-      float:right;
+  	  color: white;
+      float:left;
+      border: 0px solid;
+      width: 100%;
+      height: 22px;
+      background: black; /* For browsers that do not support gradients */
+  	  background: -webkit-linear-gradient(left, black , ghostwhite); /* For Safari 5.1 to 6.0 */
+  	  background: -o-linear-gradient(right, black, ghostwhite); /* For Opera 11.1 to 12.0 */
+  	  background: -moz-linear-gradient(right, black, ghostwhite); /* For Firefox 3.6 to 15 */
+  	  background: linear-gradient(to right, black , ghostwhite); /* Standard syntax */
+      word-spacing: .25em;
   }
-  
-	#right-top-block a {
-			border-radius: 12px;
-			-webkit-border-radius: 12px;
-			-moz-border-radius: 12px;
-			padding: 5px 10px;
-			float: right;
-			margin-right: 8px;
-			margin-bottom: 15px;
-			display: inline;
-			line-height: 22px;
-			font-size: 11pt;
-			font-weight: bold;
-			width: 80px;
-		}
-
-    #right-top-block span {
+  #right-top-block a {
+  	font-family: Arial;
+  	text-transform: uppercase;
+	color: ghostwhite;
+	display:inline-block;
+	cursor:pointer;
+	font-size:12px;
+	font-weight: bold;
+     border:1px solid #ccc;
+     padding:.3em .5em;
+     text-decoration:none;
+  }
+  #right-top-block a:hover {
+	background-color: white;
+	color: black;
+  }
+  #right-top-block a:active {
+		position:relative;
+		top:1px;
+  }
+  #right-top-block span {
       padding-left:24px;
-    }
+  }
 
     #right-top-block a.home span { background:url(../images/icons/home.gif) 0 0 no-repeat; }
     #right-top-block a.new_ticket span { background:url(../images/icons/new_ticket.gif) 0 0 no-repeat; }
@@ -175,24 +199,26 @@ table.dtable th a, table.dtable th a:hover {
     #right-top-block a.log_out span { background:url(../images/icons/logout.gif) 0 0 no-repeat; }
     #right-top-block a.query_client span { background:url(../images/icons/open.gif) 0 0 no-repeat; }
     #right-top-block a.faq span { background:url(../images/icons/thread.gif) 0 0 no-repeat; }
+    #right-top-block a.register span { background:url(../images/icons/new_ticket.gif) 0 0 no-repeat; }
+    #right-top-block a.user_login span { background:url(../images/icons/messageIN.gif) 0 0 no-repeat; }
+    #right-top-block a.order span { background:url(../images/icons/credit-card.png) 0 0 no-repeat; }
 
    
   #content {
   	  min-height: 600px;
       clear:both;
-      padding:0px 20px 0px 20px;
+      padding: 5px 5px 0px 5px;
       line-height:14pt;
       margin:8px auto 0px auto;
   }
     
     #content #landingpage {
-			/*background-image:url('../images/background-home.jpg');*/
-			background-repeat:no-repeat;
-			background-position:center;
+		/*background-image:url('../images/background-home.jpg');
+		background-repeat:no-repeat;
+		background-position:center;*/
       width:100%;
-      height:480px;
+      height:100%;
       font-family: Arial, Helvetica, sans-serif;
-      font-size:14px;
       text-decoration: none;
       border: none;
       font-weight: normal;
@@ -205,17 +231,20 @@ table.dtable th a, table.dtable th a:hover {
        text-decoration: none;
        border: none;
        font-weight: bold;
-       padding-top:30px;
-       padding-bottom:30px;
-       padding-left:30px;
+       padding-top:10px;
+       padding-bottom:10px;
+       padding-left:5px;
     }
     
     #content #subtitle {
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: 1em;
 		   overflow: auto;
-		   height: 400px;
+		   height: 100%;
  		   margin: 5px;
-	 	   padding-left: 30px;
+	 	   padding-left: 5px;
 		   min-width: 750px;
+		   text-align: justify;
     }
 
     #content form {
@@ -253,13 +282,13 @@ table.dtable th a, table.dtable th a:hover {
 #leftcolumn {
     display:inline-block;
     float:left;
-    width:50%;
+    width:40%;
 }
 
 #rightcolumn {
     display:inline-block;
     float:right;
-	  width:50%;
+	  width:40%;
 }
 
 #ticketstatus {
@@ -277,14 +306,36 @@ table.dtable th a, table.dtable th a:hover {
     border-top: 1px solid;
     border-bottom: 1px solid;
 }
-
-#info {
+#infotitle {
+	color: #666;float:right;padding-top: 4px;padding-left: 0px;border: 0px solid;
     padding:4px 4px 8px 4px;
     float:right;
     font-size: 10pt;
     text-align:center;
+} 
+#info {
+	border: 1px solid;
+	border-color: black;
+	padding-right: 10px; padding-top: 120px;
+   /*margin:120px 0 0 0;*/
+   float:right;
+   text-align: right;
 }
-
+#info a {
+   color:#111166;
+   font-weight:bold;
+}
+ #info a:hover { color: #ff7c01; }
+/*#info {
+	background-color: red;
+    padding:4px 4px 8px 4px;
+    float:right;
+    font-size: 10pt;
+    text-align:center;
+}*/
+.visitor-counter {
+	float: right;border: 0px solid;border-color: #DB8606;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+}
 /* Buttons  */
 .button {
      -webkit-border-radius: 12px;
@@ -300,8 +351,48 @@ table.dtable th a, table.dtable th a:hover {
      font-weight: bold;
      width: 140px;
      cursor:pointer;
+     margin: 0px auto;
+     
 }
-    
+.button:hover {
+     box-shadow: 0px 0px 5px #888888;
+     border-radius: 12px;
+     cursor: hand;
+}
+.button-subscribe {
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px;
+     border-width: 5px;
+     border-color: red;
+     display: inline;
+     padding: 5px 5px 5px 5px;
+     line-height: 23px;
+     font-size: 9pt;
+     font-weight: bold;
+     width: 180px;
+     cursor:pointer;
+     margin-top: 2px;
+     
+}
+.button-subscribe:hover {
+      box-shadow: 0px 0px 5px #888888;
+      border-radius: 5px;
+      line-height: 23px;
+      cursor: hand;
+}
+
+
+#customBtn {
+	margin-top: 2px;	
+}
+
+#customBtn:hover {
+      box-shadow: 0px 0px 5px #888888;
+      border-radius: 5px;
+      cursor: hand;
+    }    
+  
 /* Generic CSS based Icons. use=> <tag class="Icon iconname">text</tag> */
     
 .Icon {     
@@ -346,6 +437,16 @@ a.Icon:hover {
     font-weight:bold;
 }
 
+.center-element {
+	width: 100px;
+	margin: 0px auto 0px auto;
+}
+.center-multi-element {
+	position:relative; 
+	width:100%; 
+	background:none; 
+	text-align:center;
+}
 .firstmessage {
     border-left:4px solid;
     margin-left:20px;
@@ -407,8 +508,8 @@ MOBILE, SMARTPHONE
      padding-left: 10px;
      width: 90%;
   }
-#info {
+  /*#info {
     background:none;
     padding:0px 0px 4px 0px;
-}
+  }*/
 }

@@ -86,6 +86,15 @@ class Mail_mail extends Mail {
         }
     }
 
+//     function console($data, $priority)
+//     {
+//     	if (is_array($data))
+//     		$output = '<script>console.log("' . str_repeat(" ", $priority-1) . implode( ",", $data) . '");</script>';
+//     		else
+//     			$output = '<script>console.log("' . str_repeat(" ", $priority-1) . $data . '");</script>';
+    
+//     			echo $output;
+//     }
     /**
      * Implements Mail_mail::send() function using php's built-in mail()
      * command.
@@ -147,6 +156,7 @@ class Mail_mail extends Mail {
         }
         list(, $text_headers) = $headerElements;
 
+        //$this->console("SENDING MAIL ", 1);
         // We only use mail()'s optional fifth parameter if the additional
         // parameters have been provided and we're not running in safe mode.
         if (empty($this->_params) || ini_get('safe_mode')) {
@@ -155,7 +165,7 @@ class Mail_mail extends Mail {
             $result = mail($recipients, $subject, $body, $text_headers,
                            $this->_params);
         }
-
+        //$this->console("SENDING MAIL RESULT ". $result, 1);
         // If the mail() function returned failure, we need to create a
         // PEAR_Error object and return it instead of the boolean result.
         if ($result === false) {

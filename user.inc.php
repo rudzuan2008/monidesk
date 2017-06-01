@@ -75,9 +75,20 @@ $thisuser=null;
 
 // Has got the user a session? Then make sure the user is valid...before doing anything else.
 if($_SESSION['_user']['userID'] && $_SESSION['_user']['key'])
-  if(!$cfg->getUserLogRequired())
-    $thisuser = new UserSession($_SESSION['_user']['userID'],$_SESSION['_user']['key']);
-  else {
+  if(!$cfg->getUserLogRequired()) {
+  	if ($_SESSION["USERTYPE"]=="client") {
+  		$thisuser = new ClientSession($_SESSION['_user']['userID'],$_SESSION['_user']['key']);
+  		// Block blocked client
+  		if (!$thisuser->isactive()) {
+  			$errors['err'] = _('Access Disabled. Contact Admin');
+  			$_SESSION['_user']=array();
+  			session_unset();
+  			session_destroy();
+  		}
+  	}else{
+    	$thisuser = new UserSession($_SESSION['_user']['userID'],$_SESSION['_user']['key']);
+  	}
+  } else {
     $thisuser = new ClientSession($_SESSION['_user']['userID'],$_SESSION['_user']['key']);
     // Block blocked client
     if (!$thisuser->isactive()) {

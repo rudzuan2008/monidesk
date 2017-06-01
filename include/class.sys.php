@@ -6,7 +6,7 @@
 
     Copyright (c)  2012-2013 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket by Peter Rotich.
     See LICENSE.TXT for details.
@@ -23,10 +23,46 @@ class Sys {
     var $loglevel=array(1=>'Error','Warning','Debug');
 
 
+    static function getCompany() {
+    	global $cfg;
+    	if ($_SESSION['cid']) {
+    		$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE code='.db_input($_SESSION['cid']));
+    		$company_info = db_fetch_array($company);
+    	}else{
+    		$company_info =  $cfg->getDefaultCompany();
+    	}
+    	return $company_info['name'];
+    }
+    static function getCompanyId() {
+    	global $cfg;
+    	if ($_SESSION['cid']) {
+    		$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE code='.db_input($_SESSION['cid']));
+    		$company_info = db_fetch_array($company);
+    	}else{
+    		$company_info =  $cfg->getDefaultCompany();
+    	}
+    	return $company_info['company_id'];
+    }
+
     //Load configuration info.
     static function getConfig() {
         $cfg= new Config(1);
         return ($cfg && $cfg->getId())?$cfg:null;
+    }
+
+    static function console_log($log, $data, $module="" ) {
+    	if ($log==strtolower("debug")) {
+    		$output  = "<script>console.debug( '$log: ".$module." ";
+    	}elseif ($log==strtolower("error")) {
+    		$output  = "<script>console.error( '$log: ".$module." ";
+    	}elseif ($log==strtolower("warning")) {
+    		$output  = "<script>console.warn( '$log: ".$module." ";
+    	}else{
+    		$output  = "<script>console.log( '$log: ".$module." ";
+    	}
+    	$output .= json_encode(print_r($data, true));
+    	$output .= "' );</script>";
+    	//echo $output;
     }
 
     // Send email alert to the system administrator
@@ -38,13 +74,13 @@ class Sys {
 
         //Try getting the alert email.
         $email=null;
-        if($cfg && !($email=$cfg->getAlertEmail())) 
+        if($cfg && !($email=$cfg->getAlertEmail()))
             $email=$cfg->getDefaultEmail(); //will take the default email.
 
         if($email) {
             $email->send($to,$subject,$message);
         }else {//no luck - try the system mail.
-            Email::sendmail($to,$subject,$message,sprintf('"Katak-support Alerts"<%s>',$to));
+            Email::sendmail($to,$subject,$message,sprintf('"System Alerts"<%s>',$to));
         }
     }
 
@@ -52,12 +88,12 @@ class Sys {
     static function log($priority,$title,$message,$logger,$alert=true) {
         global $cfg;
         global $dblink;
-        
+
         switch($priority){ //We are providing only 3 levels of logs. Windows style.
             case LOG_EMERG:
-            case LOG_ALERT: 
-            case LOG_CRIT: 
-            case LOG_ERR:       
+            case LOG_ALERT:
+            case LOG_CRIT:
+            case LOG_ERR:
                 $level=1; // Error level
                 if($alert) {
                     Sys::alertAdmin($title,$message);
@@ -89,7 +125,16 @@ class Sys {
               mysql_query($sql); //don't use db_query to avoid possible loop.
         }
     }
+    // Delete old log messages
+    static function purgeAllLogs(){
+    	global $cfg;
 
+    	if($cfg) {
+    		$sql='DELETE  FROM '.SYSLOG_TABLE.' WHERE 1';
+    		db_query($sql);
+    	}
+
+    }
     // Delete old log messages
     static function purgeLogs(){
         global $cfg;
@@ -99,6 +144,14 @@ class Sys {
             db_query($sql);
         }
 
+    }
+
+    static function setClass($readonly="") {
+    	if ($readonly=="") {
+    		return 'class="input_box"';
+    	}else{
+    		return 'class="display_only"';
+    	}
     }
 }
 

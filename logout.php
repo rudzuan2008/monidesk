@@ -19,11 +19,11 @@ require_once('user.inc.php');
 //Log logout info...
 $msg=sprintf("%s/%s " . _("logged out"),$_SESSION['_user']['userID'],$_SESSION['_user']['key']);
 Sys::log(LOG_DEBUG,'User logout',$msg,$_SESSION['_user']['userID']);
-
+$cid=$_SESSION['cid'];
 //We are checking to make sure the user is logged in before a logout to avoid session reset tricks on excess logins
 $_SESSION['_user']=array();
 session_unset();
 session_destroy();
-header('Location: index.php');
+header('Location: index.php?cid='.$cid);
 require('index.php');
 ?>

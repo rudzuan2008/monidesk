@@ -14,15 +14,28 @@
 
     $Id: $
 **********************************************************************/
-if (basename($_SERVER['SCRIPT_NAME']) == basename(__FILE__))
-    die('Adiaux amikoj!'); //Say hi to our friend..
-if (!file_exists('../main.inc.php'))
-    die('Fatal error!');
+if (basename($_SERVER['SCRIPT_NAME']) == basename(__FILE__)) die('Adiaux amikoj!'); //Say hi to our friend..
+if (!file_exists('../main.inc.php')) die('Fatal error!');
 define('ROOT_PATH', '../'); //Path to the root dir.
 require_once('../main.inc.php');
 
 // set staff/admin language and language domain
-$lang = $cfg->getStaffLanguage();
+$lang=(isset($_POST['lang']) ? $_POST['lang'] : $_GET['lang']);;
+//echo "read ".$lang;
+if (!$lang) {
+	$lang = $_SESSION["LANGUAGE"];
+	//echo "def ".$lang;
+	if (!$lang) {
+		$lang = $cfg->getStaffLanguage();
+		//echo "sys ".$lang;
+		$_SESSION["LANGUAGE"]=$lang;
+	}
+	$_SESSION["LANGUAGE"]=$lang;
+}else{
+	$_SESSION["LANGUAGE"]=$lang;
+	//echo "new ".$lang;
+}
+//$lang = $cfg->getStaffLanguage();
 putenv('LC_MESSAGES=' . $lang);
 setlocale(LC_MESSAGES, $lang . '.UTF-8', $lang . '.UTF8', $lang . '.utf8', $lang . '.utf-8');
 bindtextdomain('messages', '../i18n');

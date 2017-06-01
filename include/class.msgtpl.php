@@ -140,7 +140,7 @@ class Template {
                  ',ticket_overlimit_subj='.db_input(Format::striptags($var['ticket_overlimit_subj'])).
                  ',ticket_overlimit_body='.db_input(Format::striptags($var['ticket_overlimit_body'])).
                  ',ticket_reply_subj='.db_input(Format::striptags($var['ticket_reply_subj'])).
-                 ',ticket_reply_body='.db_input(Format::striptags($var['ticket_reply_body'])).
+                 ',ticket_reply_body='.db_input($var['ticket_reply_body']).
                  ' WHERE tpl_id='.db_input($this->getId());
 
             if(!db_query($sql) || !db_affected_rows())
@@ -206,7 +206,7 @@ class Template {
                  ',ticket_overlimit_subj='.db_input(Format::striptags($info['ticket_overlimit_subj'])).
                  ',ticket_overlimit_body='.db_input(Format::striptags($info['ticket_overlimit_body'])).
                  ',ticket_reply_subj='.db_input(Format::striptags($info['ticket_reply_subj'])).
-                 ',ticket_reply_body='.db_input(Format::striptags($info['ticket_reply_body']));
+                 ',ticket_reply_body='.db_input($info['ticket_reply_body']);
             //echo $sql;
             if(!db_query($sql) || !($id=db_insert_id()))
                 $errors['err']=_('Unable to create the template. Internal error occured');

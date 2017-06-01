@@ -1,12 +1,12 @@
 <?php
 /*********************************************************************
     tickets.php
-    
+
     Handles all tickets related actions for staff.
-    
+
     Copyright (c)  2012-2013 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket by Peter Rotich.
     See LICENSE.TXT for details.
@@ -38,169 +38,187 @@ elseif (isset($_REQUEST['a']) && $_REQUEST['a'] == 'open') {
 }
 //At this stage we know the access status. we can process the post.
 if ($_POST && !$errors):
-	
+	$msg=null;$errors=null;$warn=null;
     if ($ticket && $ticket->getId()) {
         $errors = array();
         $lock = $ticket->getLock(); //Ticket lock if any
         $statusKeys = array('open' => 'Open', 'Reopen' => 'Open', 'Close' => 'Closed');
         switch (strtolower($_POST['a'])):
             case 'reply':
-	            $fields = array();
-                $fields['response'] = array('type' => 'text', 'required' => 1, 'error' => _('Response message required'));
-                $params = new Validator($fields);
-                if (!$params->validate($_POST)) {
-                   $errors = array_merge($errors, $params->errors());
-                }
-                //Use locks to avoid double replies
-                if ($lock && $lock->getStaffId() != $thisuser->getId())
-                    $errors['err'] = _('Action Denied. Ticket is locked by someone else!');
+	        	if ($_POST['randcheck']==$_SESSION['rand'])
+	        	{
+		            $fields = array();
+	                $fields['response'] = array('type' => 'text', 'required' => 1, 'error' => _('Response message required'));
+	                $params = new Validator($fields);
+	                if (!$params->validate($_POST)) {
+	                   $errors = array_merge($errors, $params->errors());
+	                }
+	                //Use locks to avoid double replies
+	                if ($lock && $lock->getStaffId() != $thisuser->getId())
+	                    $errors['err'] = _('Action Denied. Ticket is locked by someone else!');
 
-                //Check attachments restrictions.
-                $i = 0;
-                while($_FILES['attachment']['name'][$i]) {
-                  if(!$cfg->allowOnlineAttachments()) //Something wrong with the form...user shouldn't have an option to attach
-                      $errors['attachment']='File [ '.$_FILES['attachment']['name'].' ] rejected: no upload permission.';
-                  elseif (!$cfg->canUploadFiles()) //TODO: saved vs emailed attachments...admin config??
-                      $errors['attachment'] = _('Upload dir invalid. Contact admin.');
-                  elseif(!$cfg->canUploadFileType($_FILES['attachment']['name'][$i]))
-                      $errors['attachment']=_('Invalid file type').' [ '.Format::htmlchars($_FILES['attachment']['name'][$i]).' ]';
-                  elseif($_FILES['attachment']['size'][$i]>$cfg->getMaxFileSize())
-                      $errors['attachment']=_('File is too big').': '.$_FILES['attachment']['size'][$i].' bytes';
-                  $i++;
-                }
-                
-                //Make sure the email is not banned
-                if (!$errors && BanList::isbanned($ticket->getEmail()))
-                    $errors['err'] = _('Email is in banlist. Must be removed to reply');
+	                //Check attachments restrictions.
+	                $i = 0;
+	                while($_FILES['attachment']['name'][$i]) {
+	                  if(!$cfg->allowOnlineAttachments()) //Something wrong with the form...user shouldn't have an option to attach
+	                      $errors['attachment']='File [ '.$_FILES['attachment']['name'].' ] rejected: no upload permission.';
+	                  elseif (!$cfg->canUploadFiles()) //TODO: saved vs emailed attachments...admin config??
+	                      $errors['attachment'] = _('Upload dir invalid. Contact admin.');
+	                  elseif(!$cfg->canUploadFileType($_FILES['attachment']['name'][$i]))
+	                      $errors['attachment']=_('Invalid file type').' [ '.Format::htmlchars($_FILES['attachment']['name'][$i]).' ]';
+	                  elseif($_FILES['attachment']['size'][$i]>$cfg->getMaxFileSize())
+	                      $errors['attachment']=_('File is too big').': '.$_FILES['attachment']['size'][$i].' bytes';
+	                  $i++;
+	                }
 
-                //If no error...do the do.
-                if (!$errors && ($respId = $ticket->postResponse($_POST['response'], $_POST['signature'], $_FILES['attachment']))) {
-                    $msg = _('Response Posted Successfully');
-                    //$userEmail = $ticket->getEmail();
-                    //$notiSubject = $ticket->getSubject();
-                    //$notiResponse = $_POST['response'];
-                    
-                    $ticket->sendNotification($ticket->getSubject(), $_POST['response'], $ticket->getEmail(), "WTDESK");
-                    
-                    //Set status if any.
-                    $wasOpen = $ticket->isOpen();
-                    if (isset($_POST['ticket_status']) && $_POST['ticket_status']) {
-                        if ($ticket->setStatus($_POST['ticket_status']) && $ticket->reload()) {
-                            $note = sprintf(_('%s %s the ticket on reply'), $thisuser->getName(), $ticket->isOpen() ? _('reopened') : _('closed'));
-                            $ticket->logActivity(sprintf(_('Ticket status changed to %s'), ($ticket->isOpen() ? _('Open') : _('Closed'))), $note);
-                        }
-                    }
-                    //Finally upload attachment if any
-                    if ($_FILES['attachment'] && $_FILES['attachment']['size']) {
-                        $ticket->uploadAttachment($_FILES['attachment'], $respId, 'R');
-                    }
-                    $ticket->reload();
-                    //Mark the ticket answered if OPEN.
-                    if ($ticket->isopen()) {
-                        $ticket->markAnswered();
-                    } elseif ($wasOpen) { //Closed on response???
-                        $page = $ticket = null; //Going back to main listing.
-                    }
-                    
-                } elseif (!$errors['err']) {
-                    $errors['err'] = _('Unable to post the response.');
-                }
+	                //Make sure the email is not banned
+	                if (!$errors && BanList::isbanned($ticket->getEmail()))
+	                    $errors['err'] = _('Email is in banlist. Must be removed to reply');
+
+	                //If no error...do the do.
+	                if (!$errors && ($respId = $ticket->postFormattedResponse($_POST, $_FILES['attachment']))) {
+	                //if (!$errors && ($respId = $ticket->postResponse($_POST['response'], $_POST['signature'], $_FILES['attachment']))) {
+	                    $msg = _('Response Posted Successfully');
+	                    //$userEmail = $ticket->getEmail();
+	                    //$notiSubject = $ticket->getSubject();
+	                    //$notiResponse = $_POST['response'];
+
+	                    //$notification_status=$ticket->sendNotification($ticket->getSubject(), $_POST['response'], $ticket->getEmail(), "ABT-Helpdesk");
+	                    //Sys::console_log('debug', "OneSignal Status: ".$notification_status);
+
+	                    //Set status if any.
+	                    $wasOpen = $ticket->isOpen();
+	                    if (isset($_POST['ticket_status']) && $_POST['ticket_status']) {
+	                        if ($ticket->setStatus($_POST['ticket_status']) && $ticket->reload()) {
+	                            $note = sprintf(_('%s %s the ticket on reply'), $thisuser->getName(), $ticket->isOpen() ? _('reopened') : _('closed'));
+	                            $ticket->logActivity(sprintf(_('Ticket status changed to %s'), ($ticket->isOpen() ? _('Open') : _('Closed'))), $note);
+	                        }
+	                    }
+	                    //Finally upload attachment if any
+	                    if ($_FILES['attachment'] && $_FILES['attachment']['size']) {
+	                        $ticket->uploadAttachment($_FILES['attachment'], $respId, 'R');
+	                    }
+	                    $ticket->reload();
+	                    //Mark the ticket answered if OPEN.
+	                    if ($ticket->isopen()) {
+	                        $ticket->markAnswered();
+	                    } elseif ($wasOpen) { //Closed on response???
+	                        $page = $ticket = null; //Going back to main listing.
+	                    }
+
+	                } elseif (!$errors['err']) {
+	                    $errors['err'] = _('Unable to post the response.');
+	                }
+	        	}
                 break;
             case 'transfer':
-                $fields = array();
-                $fields['dept_id'] = array('type' => 'int', 'required' => 1, 'error' => _('Select Department'));
-                $fields['message'] = array('type' => 'text', 'required' => 1, 'error' => _('Note/Message required'));
-                $params = new Validator($fields);
-                if (!$params->validate($_POST)) {
-                    $errors = array_merge($errors, $params->errors());
-                }
+            	if ($_POST['randcheck']==$_SESSION['rand'])
+            	{
+	                $fields = array();
+	                $fields['dept_id'] = array('type' => 'int', 'required' => 1, 'error' => _('Select Department'));
+	                $fields['message'] = array('type' => 'text', 'required' => 1, 'error' => _('Note/Message required'));
+	                $params = new Validator($fields);
+	                if (!$params->validate($_POST)) {
+	                    $errors = array_merge($errors, $params->errors());
+	                }
 
-                if (!$errors && ($_POST['dept_id'] == $ticket->getDeptId()))
-                    $errors['dept_id'] = _('Ticket already in the Dept.');
+	                if (!$errors && ($_POST['dept_id'] == $ticket->getDeptId()))
+	                    $errors['dept_id'] = _('Ticket already in the Dept.');
 
-                if (!$errors && !$thisuser->canTransferTickets())
-                    $errors['err'] = _('Action Denied. You are not allowed to transfer tickets.');
+	                if (!$errors && !$thisuser->canTransferTickets())
+	                    $errors['err'] = _('Action Denied. You are not allowed to transfer tickets.');
 
-                if (!$errors && $ticket->transfer($_POST['dept_id'])) {
-                    $olddept = $ticket->getDeptName();
-                    $ticket->reload(); //dept manager changed!
-                    //Send out alerts?? - for now yes....part of internal note!
-                    $title = sprintf(_('Dept. Transfer from %s to %s'), $olddept, $ticket->getDeptName());
-                    $ticket->postNote($title, $_POST['message']);
-                    $msg = sprintf(_('Ticket transfered sucessfully to %s Dept.'), $ticket->getDeptName());
-                    if (!$thisuser->canAccessDept($_POST['dept_id']) && $ticket->getStaffId() != $thisuser->getId()) { //Check access.
-                        //Staff doesn't have access to the new department.
-                        $page = 'tickets.inc.php';
-                        $ticket = null;
-                    }
-                } elseif (!$errors['err']) {
-                    $errors['err'] = _('Unable to complete the transfer');
-                }
+	                if (!$errors && $ticket->transfer($_POST['dept_id'])) {
+	                    $olddept = $ticket->getDeptName();
+	                    $ticket->reload(); //dept manager changed!
+	                    //Send out alerts?? - for now yes....part of internal note!
+	                    $title = sprintf(_('Dept. Transfer from %s to %s'), $olddept, $ticket->getDeptName());
+	                    $ticket->postNote($title, $_POST['message']);
+	                    $msg = sprintf(_('Ticket transfered sucessfully to %s Dept.'), $ticket->getDeptName());
+	                    if (!$thisuser->canAccessDept($_POST['dept_id']) && $ticket->getStaffId() != $thisuser->getId()) { //Check access.
+	                        //Staff doesn't have access to the new department.
+	                        $page = 'tickets.inc.php';
+	                        $ticket = null;
+	                    }
+	                } elseif (!$errors['err']) {
+	                    $errors['err'] = _('Unable to complete the transfer');
+	                }
+            	}
                 break;
             case 'assign':
-                $fields = array();
-                $fields['staffId'] = array('type' => 'int', 'required' => 1, 'error' => _('Select assignee'));
-                $fields['assign_message'] = array('type' => 'text', 'required' => 1, 'error' => _('Message required'));
-                $params = new Validator($fields);
-                if (!$params->validate($_POST)) {
-                    $errors = array_merge($errors, $params->errors());
-                }
-                if (!$errors && $ticket->isAssigned()) {
-                    if ($_POST['staffId'] == $ticket->getStaffId())
-                        $errors['staffId'] = _('Ticket already assigned to the staff.');
-                }
-                //if already assigned.
-                if (!$errors && $ticket->isAssigned()) { //Re assigning.
-                    //Already assigned to the user?
-                    if ($_POST['staffId'] == $ticket->getStaffId())
-                        $errors['staffId'] = _('Ticket already assigned to the staff.');
-                    //Admin, Dept manager (any) or current assigneee ONLY can reassign
-                    if (!$thisuser->isadmin() && !$thisuser->isManager() && $thisuser->getId() != $ticket->getStaffId())
-                        $errors['err'] = _('Ticket already assigned. You do not have permission to re-assign assigned tickets');
-                }
-                if (!$errors && $ticket->assignStaff($_POST['staffId'], $thisuser->getId(), $_POST['assign_message'], TRUE)) {
-                    $staff = $ticket->getStaff();
-                    $msg = _('Ticket Assigned to') . ' ' . ($staff ? $staff->getName() : _('staff'));
-                    //Remove all the locks and go back to index page.
-                    TicketLock::removeStaffLocks($thisuser->getId(), $ticket->getId());
-                    $page = 'tickets.inc.php';
-                    $ticket = null;
-                } elseif (!$errors['err']) {
-                    $errors['err'] = _('Unable to assign the ticket');
-                }
+            	if ($_POST['randcheck']==$_SESSION['rand'])
+            	{
+	                $fields = array();
+	                $fields['staffId'] = array('type' => 'int', 'required' => 1, 'error' => _('Select assignee'));
+	                $fields['assign_message'] = array('type' => 'text', 'required' => 1, 'error' => _('Message required'));
+	                $params = new Validator($fields);
+	                if (!$params->validate($_POST)) {
+	                    $errors = array_merge($errors, $params->errors());
+	                }
+	                if (!$errors && $ticket->isAssigned()) {
+	                    if ($_POST['staffId'] == $ticket->getStaffId())
+	                        $errors['staffId'] = _('Ticket already assigned to the staff.');
+	                }
+	                //if already assigned.
+	                if (!$errors && $ticket->isAssigned()) { //Re assigning.
+	                    //Already assigned to the user?
+	                    if ($_POST['staffId'] == $ticket->getStaffId())
+	                        $errors['staffId'] = _('Ticket already assigned to the staff.');
+	                    //Admin, Dept manager (any) or current assigneee ONLY can reassign
+	                    if (!$thisuser->isadmin() && !$thisuser->isManager() && $thisuser->getId() != $ticket->getStaffId())
+	                        $errors['err'] = _('Ticket already assigned. You do not have permission to re-assign assigned tickets');
+	                }
+	                if (!$errors && $ticket->assignStaff($_POST['staffId'], $thisuser->getId(), $_POST['assign_message'], TRUE)) {
+	                    $staff = $ticket->getStaff();
+	                    $msg = _('Ticket Assigned to') . ' ' . ($staff ? $staff->getName() : _('staff'));
+	                    //Remove all the locks and go back to index page.
+	                    TicketLock::removeStaffLocks($thisuser->getId(), $ticket->getId());
+	                    $page = 'tickets.inc.php';
+	                    $ticket = null;
+	                } elseif (!$errors['err']) {
+	                    $errors['err'] = _('Unable to assign the ticket');
+	                }
+            	}
                 break;
             case 'postnote':
-                $fields = array();
-                $fields['title'] = array('type' => 'string', 'required' => 1, 'error' => _('Title required'));
-                $fields['note'] = array('type' => 'string', 'required' => 1, 'error' => _('Note message required'));
-                $params = new Validator($fields);
-                if (!$params->validate($_POST))
-                    $errors = array_merge($errors, $params->errors());
+            	//Sys::console_log('debug', $_POST['randcheck'].':'.$_SESSION['rand']);
+            	if ($_POST['randcheck']==$_SESSION['rand'])
+            	{
+	                $fields = array();
+	                $fields['title'] = array('type' => 'string', 'required' => 1, 'error' => _('Title required'));
+	                $fields['note'] = array('type' => 'string', 'required' => 1, 'error' => _('Note message required'));
+	                $params = new Validator($fields);
+	                if (!$params->validate($_POST))
+	                    $errors = array_merge($errors, $params->errors());
 
-                if (!$errors && $ticket->postNote($_POST['title'], $_POST['note'])) {
-                    $msg = _('Internal note posted');
-                    if (isset($_POST['ticket_status']) && $_POST['ticket_status']) {
-                        if ($ticket->setStatus($_POST['ticket_status']) && $ticket->reload()) {
-                            $msg.=' ' . _('and status set to') . ' ' . ($ticket->isClosed() ? _('closed') : _('open'));
-                            if ($ticket->isClosed())
-                                $page = $ticket = null; //Going back to main listing.
+	                if (!$errors && $ticket->postNote($_POST['title'], $_POST['note'])) {
+	                    $msg = _('Internal note posted');
+	                    if (isset($_POST['ticket_status']) && $_POST['ticket_status']) {
+	                        if ($ticket->setStatus($_POST['ticket_status']) && $ticket->reload()) {
+	                            $msg.=' ' . _('and status set to') . ' ' . ($ticket->isClosed() ? _('closed') : _('open'));
+	                            if ($ticket->isClosed())
+	                                $page = $ticket = null; //Going back to main listing.
 
-                        }
-                    }
-                }elseif (!$errors['err']) {
-                    $errors['err'] = _('Error(s) occured. Unable to post the note.');
-                }
+	                        }
+	                    }
+	                }elseif (!$errors['err']) {
+	                    $errors['err'] = _('Error(s) occured. Unable to post the note.');
+	                }
+            	}
                 break;
             case 'update':
-                $page = 'editticket.inc.php';
-                if (!$ticket || !$thisuser->canEditTickets())
-                    $errors['err'] = _('Perm. Denied. You are not allowed to edit tickets');
-                elseif ($ticket->update($_POST, $errors)) {
-                    $msg = _('Ticket updated successfully');
-                    $page = 'viewticket.inc.php';
-                } elseif (!$errors['err']) {
-                    $errors['err'] = _('Error(s) occured! Try again.');
-                }
+            	if ($_POST['randcheck']==$_SESSION['rand'])
+            	{
+	                $page = 'editticket.inc.php';
+	                if (!$ticket || !$thisuser->canEditTickets())
+	                    $errors['err'] = _('Perm. Denied. You are not allowed to edit tickets');
+	                elseif ($ticket->update($_POST, $errors)) {
+	                    $msg = _('Ticket updated successfully');
+	                    $page = 'viewticket.inc.php';
+	                } elseif (!$errors['err']) {
+	                    $errors['err'] = _('Error(s) occured! Try again.');
+	                }
+            	}
                 break;
             case 'process':
                 $isdeptmanager = ($ticket->getDeptId() == $thisuser->getDeptId()) ? true : false;
@@ -341,20 +359,22 @@ if ($_POST && !$errors):
     }elseif ($_POST['a']) {
         switch ($_POST['a']) {
             case 'mass_process':
+            	//Sys::console_log('debug','MASS PROCESS');
                 if (!$thisuser->canManageTickets())
                     $errors['err'] = _('You do not have permission to mass manage tickets. Contact admin for such access');
                 elseif (!$_POST['tids'] || !is_array($_POST['tids']))
                     $errors['err'] = _('No tickets selected. You must select at least one ticket.');
-                elseif (($_POST['reopen'] || $_POST['close']) && !$thisuser->canCloseTickets())
+                elseif (($_POST['operation']=="reopen" || $_POST['operation']=="close") && !$thisuser->canCloseTickets())
                     $errors['err'] = _('You do not have permission to close/reopen tickets');
-                elseif ($_POST['delete'] && !$thisuser->canDeleteTickets())
+                elseif ($_POST['operation']=="delete" && !$thisuser->canDeleteTickets())
                     $errors['err'] = _('You do not have permission to delete tickets');
                 elseif (!$_POST['tids'] || !is_array($_POST['tids']))
                     $errors['err'] = _('You must select at least one ticket');
 
                 if (!$errors) {
                     $count = count($_POST['tids']);
-                    if (isset($_POST['reopen'])) {
+                    //Sys::console_log('debug',$_POST);
+                    if ($_POST['operation']=="reopen") {
                         $i = 0;
                         $note = _('Ticket reopened by') . ' ' . $thisuser->getName();
                         foreach ($_POST['tids'] as $k => $v) {
@@ -364,8 +384,12 @@ if ($_POST && !$errors):
                                 $t->logActivity(_('Ticket Reopened'), $note, false, 'System');
                             }
                         }
-                        $msg = "$i " . _("of") . " $count " . _("selected tickets reopened");
-                    } elseif (isset($_POST['close'])) {
+                        if ($i==0) {
+                        	$warn = "$i " . _("of") . " $count " . _("selected tickets reopened");
+                        }else{
+                        	$msg = "$i " . _("of") . " $count " . _("selected tickets reopened");
+                        }
+                    } elseif ($_POST['operation']=="close") {
                         $i = 0;
                         $note = _('Ticket closed without response by') . ' ' . $thisuser->getName();
                         foreach ($_POST['tids'] as $k => $v) {
@@ -375,8 +399,14 @@ if ($_POST && !$errors):
                                 $t->logActivity(_('Ticket Closed'), $note, false, 'System');
                             }
                         }
-                        $msg = "$i " . _("of") . " $count " . _("selected tickets closed");
-                    } elseif (isset($_POST['overdue'])) {
+                        if ($i==0) {
+                        	$warn = "$i " . _("of") . " $count " . _("selected tickets closed");
+                        }else{
+                        	$msg = "$i " . _("of") . " $count " . _("selected tickets closed");
+                        }
+                    } elseif ($_POST['operation']=="overdue") {
+                    	//Sys::console_log('debug','overdue');
+                    	//Sys::console_log('debug',$_POST['tids']);
                         $i = 0;
                         $note = _('Ticket flagged as overdue by') . ' ' . $thisuser->getName();
                         foreach ($_POST['tids'] as $k => $v) {
@@ -387,15 +417,25 @@ if ($_POST && !$errors):
                                     $t->logActivity(_('Ticket Marked Overdue'), $note, false, 'System');
                                 }
                         }
-                        $msg = "$i " . _("of") . " $count " . _("selected tickets marked overdue");
-                    } elseif (isset($_POST['delete'])) {
+                        if ($i==0) {
+                        	$warn = "$i " . _("of") . " $count " . _("selected tickets marked overdue");
+                        }else{
+                        	$msg = "$i " . _("of") . " $count " . _("selected tickets marked overdue");
+                        }
+                    } elseif ($_POST['operation']=="delete") {
                         $i = 0;
                         foreach ($_POST['tids'] as $k => $v) {
                             $t = new Ticket($v);
                             if ($t && @$t->delete())
                                 $i++;
                         }
-                        $msg = "$i " . _("of") . " $count " . _("selected tickets deleted");
+                        if ($i==0) {
+                        	$warn = "$i " . _("of") . " $count " . _("selected tickets deleted");
+                        }else{
+                        	$msg = "$i " . _("of") . " $count " . _("selected tickets deleted");
+                        }
+                    } else {
+                    	//Sys::console_log('debug','unknown');
                     }
                 }
                 break;
@@ -421,15 +461,15 @@ if ($_POST && !$errors):
     }
     $crap = '';
 endif;
-//Navigation 
-$submenu = array();
+//Navigation
+// $submenu = array();
 /* quick stats... */
 $sql = 'SELECT count(open.ticket_id) as open, count(overdue.ticket_id) as overdue, count(assigned.ticket_id) as assigned ' .
         ' FROM ' . TICKET_TABLE . ' ticket ' .
         'LEFT JOIN ' . TICKET_TABLE . ' open ON open.ticket_id=ticket.ticket_id AND open.status=\'open\' ' .
         'LEFT JOIN ' . TICKET_TABLE . ' overdue ON overdue.ticket_id=ticket.ticket_id AND overdue.status=\'open\' AND overdue.isoverdue=1 ' .
         'LEFT JOIN ' . TICKET_TABLE . ' assigned ON assigned.ticket_id=ticket.ticket_id AND assigned.staff_id=' . db_input($thisuser->getId()) . ' AND assigned.status=\'open\' ';
-if (!$thisuser->isAdmin()) {
+if (!$thisuser->isadmin()) {
   if($thisuser->isManager())
     $sql.=' WHERE ticket.dept_id IN(' . implode(',', $thisuser->getDeptsId()) . ') OR ticket.staff_id=' . db_input($thisuser->getId());
   elseif(!$thisuser->canViewunassignedTickets())
@@ -441,37 +481,39 @@ if (!$thisuser->isAdmin()) {
 
 $stats = db_fetch_array(db_query($sql));
 //print_r($stats);
-$nav->setTabActive('tickets');
 
+$nav->setTabActive('tickets');
+//$init_menu=$_REQUEST['menu'];
 if($stats['open']){
-  $nav->addSubMenu(array('desc' => sprintf(_('OPEN TICKETS (%s)'), $stats['open']), 'title' => _('Open Tickets'), 'href' => 'tickets.php', 'iconclass' => 'Ticket'));
+  //$nav->addSubMenu(array('desc' => sprintf(_('OPEN TICKETS (%s)'), $stats['open']), 'title' => _('Open Tickets'), 'href' => 'tickets.php', 'iconclass' => 'Ticket'));
 }
 
 if ($stats['assigned'] && $thisuser->canViewunassignedTickets()) {
     if (!$sysnotice && $stats['assigned'] > 10)
         $sysnotice = $stats['assigned'] . ' ' . _('assigned to you!');
 
-    $nav->addSubMenu(array('desc' => sprintf(_('MY TICKETS (%s)'), $stats['assigned']), 'title' => _('Assigned Tickets'),
-        'href' => 'tickets.php?status=assigned', 'iconclass' => 'assignedTickets'));
+    //$nav->addSubMenu(array('desc' => sprintf(_('MY TICKETS (%s)'), $stats['assigned']), 'title' => _('Assigned Tickets'),
+    //    'href' => 'tickets.php?status=assigned', 'iconclass' => 'assignedTickets'));
 }
 
 if ($stats['overdue']) {
-    $nav->addSubMenu(array('desc' => sprintf(_('OVERDUE (%s)'), $stats['overdue']), 'title' => _('Stale Tickets'),
-        'href' => 'tickets.php?status=overdue', 'iconclass' => 'overdueTickets'));
+    //$nav->addSubMenu(array('desc' => sprintf(_('OVERDUE (%s)'), $stats['overdue']), 'title' => _('Stale Tickets'),
+    //    'href' => 'tickets.php?status=overdue', 'iconclass' => 'overdueTickets'));
 
     if (!$sysnotice && $stats['overdue'] > 10)
         $sysnotice = $stats['overdue'] . ' ' . _('overdue tickets!');
 }
 
-$nav->addSubMenu(array('desc' => _('CLOSED TICKETS'), 'title' => _('Closed Tickets'), 'href' => 'tickets.php?status=closed', 'iconclass' => 'closedTickets'));
+//$nav->addSubMenu(array('desc' => _('CLOSED TICKETS'), 'title' => _('Closed Tickets'), 'href' => 'tickets.php?status=closed', 'iconclass' => 'closedTickets'));
 
 
 if ($thisuser->canCreateTickets()) {
-    $nav->addSubMenu(array('desc' => _('NEW TICKET'), 'href' => 'tickets.php?a=open', 'iconclass' => 'newTicket'));
+    //$nav->addSubMenu(array('desc' => _('NEW TICKET'), 'href' => 'tickets.php?a=open', 'iconclass' => 'newTicket'));
 }
 
 //Render the page...
 $inc = $page ? $page : 'tickets.inc.php';
+Sys::console_log('debug','Opening Page:'.$inc);
 
 //If we're on tickets page...set refresh rate if the user has it configured. No refresh on search and POST to avoid repost.
 if (!$_POST && $_REQUEST['a'] != 'search' && !strcmp($inc, 'tickets.inc.php') && ($min = $thisuser->getRefreshRate())) {

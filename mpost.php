@@ -1,11 +1,20 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
 require('user.inc.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
+
 $ticket=null;
 $errors=array();
 //echo "HERE".$_REQUEST['message'];
 $msgid=null;
 $msg=null;
+// $_POST['ticket_id']=163;
+// $_POST['message']="Debugging ...";
 //Check if any id is given...
 if(($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['ticket_id']) && is_numeric($id)) {
     //id given fetch the ticket info and check perm.
@@ -29,7 +38,7 @@ if(!$_POST['message'] || empty($_POST['message'])) {
 //check attachment..if any is set
 if(!$errors){
 	//echo "Continue";
-	if(($msgid=$ticket->postMessage($_POST['message'],'Web'))) {
+	if($msgid=$ticket->postMessageNew($_POST,'Web')) {
 		//echo "msgid".$msgid;
 		$success=true;
 		$msg=_('Message Posted Successfully');
@@ -45,17 +54,14 @@ if(!$errors){
 	$msg = $errors['err'];
 }
 
-$obj = new stdClass;
-$obj->msgid = $msgid;
-$obj->success = $success;
-$obj->message = $msg;
+$response["msgid"] = $msgid;
+$response["success"] = $success;
+$response["message"] = $msg;
 if (isset($_REQUEST['callback'])) {
-    	$callback = $_REQUEST['callback'];
-    	header('Content-Type: text/javascript');
-    	echo $callback . '(' . json_encode($obj) . ')';
-}else {
-    	echo json_encode($obj);
+	$callback = $_REQUEST['callback'];
+	header('Content-Type: text/javascript');
+	echo $callback . '(' . json_encode($response) . ')';
+} else {
+	echo json_encode($response);
 }
-
-
 ?>

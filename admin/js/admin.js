@@ -1,5 +1,175 @@
 //Copyright (c) 2007 osTicket.com
+var tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+var tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+var tday_my=new Array("Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu");
+var tmonth_my=new Array("Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember");
+	
+function GetClock(lang){
+	console.log(lang);
+	var d=new Date();
+	var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+	if(nyear<1000) nyear+=1900;
+	var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+	
+	if(nhour==0){ap=" AM";nhour=12;}
+	else if(nhour<12){ap=" AM";}
+	else if(nhour==12){ap=" PM";}
+	else if(nhour>12){ap=" PM";nhour-=12;}
+	
+	if(nmin<=9) nmin="0"+nmin;
+	if(nsec<=9) nsec="0"+nsec;
 
+	if (lang=="en") {
+		document.getElementById('timeclock').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+	}else{
+		document.getElementById('timeclock').innerHTML=""+tday_my[nday]+", "+tmonth_my[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+	}
+}
+
+function swalInitiate(msg,error,warn) {
+	console.log('swalInitialize');
+	swal.setDefaults({
+		confirmButtonColor: '#DD6B55',   
+		allowOutsideClick: false,   
+		closeOnConfirm: false 
+	});
+	if (error!="") {
+		swalError(error);
+	}else if (msg!="") {
+		swalSuccess(msg);
+	}else if (warn!="") {
+		swalWarning(warn);
+	}
+}
+function swalSubmit(form,target,value,text){
+	var lang=$('#lang_value').val();
+
+	var sTitle='Confirmation!';
+	var sOk='Yes';
+	var sNo='No';
+	if (lang=='ms_MY') {
+		sTitle='Kepastian!';
+		sOk='Ya',
+		sNo='Tidak';
+	}
+	
+//	var msg = '<span class="fa-stack fa-lg">';
+//  		msg += '<i class="fa fa-circle-o fa-stack-2x"></i>';
+//  		msg += '&nbsp;<i class="fa fa-exclamation fa-stack-1x"></i>';
+//		msg += '</span><span style="width:20px"></span>';
+		
+	var	msg = '<i style="color: orange;" class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i><span style="width:5px"></span>' + text;
+	swal({
+		title: sTitle,   
+		text: msg,
+	    type: 'warning', 
+	    html: true,
+	    customClass: 'sweetalert-lg',
+	    showCancelButton: true,   
+	    confirmButtonText: sOk, 
+	    cancelButtonText: sNo  
+	},
+    function(isConfirm){   
+	    //console.log(isConfirm);
+	    target.val(value);
+	    if (isConfirm) {
+	    	form.submit();
+	    }
+	      	//return isConfirm;
+	});
+}
+function swalError(text){
+	var lang=$('#lang_value').val();
+
+	var sTitle='Error!';
+	var sOk='OK';
+	if (lang=='ms_MY') {
+		sTitle='Ralat!';
+		sOk='OK';
+	}
+	var	msg = '<i style="color:red;" class="fa fa-times-circle fa-2x" aria-hidden="true"></i><span style="width:10px"></span>' + text;
+	swal({
+		title: sTitle, 
+		text: msg, 
+		type: 'error',
+		html: true,
+		timer: 3000, 
+		showConfirmButton: false, 
+		showCancelButton: true, 
+		cancelButtonText: sOk 
+	});
+		
+	return (false);
+}
+function swalSuccess(text){
+	var lang=$('#lang_value').val();
+
+	var sTitle='Success!';
+	var sOk='OK';
+	if (lang=='ms_MY') {
+		sTitle='Berjaya!';
+		sOk='OK';
+	}
+	var	msg = '<i style="color: green;" class="fa fa-check-circle fa-2x" aria-hidden="true"></i><span style="width:10px"></span>' + text;
+	swal({
+		title: sTitle, 
+		text: msg, 
+		type: 'success',
+		html: true,
+		timer: 3000, 
+		showConfirmButton: false, 
+		showCancelButton: true, 
+		cancelButtonText: sOk 
+	});
+		
+	return true;
+}
+function swalWarning(text){
+	var lang=$('#lang_value').val();
+
+	var sTitle='Warning!';
+	var sOk='OK';
+	if (lang=='ms_MY') {
+		sTitle='Amaran!';
+		sOk='OK';
+	}
+	var	msg = '<i style="color: orange;" class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i><span style="width:10px"></span>' + text;
+	swal({
+		title: sTitle, 
+		text: msg, 
+		type: 'success',
+		html: true,
+		timer: 3000, 
+		showConfirmButton: false, 
+		showCancelButton: true, 
+		cancelButtonText: sOk 
+	});
+		
+	return true;
+}
+function swalInfo(text){
+	var lang=$('#lang_value').val();
+
+	var sTitle='Information!';
+	var sOk='OK';
+	if (lang=='ms_MY') {
+		sTitle='Maklumat!';
+		sOk='OK';
+	}
+	var	msg = '<i style="color: darkblue;" class="fa fa-info-circle fa-2x" aria-hidden="true"></i><span style="width:10px"></span>' + text;
+	swal({
+		title: sTitle, 
+		text: msg, 
+		type: 'info',
+		html: true,
+		timer: 5000, 
+		showConfirmButton: false, 
+		showCancelButton: true, 
+		cancelButtonText: sOk 
+	});
+		
+	return true;
+}
 function getCannedResponse(idx,fObj,target)
 {
     if(idx==0) { return false; }
@@ -87,6 +257,7 @@ function toogle_all(formObj,highlight){
 function checkbox_checker(formObj, min,max,sure,action)
 {
 
+	var lang=$('#lang_value').val();
 	var checked=getSelectedCheckbox(formObj); 
 	var total=checked.length;
     var action= action?action:"process";
@@ -96,13 +267,24 @@ function checkbox_checker(formObj, min,max,sure,action)
  		msg="You're limited to only " + max + " selections.\n"
  		msg=msg + "You have made " + total + " selections.\n"
  		msg=msg + "Please remove " + (total-max) + " selection(s)."
- 		alert(msg)
- 		return (false);
+ 		if (lang=='ms_MY') {
+ 			msg="Anda hanya dibenarkan memilih " + max + " pilhan sahaja.\n"
+ 			msg=msg + "Anda telah membuat " + total + " pilihan.\n"
+ 			msg=msg + "Sila buang " + (total-max) + " pilihan."
+ 		}
+ 		swalError(msg);
+ 		//return (false);
  	}
  
  	if (total< min )
  	{
- 		alert("Please make at least " + min + " selections. " + total + " entered so far.")
+ 		//alert("Please make at least " + min + " selections. " + total + " entered so far.")
+ 		msg="Please make at least " + min + " selections. " + total + " entered so far.";
+ 		if (lang=='ms_MY') {
+ 			msg="Sila buat pilihan sekurang-kurangnya " + min + " pilihan. "+ total + " pilihan telah dibuat."
+ 		}
+ 		//swal({title:'Error!', text: msg, type: 'error', timer: 3000, showConfirmButton: false, showCancelButton: true, cancelButtonText: 'OK' });
+ 		swalError(msg);
  		return (false);
  	}
    
@@ -116,6 +298,48 @@ function checkbox_checker(formObj, min,max,sure,action)
   }
  
   return (true);
+}
+function setLayer(whichLayer, setvalue) {
+    var elem, vis;
+
+    if( document.getElementById ) // this is the way the standards work
+        elem = document.getElementById( whichLayer );
+    else if( document.all ) // this is the way old msie versions work
+        elem = document.all[whichLayer];
+    else if( document.layers ) // this is the way nn4 works
+        elem = document.layers[whichLayer];
+  
+    vis = elem.style;
+    vis.visibility=setvalue; 
+    if (setvalue=='hidden') {
+    	vis.display='none';
+    }else{
+    	vis.display='block';
+    }
+}
+
+function toggleLayerIcon(whichLayer,iconLayer) {
+    var elem, vis, elemicon, classname;
+
+    if( document.getElementById ) { // this is the way the standards work
+        elem = document.getElementById( whichLayer );
+        elemicon = document.getElementById( iconLayer );
+    }else if( document.all ) {// this is the way old msie versions work
+        elem = document.all[whichLayer];
+        elemicon = document.all[iconLayer];
+    }else if( document.layers ) {// this is the way nn4 works
+        elem = document.layers[whichLayer];
+        elemicon = document.layers[iconLayer];
+    }
+    vis = elem.style;
+    //classname = elemicon.className;
+    // if the style.display value is blank we try to figure it out here
+    if(vis.display==''&&elem.offsetWidth!=undefined&&elem.offsetHeight!=undefined)
+        vis.display = (elem.offsetWidth!=0&&elem.offsetHeight!=0)?'block':'none';
+    vis.display = (vis.display==''||vis.display=='block')?'none':'block';
+    
+    elemicon.className = (elemicon.className=='caret_up')?'caret_down':'caret_up';
+    
 }
 
 function toggleLayer(whichLayer) {

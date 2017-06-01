@@ -36,7 +36,7 @@
  *
  * @category    HTTP
  * @package     HTTP_Request
- * @author      Jon Parise <jon@php.net> 
+ * @author      Jon Parise <jon@php.net>
  * @author      Chuck Hagenbuch <chuck@horde.org>
  * @copyright   2010 Chuck Hagenbuch
  * @license     http://opensource.org/licenses/bsd-license.php New BSD License
@@ -112,6 +112,8 @@ class Mail_smtp extends Mail {
      * @var mixed
      */
     var $auth = false;
+
+    var $starttls = false;
 
     /**
      * The username to use if the SMTP server requires authentication.
@@ -193,6 +195,7 @@ class Mail_smtp extends Mail {
         if (isset($params['host'])) $this->host = $params['host'];
         if (isset($params['port'])) $this->port = $params['port'];
         if (isset($params['auth'])) $this->auth = $params['auth'];
+        if (isset($params['starttls'])) $this->starttls = $params['starttls'];
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
@@ -304,6 +307,7 @@ class Mail_smtp extends Mail {
         }
 
         /* Send the message's headers and the body as SMTP data. */
+        ////$this->console("SENDING MAIL ... Timeout ".$this->timeout, 1);
         $res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body);
 		list(,$args) = $this->_smtp->getResponse();
 
@@ -344,15 +348,22 @@ class Mail_smtp extends Mail {
         if (is_object($this->_smtp) !== false) {
             return $this->_smtp;
         }
-
+		//$this->console("START SMTP", 1);
         include_once 'Net/SMTP.php';
+        //$this->_smtp = &new Net_SMTP($this->host,
+        //                             $this->port,
+        //                             $this->localhost);
+        //$pipelining = false, $timeout = 0, $socket_options = null
+        //$this->console("INIT SMTP ON ".$this->host, 1);
         $this->_smtp = &new Net_SMTP($this->host,
-                                     $this->port,
-                                     $this->localhost);
+        		$this->port,
+        		$this->localhost,
+        		$this->pipelining,
+        		$this->timeout);
 
         /* If we still don't have an SMTP object at this point, fail. */
         if (is_object($this->_smtp) === false) {
-            return PEAR::raiseError('Failed to create a Net_SMTP object',
+        	return PEAR::raiseError('Failed to create a Net_SMTP object',
                                     PEAR_MAIL_SMTP_ERROR_CREATE);
         }
 
@@ -361,14 +372,22 @@ class Mail_smtp extends Mail {
             $this->_smtp->setDebug(true);
         }
 
+        //$this->_smtp->setTimeout($this->timeout);
+        //$this->console("SMTP CONNECTING ... timeout".$this->timeout, 1);
         /* Attempt to connect to the configured SMTP server. */
         if (PEAR::isError($res = $this->_smtp->connect($this->timeout))) {
             $error = $this->_error('Failed to connect to ' .
                                    $this->host . ':' . $this->port,
                                    $res);
+            //$this->console("SMTP CONNECTION FAIL", 1);
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_CONNECT);
         }
 
+        //$this->console("SMTP AUTHENTICATE", 1);
+        if ($this->starttls) {
+        	//$this->console("WITH STARTTLS", 2);
+        	$this->_smtp->_esmtp['STARTTLS']=true;
+        }
         /* Attempt to authenticate if authentication has been enabled. */
         if ($this->auth) {
             $method = is_string($this->auth) ? $this->auth : '';
@@ -384,6 +403,15 @@ class Mail_smtp extends Mail {
         }
 
         return $this->_smtp;
+    }
+    function console($data, $priority)
+    {
+    		if (is_array($data))
+    			$output = '<script>console.log("' . str_repeat(" ", $priority-1) . implode( ",", $data) . '");</script>';
+    		else
+    			$output = '<script>console.log("' . str_repeat(" ", $priority-1) . $data . '");</script>';
+
+    		//echo $output;
     }
 
     /**

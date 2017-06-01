@@ -72,15 +72,40 @@ class Topic {
     function getDeptId() {
         return $this->dept_id;
     }
-
+    function getDeptName() {
+    	if ($this->getDeptId()!=0) {
+    		$dept = db_query('SELECT dept_id, dept_name FROM '.DEPT_TABLE.' WHERE dept_id='.$this->getDeptId());
+    		$dept_info = db_fetch_array($dept);
+    		return $dept_info['dept_name'];
+    	}
+    	return '';
+    
+    }
     function getAutoassignId() {
         return $this->autoassign_id;
     }
 
+    function getSupportStaffName() {
+    	if ($this->getAutoassignId()!=0) {
+    		$staff = db_query('SELECT staff_id, firstname, lastname FROM '.STAFF_TABLE.' WHERE staff_id='.$this->getAutoassignId());
+    		$staff_info = db_fetch_array($staff);
+    		return $staff_info['firstname'].' '.$staff_info['lastname'];
+    	}
+    	return 'N/A';
+    	
+    }
     function getPriorityId() {
         return $this->priority_id;
     }
-    
+    function getPriorityName() {
+    	if ($this->getPriorityId()!=0) {
+    		$priority = db_query('SELECT priority_id, priority_desc FROM '.PRIORITY_TABLE.' WHERE priority_id='.$this->getPriorityId());
+    		$priority_info = db_fetch_array($priority);
+    		return $priority_info['priority_desc'];
+    	}
+    	return '';
+    	 
+    }
     function autoRespond() {
         return $this->autoresp;
     }
@@ -126,20 +151,22 @@ class Topic {
             if(($res=db_query($sql)) && db_num_rows($res))
                 $errors['topic']=_('Topic already exists');
         }
-            
-        if(!$vars['dept_id'])
-            $errors['dept_id']=_('You must select a department');
-            
         if(!$vars['priority_id'])
-            $errors['priority_id']=_('You must select a priority');
-            
+        	$errors['priority_id']=_('You must select a priority');
+        
+        if ($id==0) {    
+        	if(!$vars['dept_id'])
+            	$errors['dept_id']=_('You must select a department');
+        }    
         if(!$errors) {
             $sql='updated=NOW(),topic='.db_input(Format::striptags($vars['topic'])).
+            	 ',company_id='.db_input($vars['company_id']).
                  ',isactive='.db_input($vars['isactive']).
-                 ',priority_id='.db_input($vars['priority_id']).
-                 ',dept_id='.db_input($vars['dept_id']).
-                 ',autoassign_id='.db_input($vars['autoassign_id']).
-                 ',noautoresp='.db_input(isset($vars['noautoresp'])?1:0);
+                 ',priority_id='.db_input($vars['priority_id']);
+                     
+            if (isset($vars['dept_id']) && $vars['dept_id']!="") $sql.=',dept_id='.db_input($vars['dept_id']);
+            if (isset($vars['autoassign_id']) && $vars['autoassign_id']!="") $sql.=',autoassign_id='.db_input($vars['autoassign_id']);
+            if (isset($vars['noautoresp']) && $vars['noautoresp']!="") $sql.=',noautoresp='.db_input(isset($vars['noautoresp'])?1:0);
             if($id) {
                 $sql='UPDATE '.TOPIC_TABLE.' SET '.$sql.' WHERE topic_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())

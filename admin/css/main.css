@@ -66,8 +66,8 @@ strong { color:#000; }
 }
 
 #header {
-  padding:0 0px 0 0px;
-  height:100px;
+  padding:0 0 0 0;
+  height: 140px;
 }
 
 #footer {
@@ -85,17 +85,25 @@ strong { color:#000; }
   text-align: left;
   margin:5px auto 0 auto;
   background:url(../images/pagebg.jpg) top left repeat-x #fff;
-  border:1px solid #ccc;
+  border:1px solid lightgray;
+  
   
 }
 
 	#content {
-	 	min-height: 600px;
-		padding:0 5px 0 5px;
+	  min-height: 600px;
+	  padding: 5px 5px 5px 5px;
+	  /*width:100%;
+      height:100%;*/
+      font-family: Arial, Helvetica, sans-serif;
+      text-decoration: none;
+      /*border: 1px solid white;*/
+      border-top: 1px solid lightgray;
+      font-weight: normal;
 	}
 	
 	.ticketprocess {
-	  margin:30px 0 0 0;
+	  margin: 10px 0 0 0;
 		margin-left:auto;
 		margin-right:auto;
 		width:82%;
@@ -109,14 +117,24 @@ strong { color:#000; }
       float:left;
     }
 
-    #info {
-      width:auto;
-      padding:10px 10px 10px 10px;
-      border:1px solid #ccc;
-      background:#ececec;
-      margin:4px 0 0 0;
+	#date_info {
+	  border: 0px solid;padding:0 0 0 0;margin: 5px 0 0 0;float: right;color: black;
+	}
+	#infotitle {
+	  float: right;
+      font-family:arial, helvetica, sans-serif;
+  	  font-size: 19pt;
+      vertical-align: text-bottom;
+   }
+	#infolang {
+      margin:5px 10px 0 0;
       float:right;
       text-align:center;
+   }
+    #info {
+      margin:50px 10px 0 0;
+      float:right;
+      text-align: right;
    }
     #info a {
       color:#111166;
@@ -126,7 +144,7 @@ strong { color:#000; }
   
   #nav {
     clear:both;
-    padding:10px 0 0 30px;
+    padding:0px 0 0 0px;
   }
 
     #nav ul {
@@ -150,7 +168,7 @@ strong { color:#000; }
     }
 
     #nav ul#main_nav {
-        padding-left:40px;
+        padding-left:125px;
     }
     
     #nav ul#main_nav li a {
@@ -177,7 +195,7 @@ strong { color:#000; }
       color:#FF7C01;
     }    
     
-    #nav ul#sub_nav li a {
+    /*#nav ul#sub_nav li a {
       height:16px;
       line-height:16px;
       padding:5px 10px 5px 25px;
@@ -187,7 +205,31 @@ strong { color:#000; }
    #nav ul#sub_nav li a:hover {
         color:#FF7C01;
     }
+    */
+    #nav ul#sub_nav {
+    	list-style-type: none;
+    	display:list-item;
+    	/*font-weight:bold;*/
+    	height:22px;
+  		margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #333;
+    	
+    }
+    #nav ul#sub_nav li a {
+    	padding:5px 10px 5px 25px;
+    	/*padding: 6px 15px 0px 0px;*/
+    	background-color: #333;
+    	color: white;
+    }
     
+    #nav ul#sub_nav li a:hover {
+	    background-color: #4CAF50; /*darkgray;*/
+	    font-weight:bold;
+	    color: black;
+	    
+	} 
 
     /** Individual Sub-nav items **/
     
@@ -206,6 +248,8 @@ strong { color:#000; }
     #nav a.userPasswd { background:url(../images/icons/v_bar.gif) 0 5px no-repeat #ececec; }
 
     #nav a.preferences { background:url(../images/icons/void.gif) 0 5px no-repeat #ececec; }
+    #nav a.page { background:url(../images/icons/v_bar.gif ) 0 5px no-repeat #ececec; }
+    #nav a.subpage { background:url(../images/icons/v_bar.gif ) 0 5px no-repeat #ececec; }
     #nav a.attachment { background:url(../images/icons/v_bar.gif ) 0 5px no-repeat #ececec; }
     #nav a.api { background:url(../images/icons/v_bar.gif) 0 5px no-repeat #ececec; }
    

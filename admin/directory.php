@@ -15,8 +15,8 @@
 **********************************************************************/
 
 require('staff.inc.php');
-$nav->setTabActive('directory');
-$nav->addSubMenu(array('desc'=>_('STAFF MEMBERS'),'href'=>'directory.php','iconclass'=>'staff'));
+$nav->setTabActive('staff');
+// $nav->addSubMenu(array('desc'=>_('STAFF MEMBERS'),'href'=>'directory.php','iconclass'=>'staff'));
 
 $WHERE=' WHERE isvisible=1 ';
 $sql=' SELECT staff.staff_id,staff.dept_id,firstname,lastname,email,phone,mobile,dept_name,isactive,onvacation,manager_id '.
@@ -36,9 +36,21 @@ if($_POST && $_POST['a']=='search') {
                         ' ) ';
         }
     }
-    if($_POST['dept'] && is_numeric($_POST['dept'])) {
-        $WHERE.=' AND staff.dept_id='.db_input($_POST['dept']);
+    if (!$thisuser->isadmin()) {    
+	    if($_POST['dept'] && is_numeric($_POST['dept'])) {
+	        $WHERE.=' AND staff.dept_id='.db_input($_POST['dept']);
+	    }else{
+	    	$WHERE.=' AND staff.dept_id='.db_input($thisuser->getDeptId());
+	    }
+    }else{
+    	if($_POST['dept'] && is_numeric($_POST['dept'])) {
+    		$WHERE.=' AND staff.dept_id='.db_input($_POST['dept']);
+    	}
     }
+}else{
+	if (!$thisuser->isadmin()) {
+		$WHERE.=' AND staff.dept_id='.db_input($thisuser->getDeptId());
+	}
 }
 
 $users=db_query("$sql $WHERE ORDER BY lastname,firstname");
@@ -59,6 +71,7 @@ require_once(STAFFINC_DIR.'header.inc.php');
     <form action="directory.php" method="POST" >
     <input type='hidden' name='a' value='search'>
     <?= _('Search for')?> :&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
+    <?php if ($thisuser->isadmin()) {?>
     <?= _('Dept.') ?>
     <select name="dept">
             <option value=0><?= _('All Department') ?></option>
@@ -70,6 +83,7 @@ require_once(STAFFINC_DIR.'header.inc.php');
            <?php } ?>
     </select>
     &nbsp;
+    <?php }?>
     <input type="submit" name="search" class="button" value="GO">
     </form>
 </div>

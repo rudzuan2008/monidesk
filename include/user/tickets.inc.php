@@ -67,8 +67,11 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     <th align="center" nowrap><a href="tickets.php?sort=ID&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort by Ticket Number')?> <?=$negorder?>"><?= _('Ticket #')?></a></th>
     <th align="center"><a href="tickets.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort by Date of Creation')?> <?=$negorder?>"><?= _('Create Date')?></a></th>
     <th align="center"><a href="tickets.php?sort=status&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort by Status')?> <?=$negorder?>"><?= _('Status')?></a></th>
-    <th>&nbsp;<a href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" title="<?= _('Sort by Department')?> <?=$negorder?>"><?= _('Department')?></a></th>
-    <th>&nbsp;<?= _('Subject')?></th>
+    <?php if($cfg && $cfg->enableTopic()) {?>
+    	<th align="left"><?= _('Category')?></th>
+    <?php }?>
+    <th align="left"><?= _('Subject')?></th>
+    <th align="left"><?= _('Message')?></th>
   </tr>
   <?php
   $total=0;
@@ -83,11 +86,25 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         $subject="<b>$subject</b>";
         $ticketID="<b>$ticketID</b>";
       }
+      $topic_name="";
+      $ticket = new Ticket($row['ticket_id']);
+      if ($ticket && $ticket->getId()) {
+	      if($cfg && $cfg->enableTopic()) {
+	      	$topic_id = $ticket->getTopicId();
+	      	$topic = new Topic($topic_id);
+	      	if ($topic && $topic->getId()) {
+	      		$topic_name = $topic->getName();
+	      	}
+	      }
+	      $msgres=$ticket->getMessages();
+	      $msg_row = db_fetch_array($msgres);
+	      $message = $msg_row['message'];
+      }
       ?>
       <tr class="row" id="<?=$row['ticketID']?>">
         <td align="center"><a href="tickets.php?id=<?=$row['ticketID']?>"><?=$ticketID?></a></td>
         <td align="center" nowrap><?=Format::db_date($row['created'])?></td>
-              
+
         <td align="center">
           <?php
           if($row['status']=='closed')
@@ -98,15 +115,21 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             echo "<span class='Icon openTicket' title="._('Open').">&nbsp;</span>";
           ?>
         </td>
-        <td nowrap>&nbsp;<?=Format::truncate($dept,30)?></td>
+        <?php if($cfg && $cfg->enableTopic()) {?>
+        	<td align="left">
+        		<?=Format::truncate($topic_name,40)?>
+        	</td>
+        <?php }?>
         <td>
           &nbsp;<a href="tickets.php?id=<?=$row['ticketID']?>"><?=$subject?></a>
           &nbsp;<?=$row['attachments']?"<span class='Icon file'>&nbsp;</span>":''?>
         </td>
+        <td nowrap>&nbsp;<?=Format::truncate($message,40)?></td>
+
       </tr>
       <?php
     } //end of while.
-    else: //not tickets found!! ?> 
+    else: //not tickets found!! ?>
       <tr class="<?=$class?>"><td colspan=7><b><?= _('NO tickets found.')?></b></td></tr>
     <?php
     endif; ?>

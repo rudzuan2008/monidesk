@@ -19,14 +19,19 @@ if(!defined('INCLUDE_DIR')) die(_('Fatal error!'));
 define('USERINC_DIR',INCLUDE_DIR.'user/');
 define('KTKUSERINC',TRUE); //make includes happy
 
-if(!$cfg->getUserLogRequired())
-  $inc = 'login.inc.php';
-else
+if(!$cfg->getUserLogRequired()) {
+	if ($_REQUEST['type']=="client") {		
+		$inc = 'clientlogin.inc.php';
+	}else{
+  		$inc = 'login.inc.php';
+	}
+}else
   $inc = 'clientlogin.inc.php';
 
 $loginmsg=_('Authentication Required');
 // User login
 if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
+	Sys::console_log("debug", "public Login");
 //    $loginmsg=_('Authentication Required');
     $email=trim($_POST['lemail']);
     $ticketID=trim($_POST['lticket']);
@@ -94,6 +99,7 @@ endif;
 
 // Client login
 if($_POST && (!empty($_POST['username']) && !empty($_POST['passwd']))):
+	Sys::console_log("debug", "client Login");
 //    $loginmsg=_('Authentication Required');
     $email=trim($_POST['username']);
     //$_SESSION['_user']=array(); #Uncomment to disable login strikes.

@@ -148,6 +148,7 @@ class Net_SMTP
      */
     var $_esmtp = array();
 
+    var $starttls = false;
     /**
      * Instantiates a new Net_SMTP object, overriding any defaults
      * with parameters that are passed in.
@@ -185,9 +186,17 @@ class Net_SMTP
 
         $this->_socket = new Net_Socket();
         $this->_socket_options = $socket_options;
+ //       $this -> _socket_options = array ( 'ssl' => array ( 'verify_peer_name' => false ));
+//         $this -> _socket_options = array(
+//         		'ssl' => array(
+//         				'verify_peer' => false,
+//         				'verify_peer_name' => false,
+//         				'allow_self_signed' => true
+//         		)
+//         );
         $this->_timeout = $timeout;
 
-        /* Include the Auth_SASL package.  If the package is available, we 
+        /* Include the Auth_SASL package.  If the package is available, we
          * enable the authentication methods that depend upon it. */
         if (@include_once 'Auth/SASL.php') {
             $this->setAuthMethod('CRAM-MD5', array($this, '_authCram_MD5'));
@@ -212,6 +221,9 @@ class Net_SMTP
         return $this->_socket->setTimeout($seconds, $microseconds);
     }
 
+    function setStartTLS($flag=false) {
+    	$this->starttls = $flag;
+    }
     /**
      * Set the value of the debugging flag.
      *
@@ -417,7 +429,7 @@ class Net_SMTP
     /**
      * Return the SMTP server's greeting string.
      *
-     * @return  string  A string containing the greeting string, or null if a 
+     * @return  string  A string containing the greeting string, or null if a
      *                  greeting has not been received.
      *
      * @access  public
@@ -448,23 +460,26 @@ class Net_SMTP
                                           $persistent, $timeout,
                                           $this->_socket_options);
         if (PEAR::isError($result)) {
+        	//$this->console("SMTP CONNECTION FAIL", 1);
             return PEAR::raiseError('Failed to connect socket: ' .
                                     $result->getMessage());
         }
 
         /*
-         * Now that we're connected, reset the socket's timeout value for 
-         * future I/O operations.  This allows us to have different socket 
-         * timeout values for the initial connection (our $timeout parameter) 
+         * Now that we're connected, reset the socket's timeout value for
+         * future I/O operations.  This allows us to have different socket
+         * timeout values for the initial connection (our $timeout parameter)
          * and all other socket operations.
          */
         if ($this->_timeout > 0) {
             if (PEAR::isError($error = $this->setTimeout($this->_timeout))) {
+            	//$this->console("SMTP CONNECTION FAIL", 1);
                 return $error;
             }
         }
 
         if (PEAR::isError($error = $this->_parseResponse(220))) {
+        	//$this->console("SMTP CONNECTION FAIL", 1);
             return $error;
         }
 
@@ -472,9 +487,11 @@ class Net_SMTP
         list(, $this->_greeting) = $this->getResponse();
 
         if (PEAR::isError($error = $this->_negotiate())) {
+        	//$this->console("SMTP CONNECTION FAIL", 1);
             return $error;
         }
 
+        //$this->console("SMTP CONNECTION SUCCESS", 1);
         return true;
     }
 
@@ -514,21 +531,26 @@ class Net_SMTP
      */
     function _negotiate()
     {
+    	//$this->console("EHLO", 1);
         if (PEAR::isError($error = $this->_put('EHLO', $this->localhost))) {
             return $error;
         }
 
+        //$this->console("parseResponse", 1);
         if (PEAR::isError($this->_parseResponse(250))) {
             /* If we receive a 503 response, we're already authenticated. */
             if ($this->_code === 503) {
+            	$this->console("connected 503", 1);
                 return true;
             }
 
             /* If the EHLO failed, try the simpler HELO command. */
             if (PEAR::isError($error = $this->_put('HELO', $this->localhost))) {
+            	$this->console("EHLO Fail ".$error, 1);
                 return $error;
             }
             if (PEAR::isError($this->_parseResponse(250))) {
+            	//$this->console("EHLO as not accepted :".$this->_code, 1);
                 return PEAR::raiseError('HELO was not accepted: ', $this->_code,
                                         PEAR_ERROR_RETURN);
             }
@@ -536,14 +558,17 @@ class Net_SMTP
             return true;
         }
 
+        //$this->console("Retrieving Response ...", 2);
         foreach ($this->_arguments as $argument) {
             $verb = strtok($argument, ' ');
             $arguments = substr($argument, strlen($verb) + 1,
                                 strlen($argument) - strlen($verb) - 1);
+            //$this->console($verb.'='.$arguments, 1);
             $this->_esmtp[$verb] = $arguments;
         }
 
         if (!isset($this->_esmtp['PIPELINING'])) {
+        	//$this->console("pipelining : false", 1);
             $this->pipelining = false;
         }
 
@@ -574,6 +599,15 @@ class Net_SMTP
                                 null, PEAR_ERROR_RETURN);
     }
 
+    function console($data, $priority)
+    {
+   		if (is_array($data))
+    			$output = '<script>console.log("' . str_repeat(" ", $priority-1) . implode( ",", $data) . '");</script>';
+    	else
+    			$output = '<script>console.log("' . str_repeat(" ", $priority-1) . $data . '");</script>';
+
+    	//echo $output;
+    }
     /**
      * Attempt to do SMTP authentication.
      *
@@ -592,25 +626,37 @@ class Net_SMTP
      */
     function auth($uid, $pwd , $method = '', $tls = true, $authz = '')
     {
+    	//$this->console("STARTTLS?".$tls.':'.version_compare(PHP_VERSION, '5.1.0', '>=').':'.$this->_esmtp['STARTTLS'].':'.extension_loaded('openssl').':'.strncasecmp($this->host, 'ssl://', 6), 1);
         /* We can only attempt a TLS connection if one has been requested,
-         * we're running PHP 5.1.0 or later, have access to the OpenSSL 
-         * extension, are connected to an SMTP server which supports the 
-         * STARTTLS extension, and aren't already connected over a secure 
+         * we're running PHP 5.1.0 or later, have access to the OpenSSL
+         * extension, are connected to an SMTP server which supports the
+         * STARTTLS extension, and aren't already connected over a secure
          * (SSL) socket connection. */
-        if ($tls && version_compare(PHP_VERSION, '5.1.0', '>=') &&
-            extension_loaded('openssl') && isset($this->_esmtp['STARTTLS']) &&
-            strncasecmp($this->host, 'ssl://', 6) !== 0) {
-            /* Start the TLS connection attempt. */
+    	//if (version_compare (PHP_VERSION, '6 .1.0 ','>=') && extension_loaded('openssl') && (isset ($this-> _esmtp [' STARTTLS ']) || ($this-> _esmtp [' STARTTLS '] == true)) ) {
+        if ($tls && version_compare(PHP_VERSION, '5.1.0', '>=') && extension_loaded('openssl') && (isset ($this-> _esmtp ['STARTTLS']) || ($this-> _esmtp ['STARTTLS'] == true)) && strncasecmp($this->host, 'ssl://', 6) !== 0) {
+    	//if ($tls && version_compare(PHP_VERSION, '5.1.0', '>=') && extension_loaded('openssl') && $this->_esmtp['STARTTLS'] == true) {
+        //if ($tls && version_compare(PHP_VERSION, '5.1.0', '>=') && extension_loaded('openssl') && (isset ($this-> _esmtp ['STARTTLS']) || ($this-> _esmtp ['STARTTLS'] == true)) ) {
+        /* Start the TLS connection attempt. */
+        	//$this->console("STARTTLS", 1);
             if (PEAR::isError($result = $this->_put('STARTTLS'))) {
-                return $result;
+                return "Mail error1:". $result;
             }
+            //$this->console("parseResponse ". $result, 1);
             if (PEAR::isError($result = $this->_parseResponse(220))) {
-                return $result;
+                return "Mail error2:". $result;
             }
-            if (PEAR::isError($result = $this->_socket->enableCrypto(true, STREAM_CRYPTO_METHOD_TLS_CLIENT))) {
-                return $result;
+            //$this->console("enableCrypto ". $result, 1);
+
+            //stream_context_set_option($this->_socket, 'ssl', 'verify_host', false);
+            //stream_context_set_option($this->_socket, 'ssl', 'verify_peer', false);
+            //stream_context_set_option($this->_socket, 'ssl', 'allow_self_signed', true);
+
+            if (PEAR::isError($result = $this->_socket->enableCrypto(true,  STREAM_CRYPTO_METHOD_TLS_CLIENT))) {
+            //if (PEAR::isError($result = $this->_socket->enableCrypto(true,  STREAM_CRYPTO_METHOD_SSLv23_CLIENT))) {
+                return "Mail error3:". $result;
             } elseif ($result !== true) {
-                return PEAR::raiseError('STARTTLS failed');
+            	//$this->console("STREAM_CRYPTO_METHOD_TLS_CLIENT FAIL ".$result, 1);
+                return PEAR::raiseError("Mail error4:" . 'STARTTLS failed');
             }
 
             /* Send EHLO again to recieve the AUTH string from the
@@ -618,8 +664,14 @@ class Net_SMTP
             $this->_negotiate();
         }
 
+        //$this->console("STARTTLS?".$this->_esmtp['STARTTLS'], 1);
+        //if (array_key_exists('STARTTLS', $this->_esmtp)) {
+        //	$this->console("Send negotiate again", 1);
+        //	$this->_negotiate();
+        //}
+
         if (empty($this->_esmtp['AUTH'])) {
-            return PEAR::raiseError('SMTP server does not support authentication');
+            return PEAR::raiseError("Mail error5:". 'SMTP server does not support authentication');
         }
 
         /* If no method has been specified, get the name of the best
@@ -664,10 +716,10 @@ class Net_SMTP
      * Add a new authentication method.
      *
      * @param string    The authentication method name (e.g. 'PLAIN')
-     * @param mixed     The authentication callback (given as the name of a 
+     * @param mixed     The authentication callback (given as the name of a
      *                  function or as an (object, method name) array).
-     * @param bool      Should the new method be prepended to the list of 
-     *                  available methods?  This is the default behavior, 
+     * @param bool      Should the new method be prepended to the list of
+     *                  available methods?  This is the default behavior,
      *                  giving the new method the highest priority.
      *
      * @return  mixed   True on success or a PEAR_Error object on failure.
@@ -1077,8 +1129,8 @@ class Net_SMTP
 
         /* Now we can send the message body data. */
         if (is_resource($data)) {
-            /* Stream the contents of the file resource out over our socket 
-             * connection, line by line.  Each line must be run through the 
+            /* Stream the contents of the file resource out over our socket
+             * connection, line by line.  Each line must be run through the
              * quoting routine. */
             while (strlen($line = fread($data, 8192)) > 0) {
                 /* If the last character is an newline, we need to grab the
@@ -1097,15 +1149,15 @@ class Net_SMTP
             }
         } else {
             /*
-             * Break up the data by sending one chunk (up to 512k) at a time.  
+             * Break up the data by sending one chunk (up to 512k) at a time.
              * This approach reduces our peak memory usage.
              */
             for ($offset = 0; $offset < $size;) {
                 $end = $offset + 512000;
 
                 /*
-                 * Ensure we don't read beyond our data size or span multiple 
-                 * lines.  quotedata() can't properly handle character data 
+                 * Ensure we don't read beyond our data size or span multiple
+                 * lines.  quotedata() can't properly handle character data
                  * that's split across two line break boundaries.
                  */
                 if ($end >= $size) {

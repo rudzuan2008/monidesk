@@ -189,7 +189,7 @@ class StaffSession extends Staff {
     var $session;
     
     function StaffSession($var){
-        parent::Staff($var);
+    	parent::Staff($var);
         $this->session= new VisitorSession($var);
     }
 

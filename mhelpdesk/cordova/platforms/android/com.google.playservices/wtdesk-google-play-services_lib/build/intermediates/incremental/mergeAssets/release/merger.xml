@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/var/www/html/hdesk/mhelpdesk/cordova/platforms/android/com.google.playservices/wtdesk-google-play-services_lib/assets"/></dataSet><dataSet config="release"><source path="/var/www/html/hdesk/mhelpdesk/cordova/platforms/android/com.google.playservices/wtdesk-google-play-services_lib/src/release/assets"/></dataSet></merger>

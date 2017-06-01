@@ -244,7 +244,7 @@ function csubm() {
 
 function cdayf() {
     
-    return;
+    //return;
 
     if ((ccy>sccy)|((ccy==sccy)&&(ccm>=sccm)))
 	    return;
@@ -253,4 +253,5 @@ function cdayf() {
 	    ccm=sccm;
 	    cfd=scfd;
 	}
+    return;
 }

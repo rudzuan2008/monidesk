@@ -53,9 +53,16 @@ class Config {
         if($this->load($this->id))
             $this->init();
     }
+    
+    function getDefaultCompany() {
+    	$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE isdefault=1');
+    	$company_info = db_fetch_array($company);
+    	//$def_company=$ary_company['name'];
+    	//return $def_company;
+    	return $company_info;
+    }
 
-
-    function isHelpDeskOffline() {
+	function isHelpDeskOffline() {
         return $this->config['isonline']?false:true;
     }
 
@@ -456,7 +463,12 @@ class Config {
         $dir=$this->config['upload_dir'];
         return ($dir && is_writable($dir))?TRUE:FALSE;
     }
-
+    function canUploadImageType($filename) {
+    	$ext = strtolower(preg_replace("/.*\.(.{3,4})$/", "$1", $filename));
+    	$allowed=$this->config['allowed_filetypes']?array_map('trim',explode(',',strtolower('.jpg, .png, .gif, .jpeg'))):null;
+    	return ($ext && is_array($allowed) && (in_array(".$ext",$allowed) || in_array(".*",$allowed)))?TRUE:FALSE;
+    }
+    
     function canUploadFileType($filename) {       
         $ext = strtolower(preg_replace("/.*\.(.{3,4})$/", "$1", $filename));
         $allowed=$this->config['allowed_filetypes']?array_map('trim',explode(',',strtolower($this->config['allowed_filetypes']))):null;

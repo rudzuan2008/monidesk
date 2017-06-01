@@ -1,7 +1,11 @@
 <?php
-if (!defined('KTKADMININC') or !is_object($thisuser) or !$thisuser->canManageStdr())
-    die(_('Access Denied'));
-
+require_once(INCLUDE_DIR . 'class.stdreply.php');
+if (!defined('KTKADMININC') or !is_object($thisuser) or !$thisuser->canManageStdr()) die(_('Access Denied'));
+$page = "admin.php";
+$readonly = "";
+if (! defined ( 'ADMINPAGE' )) {
+    $page = "staff.php";
+}
 //List standard replies.
 $select = 'SELECT stdreply.*,dept_name ';
 $from = 'FROM ' . STD_REPLY_TABLE . ' stdreply LEFT JOIN ' . DEPT_TABLE . ' USING(dept_id) ';
@@ -43,9 +47,9 @@ $order_by = $search ? '' : " ORDER BY $order_column $order ";
 $total = db_count('SELECT count(*) ' . $from . ' ' . $where);
 $pagelimit = $thisuser->getPageLimit();
 $pagelimit = $pagelimit ? $pagelimit : PAGE_LIMIT; //true default...if all fails.
-$page = ($_GET['p'] && is_numeric($_GET['p'])) ? $_GET['p'] : 1;
-$pageNav = new PageNate($total, $page, $pagelimit);
-$pageNav->setURL('stdreply.php', $qstr . '&sort=' . urlencode($_REQUEST['sort']) . '&order=' . urlencode($_REQUEST['order']));
+$paging = ($_GET['p'] && is_numeric($_GET['p'])) ? $_GET['p'] : 1;
+$pageNav = new PageNate($total, $paging, $pagelimit);
+$pageNav->setURL($page, $qstr . '&sort=' . urlencode($_REQUEST['sort']) . '&order=' . urlencode($_REQUEST['order']));
 //Ok..lets roll...create the actual query
 $query = "$select $from $where $order_by LIMIT " . $pageNav->getStart() . "," . $pageNav->getLimit();
 //echo $query;
@@ -54,19 +58,28 @@ $showing = db_num_rows($replies) ? $pageNav->showing() : '';
 $results_type = ($search) ? _('Search Results') : _('Standard/Canned Replies');
 $negorder = $order == 'DESC' ? 'ASC' : 'DESC'; //Negate the sorting..
 ?>
+<script type="text/javascript">
+window.onload=function(){
+	var msg = "<?php echo $msg ?>";
+	var error = "<?php echo $errors['err'] ?>";
+	var warn = "<?php echo $warn ?>";
+	//console.log('here'+msg);
+	swalInitiate(msg,error,warn);
+}
+</script>
+
 <div>
-    <?php if ($errors['err']) {
-    ?>
-        <p align="center" id="errormessage"><?= $errors['err'] ?></p>
-    <?php } elseif ($msg) {
- ?>
-        <p align="center" id="infomessage"><?= $msg ?></p>
-<?php } elseif ($warn) { ?>
-        <p id="warnmessage"><?= $warn ?></p>
-<?php } ?>
+    <?php if($errors['err']) { ?>
+        <p align="center" id="errormessage"><?=$errors['err']?></p>
+    <?php }elseif($msg) { ?>
+        <p align="center" id="infomessage"><?=$msg?></p>
+    <?php }elseif($warn) { ?>
+        <p id="warnmessage"><?=$warn?></p>
+     <?php } ?>
 </div>
 <div align="left">
-  <form action="stdreply.php" method="GET" >
+  <form action="<?=$page?>" method="GET" >
+    <input type="hidden" name="t" value="stdreply">
     <input type='hidden' name='a' value='search'>
     <?= _('Search for') ?>:&nbsp;<input type="text" name="query" value="<?= Format::htmlchars($_REQUEST['query']) ?>">
     <?= _('category') ?>
@@ -85,15 +98,16 @@ $negorder = $order == 'DESC' ? 'ASC' : 'DESC'; //Negate the sorting..
   </form>
 </div>
 <div class="msg"><?= $result_type ?>&nbsp;<?= $showing ?></div>
-<form action="stdreply.php" method="POST" name="stdreply" onSubmit="return checkbox_checker(document.forms['stdreply'],1,0);">
-  <input type=hidden name='a' value='process'>
+<form action="<?=$page?>" method="POST" id="form" name="stdreply" onSubmit="return checkbox_checker(document.forms['stdreply'],1,0);">
+  	<input type="hidden" name="t" value="stdreply">
+    <input type=hidden name='a' value='process'>
   <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
       <tr>
           <th width="7px">&nbsp;</th>
-          <th><a href="stdreply.php?sort=title&order=<?= $negorder ?><?= $qstr ?>" title="<?= _('Sort By Title') ?> <?= $negorder ?>"><?= _('Reply Title') ?></a></th>
-          <th width=50><?= _('Status') ?></th>
-          <th width=200><?= _('Category/Dept') ?></th>
-          <th width=150 nowrap><a href="stdreply.php?sort=updatedate&order=<?= $negorder ?><?= $qstr ?>" title="<?= _('Sort By Update Date') ?> <?= $negorder ?>"><?= _('Last Updated') ?></a></th>
+          <th><a href="<?=$page?>?t=stdreply&sort=title&order=<?= $negorder ?><?= $qstr ?>" title="<?= _('Sort By Title') ?> <?= $negorder ?>"><?= _('Reply Title') ?></a></th>
+          <th align="center"><?= _('Type') ?></th>
+          <th align="center"><?= _('Status') ?></th>
+          <th align="center"><a href="<?=$page?>?t=stdreply&sort=updatedate&order=<?= $negorder ?><?= $qstr ?>" title="<?= _('Sort By Update Date') ?> <?= $negorder ?>"><?= _('Last Updated') ?></a></th>
       </tr>
       <?php
       $class = 'row1';
@@ -108,16 +122,23 @@ $negorder = $order == 'DESC' ? 'ASC' : 'DESC'; //Negate the sorting..
               } elseif ($replyID && $replyID == $row['stdreply_id']) {
                   $class = "$class highlight";
               }
+              $stdreply = new StdReply($row['stdreply_id']);
+              $disabled_checked='disabled';
+              $menu=_('VIEW STANDARD REPLY');
+              if ($thisuser->isadmin() or $stdreply->getStaffId()==$thisuser->getId()) {
+              	$disabled_checked='';
+              	$menu=_('EDIT STANDARD REPLY');
+              }
       ?>
       <tr class="<?= $class ?>" id="<?= $row['stdreply_id'] ?>">
           <td width=7px>
-              <input type="checkbox" name="canned[]" value="<?= $row['stdreply_id'] ?>" <?= $sel ? 'checked' : '' ?>
+              <input <?=$disabled_checked?> type="checkbox" name="canned[]" value="<?= $row['stdreply_id'] ?>" <?= $sel ? 'checked' : '' ?>
                      onClick="highLight(this.value,this.checked);">
           </td>
-          <td><a href="stdreply.php?id=<?= $row['stdreply_id'] ?>"><?= Format::htmlchars(Format::truncate($row['title'], 60)) ?></a></td>
-          <td><b><?= $row['isenabled'] ? _('Active') : _('Disabled') ?></b></td>
-          <td><?= $row['dept_name'] ? Format::htmlchars($row['dept_name']) : 'All Departments' ?></td>
-          <td><?= Format::db_datetime($row['updated']) ?></td>
+          <td><a href="<?=$page?>?t=stdreply&menu=<?=$menu?>&id=<?= $row['stdreply_id'] ?>"><?= Format::htmlchars(Format::truncate($row['title'], 60)) ?></a></td>
+          <td align="center"><?=Format::propercase(strtolower($row['publish_type']))?></td>
+          <td align="center"><b><?= $row['isenabled'] ? _('Active') : '<span style="color:red;">'._('Disabled').'</span>' ?></b></td>
+          <td align="center"><?= Format::db_datetime($row['updated']) ?></td>
       </tr>
       <?php
               $class = ($class == 'row2') ? 'row1' : 'row2';
@@ -138,17 +159,19 @@ $negorder = $order == 'DESC' ? 'ASC' : 'DESC'; //Negate the sorting..
       [<a href="#" onclick="return toogle_all(document.forms['stdreply'],true)"><?= _('Toggle') ?></a>]&nbsp;
       [<a href="#" onclick="return reset_all(document.forms['stdreply'])"><?= _('None') ?></a>]&nbsp;
     </div>
-    <div class="centered">                     
-      <input class="button" type="submit" name="enable" value="<?= _('Enable') ?>"
-             onClick='return confirm("<?= _('Are you sure you want to ENABLE selected entries?') ?>");'>
-      <input class="button" type="submit" name="disable" value="<?= _('Disable') ?>"
-             onClick='return confirm("<?= _('Are you sure you want to DISABLE selected entries?') ?>");'>
-      <input class="button" type="submit" name="delete" value="<?= _('Delete') ?>"
-             onClick='return confirm("<?= _('Are you sure you want to DELETE selected entries?') ?>");'>
-    </div>
     <span style="float:right; padding-right:4px;">
       &nbsp;<?= _('page:') ?><?= $pageNav->getPageLinks() ?>&nbsp;
     </span>
+    <div class="centered">   
+      <input type="hidden" id="operation" name="operation" value="">                
+      <input class="button" type="button" name="enable" value="<?= _('Enable') ?>"
+             onClick='return swalSubmit($("#form"),$("#operation"),"enable","<?= _('Are you sure you want to ENABLE selected entries?') ?>");'>
+      <input class="button" type="button" name="disable" value="<?= _('Disable') ?>"
+             onClick='return swalSubmit($("#form"),$("#operation"),"disable","<?= _('Are you sure you want to DISABLE selected entries?') ?>");'>
+      <input class="button" type="button" name="delete" value="<?= _('Delete') ?>"
+             onClick='return swalSubmit($("#form"),$("#operation"),"delete","<?= _('Are you sure you want to DELETE selected entries?') ?>");'>
+    </div>
+    
   <?php
   endif;
   ?>

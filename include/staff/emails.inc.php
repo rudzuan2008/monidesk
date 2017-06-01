@@ -8,12 +8,12 @@ $sql='SELECT email.email_id,email,name,email.noautoresp,email.dept_id,dept_name,
 $emails=db_query($sql.' ORDER BY email'); 
 ?>
 <div class="msg"><?= _('System Emails') ?></div>
- <table width="100%" border="0" cellspacing=0 cellpadding=0>
-    <form action="admin.php?t=email" method="POST" name="email" onSubmit="return checkbox_checker(document.forms['email'],1,0);">
-    <input type='hidden' name='t' value='email'>
-    <input type=hidden name='do' value='mass_process'>
-    <tr><td>
-    <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
+<form action="admin.php?t=email" method="POST" id="form" name="email" onSubmit="return checkbox_checker(document.forms['email'],1,0);">
+	<input type='hidden' name='t' value='email'>
+	<input type=hidden name='do' value='mass_process'>
+ 	<table style="width: 100%;border-collapse: collapse; border-spacing: 1px;">
+ 	<tr><td>
+ 		<table style="width: 100%;border-collapse: collapse; border-spacing: 1px;" class="dtable">
         <tr>
             <th width="7px">&nbsp;</th>
             <th><?= _('Email Address') ?></th>
@@ -37,12 +37,13 @@ $emails=db_query($sql.' ORDER BY email');
                 if($row['name']) {
                     $row['email']=$row['name'].' <'.$row['email'].'>';
                 }
+                $menu=_('EDIT EMAIL');
                 ?>
             <tr class="<?=$class?>" id="<?=$row['email_id']?>">
                 <td width=7px>
                  <input type="checkbox" name="ids[]" value="<?=$row['email_id']?>" <?=$sel?'checked':''?>  
                     <?=($defaultID==$row['email_id'])?'disabled':''?>   onClick="highLight(this.value,this.checked);">
-                <td><a href="admin.php?t=email&id=<?=$row['email_id']?>"><?=Format::htmlchars($row['email'])?></a></td>
+                <td><a href="admin.php?t=email&menu=<?=$menu?>&id=<?=$row['email_id']?>"><?=Format::htmlchars($row['email'])?></a></td>
                 <td>&nbsp;&nbsp;<?=$row['noautoresp']?'No':'<b>Yes</b>'?></td>
                 <td><a href="admin.php?t=dept&id=<?=$row['dept_id']?>"><?=Format::htmlchars($row['dept_name'])?></a></td>
                 <td><?=$row['priority_desc']?></td>
@@ -55,27 +56,26 @@ $emails=db_query($sql.' ORDER BY email');
             <tr class="<?=$class?>"><td colspan=6><b><?= _('Query returned 0 results') ?></b></td></tr>
         <?php
         endif; ?>
-    </table>
-   </td></tr>
-    <?php
-    if(db_num_rows($emails)>0): //Show options..
-     ?>
-    <tr>
-        <td style="padding-left:20px">
-            <?= _('Select:') ?>&nbsp;
+    	</table>
+   		</td></tr>
+	</table>
+	  <?php
+  if(db_num_rows($emails)>0): //Show options..
+   ?>
+      <div style="padding-left:20px">
+          <?= _('Select:') ?>&nbsp;
             [<a href="#" onclick="return select_all(document.forms['email'],true)"><?= _('All') ?></a>]&nbsp;
             [<a href="#" onclick="return reset_all(document.forms['email'])"><?= _('None') ?></a>]&nbsp;
             [<a href="#" onclick="return toogle_all(document.forms['email'],true)"><?= _('Toggle') ?></a>]&nbsp;
-        </td>
-    </tr>
-    <tr>
-        <td align="center">
-            <input class="button" type="submit" name="delete" value="<?= _('Delete Selected Emails') ?>"
-                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected emails?') ?>");'>
-        </td>
-    </tr>
-    <?php
-    endif;
-    ?>
-  </form>
-</table>
+      </div>
+      <div class="centered">
+      	<input type="hidden" id="operation" name="operation" value="">
+          <input class="button" type="button" name="delete" value="<?= _('Delete Selected Emails') ?>"
+                onClick=' return swalSubmit($("#form"),$("#operation"),"delete","<?= _('Are you sure you want to DELETE selected emails?') ?>");'>
+      </div>
+  <?php
+  endif;
+  ?>
+	
+</form>
+

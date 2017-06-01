@@ -6,7 +6,7 @@
 
     Copyright (c)  2012-2014 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicketv1.6 by Peter Rotich.
     See LICENSE.TXT for details.
@@ -14,22 +14,31 @@
     $Id: $
 **********************************************************************/
 class Staff {
-    
+
     var $udata;
     var $role_id;
+    var $role_type;
+    var $role_name;
+
     var $dept_id;
+    var $company_id;
     var $passwd;
     var $id;
     var $fullname;
     var $username;
     var $email;
+    var $fax;
+    var $address;
+    var $postcode;
+    var $state_id;
 
     var $firstname;
     var $lastname;
     var $signature;
+    var $language;
 
     var $dept;
-    
+
     function Staff($var){
         $this->id = 0;
         return ($this->lookup($var));
@@ -37,17 +46,37 @@ class Staff {
 
     function lookup($var){
 
-        $sql=sprintf("SELECT staff.*, roles.*, dept.dept_name FROM ".STAFF_TABLE." staff LEFT JOIN ".GROUP_TABLE." roles USING(role_id) LEFT JOIN ".DEPT_TABLE." dept USING(dept_id) WHERE %s=%s ",
-                        is_numeric($var)?'staff_id':'username',db_input($var));
 
+
+    	$docheckco=true;
+    	if (!is_numeric($var)) {
+    		$username=$var;
+    		if ($username=="admin") $docheckco=false;
+    	}else{
+    		if ($_SESSION['_staff']['userID']=="admin") $docheckco=false;
+    	}
+        $sql=sprintf("SELECT staff.*, roles.*, dept.dept_name, staff.company_id companyID FROM ".STAFF_TABLE." staff ".
+        		"LEFT JOIN ".GROUP_TABLE." roles USING(role_id) ".
+        		"LEFT JOIN ".DEPT_TABLE." dept USING(dept_id) WHERE %s=%s ",
+                        is_numeric($var)?'staff_id':'username',db_input($var));
+        if ($_SESSION['cid'] && $docheckco) {
+        	$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE code='.db_input($_SESSION['cid']));
+        	$company_info = db_fetch_array($company);
+       		if ($company_id = $company_info['company_id']) {
+       			$sql.=" AND staff.company_id=".$company_id;
+       		}
+        }
+        //Sys::console_log('debug', $sql);
         $res=db_query($sql);
         if(!$res || !db_num_rows($res))
             return NULL;
 
         $row=db_fetch_array($res);
         $this->udata=$row;
-        $this->id         = $row['staff_id'];
+        $this->id        = $row['staff_id'];
         $this->role_id   = $row['role_id'];
+        $this->role_type   = $row['role_type'];
+        $this->role_name   = $row['role_name'];
         $this->dept_id    = $row['dept_id'];
         $this->firstname  = ucfirst($row['firstname']);
         $this->lastname  = ucfirst($row['lastname']);
@@ -56,6 +85,15 @@ class Staff {
         $this->username   = $row['username'];
         $this->email      = $row['email'];
         $this->signature  = $row['signature'];
+        $this->fax      = $row['fax'];
+        $this->address      = $row['address'];
+        $this->postcode      = $row['postcode'];
+        $this->state_id      = $row['state_id'];
+        $this->company_id      = $row['companyID'];
+        $this->language   = $row['language'];
+
+        //Sys::console_log('debug', $row['companyID']);
+
 
         return($this->id);
     }
@@ -67,7 +105,7 @@ class Staff {
     function getInfo() {
         return $this->udata;
     }
-    
+
     // Compares staff password
     function check_passwd($password){
       $check = (strlen($this->passwd) && PhpassHashedPass::check($password, $this->passwd))?(TRUE):(FALSE);
@@ -102,7 +140,26 @@ class Staff {
     function getId(){
         return $this->id;
     }
-
+    function getFax() {
+    	return($this->fax);
+    }
+    function getAddress() {
+    	return($this->address);
+    }
+    function getPostcode() {
+    	return($this->postcode);
+    }
+    function getStateId() {
+    	return($this->state_id);
+    }
+    function getStateName() {
+    	if ($this->state_id) {
+	    	$state = db_query('SELECT state_id, name FROM '.STATE_TABLE.' WHERE state_id='.$this->getStateId());
+	    	$state_info = db_fetch_array($state);
+	    	return $state_info['name'];
+    	}
+    	return '';
+    }
     function getEmail(){
         return($this->email);
     }
@@ -114,25 +171,33 @@ class Staff {
     function getName(){
         return($this->fullname);
     }
-        
+
     function getFirstName(){
         return $this->firstname;
     }
-        
+
     function getLastName(){
         return $this->lastname;
     }
-    
+
     function getDeptId(){
         return $this->dept_id;
-    }   
+    }
 
     function getDeptName(){
         return $this->udata['dept_name'];
-    }   
+    }
 
     function getRoleId(){
         return $this->role_id;
+    }
+
+    function getRoleType(){
+    	return $this->role_type;
+    }
+
+    function getRoleName(){
+    	return $this->role_name;
     }
 
     function getSignature(){
@@ -144,7 +209,7 @@ class Staff {
     }
 
     function forcePasswdChange(){
-        return $this->udata['change_passwd']?true:false;        
+        return $this->udata['change_passwd']?true:false;
     }
 
     function getDeptsId(){
@@ -160,9 +225,32 @@ class Staff {
          $sql='SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE dept_id IN ('.implode(',',$this->getDeptsId()).')';
        else
          $sql='SELECT dept_id,dept_name FROM '.DEPT_TABLE;
-       
+
        $depts= db_query($sql);
        return ($depts);
+    }
+
+    function getCompanyId() {
+    	if ($this->company_id) {
+    		return $this->company_id;
+    	}else{
+    		return Sys::getCompanyId();
+    	}
+    }
+
+    function getCompanyName() {
+    	if ($this->getCompanyId()) {
+	    	$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE company_id='.$this->getCompanyId());
+	    	$company_info = db_fetch_array($company);
+	    	return $company_info['name'];
+    	}
+    	return '';
+    }
+    function getAssignClient() {
+    	$sql='SELECT client_id, client_firstname, client_lastname, client_organization FROM '.CLIENT_TABLE. ' WHERE support_staff='.$this->getId();
+    	$clients= db_query($sql);
+    	//Sys::console_log('debug', $clients);
+    	return ($clients);
     }
 
     function getDept(){
@@ -172,7 +260,9 @@ class Staff {
 
         return $this->dept;
     }
-
+	function getLanguage() {
+		return $this->language;
+	}
     function isManager() {
         return (($dept=$this->getDept()) && $dept->getManagerId()==$this->getId())?true:false;
     }
@@ -192,7 +282,7 @@ class Staff {
     function isVisible(){
          return ($this->udata['isvisible'])?true:false;
     }
-        
+
     function onVacation(){
         return ($this->udata['onvacation'])?true:false;
     }
@@ -200,11 +290,19 @@ class Staff {
     function isAvailable() {
         return (!$this->isactive() || !$this->isRoleActive() || $this->onVacation())?false:true;
     }
-   
+
     function isadmin(){
         return ($this->udata['isadmin'])?true:false;
     }
-   
+
+    function isSuperAdmin() {
+    	if ($this->getUserName()=='admin') {
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+
     function canAccessDept($deptid){
         return ($this->isadmin() ||in_array($deptid,$this->getDeptsId()))?true:false;
     }
@@ -220,19 +318,19 @@ class Staff {
     function canEditTickets(){
         return ($this->isadmin() || $this->udata['can_edit_tickets'])?true:false;
     }
-    
+
     function canDeleteTickets(){
         return ($this->isadmin() || $this->udata['can_delete_tickets'])?true:false;
     }
-   
+
     function canChangepriorityTickets(){
         return ($this->isadmin() || $this->udata['can_changepriority_tickets'])?true:false;
     }
-   
+
     function canAssignTickets(){
         return ($this->isadmin() || $this->udata['can_assign_tickets'])?true:false;
     }
-   
+
     function canCloseTickets(){
         return ($this->isadmin() || $this->udata['can_close_tickets'])?true:false;
     }
@@ -244,7 +342,7 @@ class Staff {
     function canManageBanList() {
         return ($this->isadmin() || $this->udata['can_ban_emails'])?true:false;
     }
-  
+
     function canManageTickets() {
         return ($this->isadmin()
                 || $this->isManager()
@@ -273,20 +371,33 @@ class Staff {
       db_query('UPDATE ' . STAFF_TABLE . ' SET lastlogin=NOW() WHERE staff_id=' . db_input($id));
       return true;
     }
-    
+
     static function create($vars,&$errors) {
         return Staff::save(0,$vars,$errors);
     }
 
 
     function save($id,$vars,&$errors) {
-            
+
         if($id && $id!=$vars['staff_id'])
             $errors['err']=_('Internal Error');
-            
-        if(!$vars['firstname'] || !$vars['lastname'])
-            $errors['name']=_('First and last name required');
-            
+
+
+        $fields=array();
+        $fields['firstname']     = array('type'=>'string',   'required'=>1, 'error'=>_('Firstname required'));
+        $fields['lastname']    = array('type'=>'string',    'required'=>1, 'error'=>_('Lastname required'));
+        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $fields['phone']  = array('type'=>'phone',   'required'=>0, 'error'=>_('Phone required'));
+        $fields['mobile']  = array('type'=>'phone',     'required'=>0, 'error'=>_('Mobile required'));
+        $fields['fax']  = array('type'=>'phone',     'required'=>0, 'error'=>_('Mobile required'));
+        $fields['address']  = array('type'=>'text',     'required'=>1, 'error'=>_('Address required'));
+        $fields['postcode']  = array('type'=>'zipcode',     'required'=>1, 'error'=>_('Postcode required'));
+        $fields['state_id']  = array('type'=>'int',     'required'=>1, 'error'=>_('State required'));
+
+        $validate = new Validator($fields);
+        if(!$validate->validate($vars)){
+            	$errors=array_merge($errors,$validate->errors());
+        }
         if(!$vars['username'] || strlen($vars['username'])<3)
             $errors['username']=_('Username required');
         else{
@@ -295,7 +406,7 @@ class Staff {
             if($id)
                 $sql.=' AND staff_id!='.db_input($id);
             if(db_num_rows(db_query($sql)))
-                $errors['username']=_('Username already in-use');
+                $errors['username']=_('Username not available');
         }
 
         // Check email.
@@ -311,12 +422,6 @@ class Staff {
             if(db_num_rows(db_query($sql)))
                 $errors['email']=_('Already in-use email');
         }
-                
-        if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']=_('Valid number required');
-        
-        if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']=_('Valid number required');
 
         // Chek password
         if($vars['npassword'] || $vars['vpassword'] || !$id){
@@ -339,25 +444,26 @@ class Staff {
             if(db_num_rows(db_query($sql)))
                 $errors['dept']=_('The user is currently manager of his/her department');
         }
-          
+
         // Check if the role is select and that it remains at least one administrator
         if(!$vars['role_id'])
             $errors['role']=_('Role required');
-        elseif($vars['role_id']=="1")
-            $isadmin="1";
+//         elseif($vars['role_id']=="1")
+//             $isadmin="1";
         elseif($id && (db_count('SELECT COUNT(*) FROM '.STAFF_TABLE.' WHERE staff_id = '.db_input($id).' AND isadmin = 1') == 1) && (db_count('SELECT COUNT(*) FROM '.STAFF_TABLE.' WHERE isadmin = 1') == 1))
             $errors['role']=_('At least an administrator must remain');
-        else
-            $isadmin="0";
-        
+//         else
+//             $isadmin="0";
+
+
         if(!$errors){
-            
+
             $sql=' SET updated=NOW() '.
-                 ',isadmin='.db_input($isadmin).
                  ',isactive='.db_input($vars['isactive']).
                  ',isvisible='.db_input(isset($vars['isvisible'])?1:0).
                  ',onvacation='.db_input(isset($vars['onvacation'])?1:0).
                  ',dept_id='.db_input($vars['dept_id']).
+                 ',company_id='.db_input($vars['company_id']).
                  ',role_id='.db_input($vars['role_id']).
                  ',username='.db_input(Format::striptags($vars['username'])).
                  ',firstname='.db_input(Format::striptags($vars['firstname'])).
@@ -365,13 +471,22 @@ class Staff {
                  ',email='.db_input($vars['email']).
                  ',phone="'.db_input($vars['phone'],false).'"'.
                  ',mobile="'.db_input($vars['mobile'],false).'"'.
+                 ',fax="'.db_input($vars['fax'],false).'"'.
+                 ',postcode="'.db_input($vars['postcode'],false).'"'.
+                 ',state_id="'.db_input($vars['state_id'],false).'"'.
+                 ',address="'.db_input($vars['address'],false).'"'.
                  ',signature='.db_input(Format::striptags($vars['signature']));
+
+            if (!isset($vars['isadmin']) or $vars['isadmin']=="") {
+            	$vars['isadmin']=0;
+            }
+            $sql.= ',isadmin='.db_input($vars['isadmin']);
 
             if($vars['npassword']) {
                 $hash = PhpassHashedPass::hash($vars['npassword']);
                 $sql.=',passwd='.db_input($hash);
             }
-            
+
             if(isset($vars['resetpasswd']))
                 $sql.=',change_passwd=1';
 

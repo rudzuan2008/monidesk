@@ -5,10 +5,10 @@
     Static Katak-support configuration file. Mainly useful for mysql login info
     and sysadmin email recording.
     Created during installation process and shouldn't change even on upgrades.
-   
+
     Copyright (c)  2012-2013 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket by Peter Rotich.
     See LICENSE.TXT for details.
@@ -36,8 +36,8 @@ define('ADMIN_EMAIL','rudzuan@domain-oracle.com');
 
 #Mysql Login info
 define('DBTYPE','mysql');
-define('DBHOST','localhost'); 
-define('DBNAME','hdesk');
+define('DBHOST','localhost');
+define('DBNAME','wt-property');
 define('DBUSER','helpdesk');
 define('DBPASS','password$1');
 

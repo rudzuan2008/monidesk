@@ -17,7 +17,8 @@ if($_POST && $errors){
                 'time'=>$ticket->getDueDate()?(Format::userdate('G:i',Misc::db2gmtime($ticket->getDueDate()))):'',
                 );
 }
-
+$rand=rand();
+$_SESSION['rand']=$rand;
 ?>
 <div width="100%">
     <?php if($errors['err']) { ?>
@@ -30,6 +31,7 @@ if($_POST && $errors){
 </div>
 <form action="tickets.php?id=<?=$ticket->getId()?>" method="post">
   <table width="100%" border="0" cellspacing=1 cellpadding=2>
+  	<input type="hidden" value="<?= $rand ?>" name="randcheck" />
     <input type='hidden' name='id' value='<?=$ticket->getId()?>'>
     <input type='hidden' name='a' value='update'>
     <tr><td align="left" colspan=2 class="msg">

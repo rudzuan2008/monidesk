@@ -3,6 +3,7 @@ if(!defined('KTKUSERINC')) die('Adiaux amikoj!');
 
 $e=Format::input($_POST['lemail']?$_POST['lemail']:$_GET['e']);
 $t=Format::input($_POST['lticket']?$_POST['lticket']:$_GET['t']);
+$_SESSION["USERTYPE"]="user";
 ?>
 <div>
     <?php if($errors['err']) { ?>

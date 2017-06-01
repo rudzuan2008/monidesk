@@ -68,12 +68,13 @@ $deletable=0;
                         $sel=true;
                     }
                 }
+                $menu=_('EDIT TEMPLATES');
                 ?>
             <tr class="<?=$class?>" id="<?=$row['tpl_id']?>">
                 <td width=7px>
                   <input type="checkbox" name="ids[]" value="<?=$row['tpl_id']?>" <?=$sel?'checked':''?> <?=$disabled?>
                         onClick="highLight(this.value,this.checked);">
-                <td><a href="admin.php?t=templates&id=<?=$row['tpl_id']?>"><?=$row['name']?></a></td>
+                <td><a href="admin.php?t=templates&menu=<?=$menu?>&id=<?=$row['tpl_id']?>"><?=$row['name']?></a></td>
                 <td><?=$disabled?'Yes':'No'?></td>
                 <td><?=Format::db_datetime($row['updated'])?></td>
                 <td><?=Format::db_datetime($row['created'])?></td>

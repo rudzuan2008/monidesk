@@ -16,9 +16,11 @@
 **********************************************************************/
 require('staff.inc.php');
 Sys::log(LOG_DEBUG,'Staff logout',sprintf("%s " . _('logged out'),$thisuser->getUserName()),$thisuser->getUserName()); //Debug.
+$cid=$_SESSION['cid'];
 $_SESSION['_staff']=array();
 session_unset();
 session_destroy();
-@header('Location: index.php');
+//$_SESSION['cid']=$cid;
+@header('Location: index.php?cid='.$cid);
 require('index.php');
 ?>

@@ -2,7 +2,7 @@
 if(!defined('KTKUSERINC')) die('Adiaux amikoj!');
 
 $e=Format::input($_POST['username']?$_POST['username']:$_GET['e']);
-
+$_SESSION["USERTYPE"]="client";
 ?>
 <div>
     <?php if($errors['err']) { ?>

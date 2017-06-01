@@ -1,5 +1,8 @@
 <?php
 if(!defined('KTKUSERINC') || !is_object($thisuser) || !is_object($ticket)) die('Adiaux amikoj!'); //bye..see ya
+require_once (INCLUDE_DIR . 'class.client.php');
+require_once (INCLUDE_DIR . 'class.product.php');
+
 //Double check access one last time...
 if(strcasecmp($thisuser->getEmail(),$ticket->getEmail())) die(_('Access Denied'));
 
@@ -8,6 +11,13 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info 
 $dept = $ticket->getDept();
 //Making sure we don't leak out internal dept names
 $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
+
+$client=null;
+if ($thisuser->isClient()) {
+	$client= new Client($thisuser->getEmail());
+	$product_id= $client->getProductId();
+	$product= new Product($product_id);
+}
 //We roll like that...
 ?>
 <div class="msg">
@@ -20,26 +30,21 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
         Ticket #<?=$ticket->getExtId()?>
         &nbsp;<a href="tickets.php?id=<?=$ticket->getExtId()?>" title="<?=_('Reload') ?>"><span class="Icon refresh">&nbsp;</span></a>
 </div>
-<div class="msg" id="ticketstatus"><?=_('Ticket Status:').' '.$ticket->getStatus()?></div>
+<div class="msg" id="ticketstatus"><?=_('Ticket Status:').' '.strtoupper($ticket->getStatus())?></div>
 <br style="clear:both;" />
 <div id="ticket">
   <div id="leftcolumn">
-    <div>
-      <span class="label"><?=_('Created on:') ?></span>
-      <span><?=Format::db_datetime($ticket->getCreateDate())?></span>
-    </div>
-    <div>
-      <span class="label"><?=_('Department:') ?></span>
-      <span><?=Format::htmlchars($dept->getName())?></span>
-    </div>
     <?php if (!$ticket->isOpen()) { ?>
     <div>
       <span class="label"><?=_('Closing date:') ?></span>
       <span><?=Format::db_datetime($ticket->getCloseDate())?></span>
     </div>
+    <?php }else{ ?>
+    <div>
+      <span class="label"><?=_('Created on:') ?></span>
+      <span><?=Format::db_datetime($ticket->getCreateDate())?></span>
+    </div>
     <?php } ?>
-  </div>
-  <div id="rightcolumn">
     <div>
       <span class="label"><?=_('Name:') ?></span>
       <span><?=Format::htmlchars($ticket->getName())?></span>
@@ -48,10 +53,68 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
       <span class="label"><?=_('Email:') ?></span>
       <span><?=$ticket->getEmail()?></span>
     </div>
+
     <div>
-      <span class="label"><?=_('Phone:') ?></span>
+      <span class="label"><?=_('Main Phone:') ?></span>
       <span><?=Format::phone($ticket->getPhoneNumber())?></span>
     </div>
+    <div>
+      <span class="label"><?=_('Secondary Phone:') ?></span>
+      <span><?=Format::phone($ticket->getMobile())?></span>
+    </div>
+  </div>
+  <div id="rightcolumn">
+  	<?php if ($client && $product) {?>
+    <div>
+      <span class="label"><?=_('Unit No:') ?></span>
+      <span><?=Format::htmlchars($product->getUnitNo())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('Unit Model:') ?></span>
+      <span><?=Format::htmlchars($product->getModel())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('Address:') ?></span>
+      <span>
+      		<span style="border: 0px solid black;padding-left: 0px;display: block;">
+      			<?=Format::htmlchars($product->getAddress())?>
+      		</span>
+      </span>
+    </div>
+    <div>
+      <span class="label"><?=_('Postcode:') ?></span>
+      <span><?=Format::htmlchars($product->getPostcode())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('State:') ?></span>
+      <span><?=Format::htmlchars($product->getStateName())?></span>
+    </div>
+    <?php }else{ ?>
+    <div>
+      <span class="label"><?=_('Company:') ?></span>
+      <span><?=Format::htmlchars($ticket->getCompany())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('Department:') ?></span>
+      <span><?=Format::htmlchars($ticket->getDepartment())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('Address:') ?></span>
+      <span>
+      		<span style="border: 0px solid black;padding-left: 0px;display: block;">
+      			<?=Format::htmlchars($ticket->getAddress())?>
+      		</span>
+      </span>
+    </div>
+    <div>
+      <span class="label"><?=_('Postcode:') ?></span>
+      <span><?=Format::htmlchars($ticket->getPostcode())?></span>
+    </div>
+    <div>
+      <span class="label"><?=_('State:') ?></span>
+      <span><?=Format::htmlchars($ticket->getStateName())?></span>
+    </div>
+    <?php } ?>
   </div>
   <br style="clear:both;" />
   <?php
@@ -60,12 +123,17 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
   $msg_row = db_fetch_array($msgres);
   ?>
   <div>
+      <span class="label"><?=_('Category:') ?></span>
+      <span><?=Format::htmlchars($ticket->getTopic())?></span>
+  </div>
+  <div>
     <span class="label"><?=_('Subject:') ?></span>
-    <span><?=Format::htmlchars($ticket->getSubject())?></span>
+    <span><?=Format::htmlchars($ticket->getSubject())?>
+    </span>
   </div>
   <span class="label"><?=_('New Message:') ?></span>
   <div class="firstmessage">
-    <?=Format::display($msg_row['message'])?>
+    <?=$msg_row['message']?>
   </div>
   <?php if($msg_row['attachments']>0){ ?>
     <div class="firstmessage">
@@ -85,7 +153,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
           <span class="Icon outMessage">&nbsp;<?=Format::db_daydatetime($msg_row['created'])?></span>
       </div>
       <div class="message">
-          <?=Format::display($msg_row['message'])?>
+          <?=$msg_row['message']?>
       </div>
       <div class="attachment">
           <?php if($msg_row['attachments']>0){ ?>
@@ -102,7 +170,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
 		        <span class="Icon inMessage">&nbsp;<?=Format::db_daydatetime($msg_row['created'])?>&nbsp;-&nbsp;<?=$name?></span>
             </div>
             <div class="message">
-                  <?=Format::display($msg_row['message'])?>
+                  <?=$msg_row['message']?>
 		    </div>
             <div class="attachment">
                 <?php if($msg_row['attachments']>0){ ?>
@@ -123,7 +191,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
             <p align="center" id="infomessage"><?=$msg?></p>
         <?php } ?>
     </div>
-    <?php 
+    <?php
     // Give the possibility to post a message and eventually reopen the ticket, if not blocked (reopen grace period overdue)
     if($ticket->isOpen() || (time()-strtotime($ticket->getCloseDate()))<=$cfg->getReopenGracePeriod()*24*3600) { ?>
     <div id="reply" style="padding:10px 0 20px 40px;">

@@ -22,7 +22,14 @@ class User {
     var $username;
     var $email;
     var $phone;
-
+    var $mobile;
+    var $fax;
+    var $organization;
+    var $department;
+    var $address;
+    var $postcode;
+    var $state_id;
+    var $product;
     
     var $udata;
     var $ticket_id;
@@ -41,8 +48,16 @@ class User {
     	return FALSE;
     }
     
+    function isClient(){
+    	$sql='SELECT client_id FROM '.CLIENT_TABLE.' WHERE client_email='.db_input($this->getEmail());
+    	$res=db_query($sql);
+    	if(!$res || !db_num_rows($res))
+    		return FALSE;
+    	return TRUE;
+    }
+    
     function lookup($id, $email=''){
-        $sql='SELECT ticket_id,ticketID,name,email FROM '.TICKET_TABLE.' WHERE ticketID='.db_input($id);
+        $sql='SELECT * FROM '.TICKET_TABLE.' WHERE ticketID='.db_input($id);
         if($email){ //don't validate...using whatever is entered.
             $sql.=' AND email='.db_input($email);
         }
@@ -60,15 +75,26 @@ class User {
         $this->username   = $row['email'];
         $this->email      = $row['email'];
         $this->phone      = $row['phone'];
+        $this->mobile     = $row['mobile'];
+        $this->fax        = $row['fax'];
+        $this->organization	= $row['organization'];
+        $this->department = $row['dept'];
+        $this->address    = $row['address'];
+        $this->postcode   = $row['postcode'];
+        $this->state_id   = $row['state_id'];
+        $this->product 	  = $row['subject'];
+        
       
         return($this->id);
     }
-
 
     function getId(){
         return $this->id;
     }
 
+    function getProduct(){
+    	return($this->product);
+    }
     function getEmail(){
         return($this->email);
     }
@@ -77,12 +103,45 @@ class User {
         return($this->phone);
     }
 
+    function getFax() {
+    	return($this->fax);
+    }
+    function getDepartment() {
+    	return($this->department);
+    }
+    function getOrganization() {
+    	return($this->organization);
+    }
+    function getAddress() {
+    	return($this->address);
+    }
+    function getPostcode() {
+    	return($this->postcode);
+    }
+    function getStateId() {
+    	return($this->state_id);
+    }
+    function getMobile(){
+    	return($this->mobile);
+    }
+    
     function getUserName(){
         return($this->username);
     }
 
     function getName(){
         return($this->fullname);
+    }
+    
+    function getRoleName(){
+    	return 'PUBLIC';
+    }
+    function getCompanyId() {
+    	return Sys::getCompanyId();
+    }
+    
+    function getCompanyName() {
+    	return($this->organization);
     }
     
     function getTicketID() {

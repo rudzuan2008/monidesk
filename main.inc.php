@@ -7,13 +7,13 @@
 
     Copyright (c)  2012-2014 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket v1.6 by Peter Rotich.
     See LICENSE.TXT for details.
 
     $Id: $
-**********************************************************************/    
+**********************************************************************/
 
 #Disable direct access.
 if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__))) die('Adiaux amikoj!');
@@ -38,8 +38,8 @@ ini_set('session.cache_limiter', 'nocache');
 
 #Error reporting...Good idea to ENABLE error reporting to a file. i.e display_errors should be set to false
 #Don't display errors in productions, but fatal errors.
-error_reporting(E_ERROR); 
-//error_reporting(E_ALL); 
+error_reporting(E_ERROR);
+//error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 0);
 
@@ -58,11 +58,11 @@ define('SETUP_DIR',INCLUDE_DIR.'setup/');
 
 /*############## Do NOT monkey with anything else beyond this point UNLESS you really know what you are doing ##############*/
 
-/* 
+/*
  * Current version.
  * The first two digits indicate the database's version.
  * The third digit represents minor changes that do not affect the database.
-*/ 
+*/
 define('THIS_VERSION','1.1.0'); //Changes from version to version.
 
 // Is the system already installed?
@@ -92,7 +92,7 @@ ini_set('include_path', './'.PATH_SEPARATOR.INCLUDE_DIR.PATH_SEPARATOR.PEAR_DIR)
 #include required files
 require(INCLUDE_DIR.'class.visitorsession.php');
 require(INCLUDE_DIR.'class.pagenate.php'); //Pagenate helper!
-// require(INCLUDE_DIR.'class.sys.php'); //system loader & config & logger. Already loaded by mysql.php
+require(INCLUDE_DIR.'class.sys.php'); //system loader & config & logger. Already loaded by mysql.php
 require(INCLUDE_DIR.'class.misc.php');
 require(INCLUDE_DIR.'class.http.php');
 require(INCLUDE_DIR.'class.format.php'); //format helpers
@@ -114,6 +114,14 @@ define('SESSION_TTL', 86400); // Default 24 hours
 
 define('DEFAULT_PRIORITY_ID',1);
 define('EXT_TICKET_ID_LEN',6); //Ticket ID length. Applies only on random ticket ids.
+#Define default company code
+if (isset($_REQUEST['cid'])) {
+	define('SYSTEM_CODE', strtoupper($_REQUEST['cid']));
+}elseif ($_SESSION['cid']) {
+	define('SYSTEM_CODE',$_SESSION['cid']);
+}else{
+	define('SYSTEM_CODE','WT');
+}
 
 #Tables being used sytem wide
 define('CONFIG_TABLE',TABLE_PREFIX.'config');
@@ -137,8 +145,18 @@ define('EMAIL_TABLE',TABLE_PREFIX.'email');
 define('EMAIL_TEMPLATE_TABLE',TABLE_PREFIX.'email_template');
 define('BANLIST_TABLE',TABLE_PREFIX.'email_banlist');
 define('API_KEY_TABLE',TABLE_PREFIX.'api_key');
-define('TIMEZONE_TABLE',TABLE_PREFIX.'timezone'); 
+define('TIMEZONE_TABLE',TABLE_PREFIX.'timezone');
 
+define('PAGE_TABLE',TABLE_PREFIX.'page');
+define('PAGE_DETAIL_TABLE',TABLE_PREFIX.'page_detail');
+define('COMPANY_TABLE',TABLE_PREFIX.'company');
+define('USER_TABLE',TABLE_PREFIX.'users');
+define('PRODUCT_TABLE',TABLE_PREFIX.'asset');
+define('STATE_TABLE',TABLE_PREFIX.'state');
+define('NOTIFICATION_TABLE',TABLE_PREFIX.'notification');
+define('NOTIFICATION_DETAIL_TABLE',TABLE_PREFIX.'notification_detail');
+define('EVENT_TABLE',TABLE_PREFIX.'event');
+define('FILE_ATTACHMENT_TABLE',TABLE_PREFIX.'file_attachment');
 #Connect to the DB && get configuration from database
 $ferror=null;
 if (!db_connect(DBHOST,DBUSER,DBPASS,DBNAME)) {
@@ -157,6 +175,9 @@ if($ferror) { //Fatal error
 //Init
 $cfg->init();
 
+require_once(INCLUDE_DIR . 'class.page.php');
+$default_page=new Page(SYSTEM_CODE);
+$_SESSION['cid']=SYSTEM_CODE;
 //Set default timezone and store it in the session array...staff will overwrite it.
 $_SESSION['TZ_OFFSET']=$cfg->getTZoffset();
 $_SESSION['daylight']=$cfg->observeDaylightSaving();
@@ -167,5 +188,22 @@ if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
     $_GET=Format::strip_slashes($_GET);
     $_REQUEST=Format::strip_slashes($_REQUEST);
 }
+function randCode($len=8) {
+	return substr(strtoupper(base_convert(microtime(),10,16)),0,$len);
+}
+function file_name($filename) {
 
+	$search = array('/ß/','/ä/','/Ä/','/ö/','/Ö/','/ü/','/Ü/','([^[:alnum:]._])');
+	$replace = array('ss','ae','Ae','oe','Oe','ue','Ue','_');
+	return preg_replace($search,$replace,$filename);
+}
+function truncate($string,$len,$hard=false) {
+
+	if(!$len || $len>strlen($string))
+		return $string;
+
+		$string = substr($string,0,$len);
+
+		return $hard?$string:(substr($string,0,strrpos($string,' ')).' ...');
+}
 ?>

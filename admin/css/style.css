@@ -5,19 +5,30 @@
 .button {
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 5px;
-    background-color: #479126;
+    background-color: #73b570; /*#479126;*/
+    box-shadow: 0px 0px 5px #888888;
     color: #FFF;
-    border:1px solid #222;
+    /*color: #448844;*/
+    border:3px solid white; /*#222;*/
     font-weight:bold;
     cursor:pointer;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    
+    width: auto;
+    text-align: center;
 }
 
 .button:hover {
-	color:#FBA626;
-  text-decoration: none;
+	border-radius: 5px;
+    -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+	box-shadow: 3px 3px 10px #888888;
+	background-color: #479126;
+	color: #6c9804; /*#001A00; /* #e3f7e3; #001A00; #FBA626;*/
+  	text-decoration: none;
 }
 
 
@@ -39,20 +50,29 @@
 }
 
 .msg {
-  color:#222222;
+  	color:#222222;
 }
 
 .firstmessage {
-    border-left:8px solid;
-    margin-left:20px;
-    padding:0px 5px 5px 5px;
-    border-color:#EEE1CA;
+    border: 1px solid #DFDFDF;
+    margin-left:0px;
+    padding:5px 5px 5px 5px;
+    background-color: #FCFCFC;
+    /*border-color: #EEE1CA;*/
+    min-height: 30px;
 }
 
 .message {
     border:1px solid #DFDFDF;
     padding:4px 5px 1px 5px;
     background-color: #FCFCFC;
+    min-height: 30px;
+}
+.note_message {
+    border:1px solid #DFDFDF;*/
+    padding:4px 5px 1px 5px;
+    background-color: #FCFCFC;
+    min-height: 30px;
 }
 
 .note_title {
@@ -91,12 +111,38 @@
   float:right;
   padding:0 4px 4px 4px;
 }
-
-#infomessage, #warnmessage, #errormessage {
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+        border: 0px solid;
+        margin-bottom: 0;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+        border: 0px solid;
+        margin-bottom: 0;
+    }
+}
+#infomessage, #warnmessage {
     margin-bottom: 1.5em;
     padding: 0.3em;
     font-weight: bold;
     border: 1px solid;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;   
 }
 
 
@@ -105,6 +151,7 @@
   border-color: #339900;
   color: #339900;
   background: #CCFFCC;
+  
 }
 
 #errormessage {
@@ -123,15 +170,21 @@
 .row1 td { background-color: #F4F4F4; }
 .row2 td { background-color: #FFFFFF; }
 
-
-
+table {
+	border-collapse: collapse; border-spacing: 1px;
+}
+table.logs {
+ 	border-left: 1px solid;
+}
 /* Data Table */
-table.dtable, table.logs {
- border-left: 1px solid;
+table.dtable {
+	width: 100%;
+ 	border-left: 1px solid;
 }
 
 table.dtable td, table.logs td {
   padding-left:3px;
+  padding-right:3px;
   border:1px solid;
   border-top:none;
   border-left:none;
@@ -172,9 +225,13 @@ table.tform {
  border-left: 1px solid;
  border-top: 1px solid;
  margin-bottom: 10px;
+ width:100%;
+ /*border-collapse: collapse; border-spacing: 1px;*/
 }
 
 table.tform td,table.tform th {
+	padding-top: 3px;
+	padding-bottom: 3px;
   padding-left:3px;
   border:1px solid;
   border-top:none;
@@ -182,7 +239,8 @@ table.tform td,table.tform th {
 }
 
 table.tform th {
-    text-align:left;
+	vertical-align: middle;
+	text-align:left;
     font-weight:normal;
     background:#F4FAFF;
     padding-left:5px;
@@ -218,7 +276,7 @@ table.ticketinfo {
 }
 
 table.ticketinfo td, table.ticketinfo th {
-    background-color: #F6F4F4;
+    /*background-color: #F6F4F4;*/
 }
 
 table.ticketinfo th {
@@ -227,30 +285,53 @@ table.ticketinfo th {
     padding-left:3px;
     width: 110px;
 }
+.collapsible {
+	display: block;
+	border: 0px solid green;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+table.ticketinformation, table.reportedstatement, table.internalnotes, table.messages, table.ticketprocess {
+	width: 100%; height: auto;
+	/*background-color: #F6F4F4;*/
+	border: 0px solid green; /*lightgray;*/
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    
+}
+
+#ticketinformation_div, #reportedstatement_div, #internalnotes_div, #messages_div, #ticketprocess_div {
+	border: 0px solid lightgray;
+    display: block;
+    padding: 10px 20px 10px 20px;
+    min-height: 30px;
+    /*box-shadow: 1px 1px 2px #888888;*/
+}
 
 table.ticketoptions {
-    background-color: #EFEFEF;
-    border-color:#CCC;
-    border: 1px solid;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: black;
+	width: 100%;
+    /*background-color: #EFEFEF;*/
+    /*border: 1px solid red;  lightgray;*/
+    border-collapse: collapse; border-spacing: 1px;
 }
 
-table.ticketoptions td {
-    border: 0;
-    padding-top:3px;
-    padding-bottom:3px;
-}
 
-/* Ticket view (Notes, Messages and Responses) */
+
+/* Ticket view (Notes, Messages and Responses) 
 #ticketthread table.message {
-    margin:10px 0 5px 0;
-}
-
+    margin: 10px 0 5px 0;
+    border: 1px solid red;
+    
+}*/
 #ticketthread table.response {
-    margin-bottom:5px;
+    /*margin-bottom:5px;*/
 }
 
 #ticketnotes table.note {
-    margin-bottom:10px;
+    /*margin-bottom:5px;*/
 }
 
 table.message, table.response,table.note {
@@ -295,4 +376,374 @@ table.message tr.header td, table.response tr.header td, table.note tr.header td
     border-color:#ccc;
     padding:1px;
     padding-left:5px;
+}
+.caret_up {
+    display: inline-block;
+  	width: 0px;
+  	height: 0px;
+  	margin-left: 2px;
+  	vertical-align: middle;
+  	border-top: none;
+  	border-bottom: 4px solid #000000;
+  	border-right: 4px solid transparent;
+  	border-left: 4px solid transparent;
+  	border-top-width: 0px;
+  	border-top-style: dotted;
+  	content: "";
+}
+.caret_down {
+    display: inline-block;
+  	width: 0px;
+  	height: 0px;
+  	margin-left: 2px;
+  	vertical-align: middle;
+  	border-bottom: none;
+  	border-top: 4px solid #000000;
+  	border-right: 4px solid transparent;
+  	border-left: 4px solid transparent;
+  	border-bottom-width: 0px;
+  	border-bottom-style: dotted;
+  	content: "";
+}
+.display_only {
+	FONT-FAMILY: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    color: #3E3E3E;
+    border: none;
+	pointer-events: none;
+	z-index: 1;
+}
+.input_box {
+	FONT-FAMILY: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+#tipofday {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border: 0px solid gray;
+	padding: 10px 10px 10px 10px;
+	box-shadow: 1px 1px 5px #888888;
+	-webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px;
+    background-color: #fafdbd; 
+    width: 60%;	
+}
+#noticeboard {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+/* ========================================================================
+   Component: Form
+ ========================================================================== */
+/*
+ * 1. Define consistent box sizing.
+ *    Default is `content-box` with following exceptions set to `border-box`
+ *    `button`, `select`, `input[type="checkbox"]` and `input[type="radio"]`
+ *    `input[type="search"]` in Chrome, Safari and Opera
+ *    `input[type="color"]` in Firefox
+ * 2. Address margins set differently in Firefox/IE and Chrome/Safari/Opera.
+ * 3. Remove `border-radius` in iOS.
+ * 4. Correct `font` properties and `color` not being inherited.
+ */
+.rz-form input,
+.rz-form select,
+.rz-form textarea {
+  /* 1 */
+  box-sizing: border-box;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+  /*border-radius: 0;*/
+  /* 4 */
+  font: inherit;
+  /*color: inherit;*/
+}
+/*
+ * Address inconsistent `text-transform` inheritance which is only inherit in Firefox
+ */
+.rz-form select {
+  text-transform: none;
+  overflow: auto;
+}
+/*
+ * 1. Correct `font` properties not being inherited.
+ * 2. Don't inherit the `font-weight` and use `bold` instead.
+ * NOTE: Both declarations don't work in Chrome, Safari and Opera.
+ */
+.rz-form optgroup {
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  font-weight: bold;
+}
+/*
+ * Removes inner padding and border in Firefox 4+.
+ */
+.rz-form input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+/*
+ * Removes excess padding in IE 8/9/10.
+ */
+.rz-form input[type="checkbox"],
+.rz-form input[type="radio"] {
+  padding: 5px;
+  vertical-align: bottom;
+}
+/*
+ * Improves consistency of cursor style for clickable elements
+ */
+.rz-form input[type="checkbox"]:not(:disabled),
+.rz-form input[type="radio"]:not(:disabled) {
+  cursor: pointer;
+}
+/*
+ * Remove default style in iOS.
+ */
+.rz-form textarea,
+.rz-form input:not([type]),
+.rz-form input[type="text"],
+.rz-form input[type="password"],
+.rz-form input[type="email"],
+.rz-form input[type="url"],
+.rz-form input[type="search"],
+.rz-form input[type="tel"],
+.rz-form input[type="number"],
+.rz-form input[type="datetime"] {
+  -webkit-appearance: none;
+}
+/*
+ * Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
+ */
+.rz-form input[type="search"]::-webkit-search-cancel-button,
+.rz-form input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+/*
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+.rz-form input[type="number"]::-webkit-inner-spin-button,
+.rz-form input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+/*
+ * Define consistent border, margin, and padding.
+ */
+.rz-form fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * 1. Remove default vertical scrollbar in IE 8/9/10/11.
+ * 2. Improve readability and alignment in all browsers.
+ */
+.rz-form textarea {
+  /* 1 */
+  overflow: auto;
+  /* 2 */
+  vertical-align: top;
+}
+/*
+ * Removes placeholder transparency in Firefox.
+ */
+.rz-form ::-moz-placeholder {
+  opacity: 1;
+}
+/*
+ * Removes `box-shadow` for invalid controls in Firefox.
+ */
+.rz-form :invalid {
+  box-shadow: none;
+}
+/*
+ * Vertical alignment
+ */
+.rz-form input:not([type="radio"]):not([type="checkbox"]),
+.rz-form select {
+  vertical-align: middle;
+}
+
+/* Style
+ ========================================================================== */
+/*
+ * Remove margin from the last-child
+ */
+.rz-form > :last-child {
+  margin-bottom: 0;
+}
+.rz-form .cal, #cal-img {
+	vertical-align: middle;
+
+}
+/*
+ * Controls
+ * Except for `range`, `radio`, `checkbox`, `file`, `submit`, `reset`, `button` and `image`
+ * 1. Must be `height` because `min-height` is not working in OSX
+ * 2. Responsiveness: Sets a maximum width relative to the parent to scale on narrower viewports
+ * 3. Vertical `padding` needed for `select` elements in Firefox
+ * 4. Style
+ */
+.rz-form select,
+.rz-form textarea,
+.rz-form input:not([type]),
+.rz-form input[type="text"],
+.rz-form input[type="password"],
+.rz-form input[type="datetime"],
+.rz-form input[type="datetime-local"],
+.rz-form input[type="date"],
+.rz-form input[type="month"],
+.rz-form input[type="time"],
+.rz-form input[type="week"],
+.rz-form input[type="number"],
+.rz-form input[type="email"],
+.rz-form input[type="url"],
+.rz-form input[type="search"],
+.rz-form input[type="tel"],
+.rz-form input[type="color"] {
+  /* 1 */
+  height: 20px;
+  /* 2 */
+  max-width: 100%;
+  /* 3 */
+  padding: 0px 6px 2px 2px;
+  /* 4 */
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #444;
+  -webkit-transition: all 0.2s linear;
+  -webkit-transition-property: border, background, color, box-shadow, padding;
+  transition: all 0.2s linear;
+  transition-property: border, background, color, box-shadow, padding;
+  border-radius: 2px;
+}
+.rz-form select:focus,
+.rz-form textarea:focus,
+.rz-form input:not([type]):focus,
+.rz-form input[type="text"]:focus,
+.rz-form input[type="password"]:focus,
+.rz-form input[type="datetime"]:focus,
+.rz-form input[type="datetime-local"]:focus,
+.rz-form input[type="date"]:focus,
+.rz-form input[type="month"]:focus,
+.rz-form input[type="time"]:focus,
+.rz-form input[type="week"]:focus,
+.rz-form input[type="number"]:focus,
+.rz-form input[type="email"]:focus,
+.rz-form input[type="url"]:focus,
+.rz-form input[type="search"]:focus,
+.rz-form input[type="tel"]:focus,
+.rz-form input[type="color"]:focus {
+  border-color: #99baca;
+  outline: 0;
+  background: #f5fbfe;
+  color: #444;
+}
+.rz-form select:disabled,
+.rz-form textarea:disabled,
+.rz-form input:not([type]):disabled,
+.rz-form input[type="text"]:disabled,
+.rz-form input[type="password"]:disabled,
+.rz-form input[type="datetime"]:disabled,
+.rz-form input[type="datetime-local"]:disabled,
+.rz-form input[type="date"]:disabled,
+.rz-form input[type="month"]:disabled,
+.rz-form input[type="time"]:disabled,
+.rz-form input[type="week"]:disabled,
+.rz-form input[type="number"]:disabled,
+.rz-form input[type="email"]:disabled,
+.rz-form input[type="url"]:disabled,
+.rz-form input[type="search"]:disabled,
+.rz-form input[type="tel"]:disabled,
+.rz-form input[type="color"]:disabled {
+  border-color: #ddd;
+  background-color: #fafafa;
+  color: #999;
+}
+/*
+ * Placeholder
+ */
+.rz-form :-ms-input-placeholder {
+  color: #999 !important;
+}
+.rz-form ::-moz-placeholder {
+  color: #999;
+}
+.rz-form ::-webkit-input-placeholder {
+  color: #999;
+}
+.rz-form :disabled:-ms-input-placeholder {
+  color: #999 !important;
+}
+.rz-form :disabled::-moz-placeholder {
+  color: #999;
+}
+.rz-form :disabled::-webkit-input-placeholder {
+  color: #999;
+}
+/*
+ * Legend
+ * 1. Behave like block element
+ * 2. Correct `color` not being inherited in IE 8/9/10/11.
+ * 3. Remove padding
+ * 4. `margin-bottom` is not working in Safari and Opera.
+ *    Using `padding` and :after instead to create the border
+ * 5. Style
+ */
+.rz-form legend {
+  /* 1 */
+  width: 100%;
+  /* 2 */
+  border: 0;
+  /* 3 */
+  padding: 0;
+  /* 4 */
+  padding-bottom: 15px;
+  /* 5 */
+  font-size: 18px;
+  line-height: 30px;
+}
+/*
+ * 1. Fixes IE9
+ */
+.rz-form legend:after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ddd;
+  /* 1 */
+  width: 100%;
+}
+/* Size modifiers
+ * Higher specificity needed to override defaults
+ ========================================================================== */
+select.rz-form-small,
+textarea.rz-form-small,
+input[type].rz-form-small,
+input:not([type]).rz-form-small {
+  height: 25px;
+  padding: 3px 3px;
+  font-size: 12px;
+}
+select.rz-form-large,
+textarea.rz-form-large,
+input[type].rz-form-large,
+input:not([type]).rz-form-large {
+  min-height: 40px;
+  padding: 8px 6px;
+  font-size: 16px;
+}
+/* Reset height
+ * Must be after size modifiers
+ ========================================================================== */
+.rz-form textarea,
+.rz-form select[multiple],
+.rz-form select[size] {
+  height: auto;
 }

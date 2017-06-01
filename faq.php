@@ -15,7 +15,7 @@
 **********************************************************************/
 require('user.inc.php');
 // If a login is required to post tickets, check if the iser is logged-in.
-if($cfg->getUserLogRequired() && (!is_object($thisuser) || !$thisuser->isValid())) die(_('Access Denied'));
+//if($cfg->getUserLogRequired() && (!is_object($thisuser) || !$thisuser->isValid())) die(_('Access Denied'));
 // TODO: send the user to another page (login?)
 // TODO: Check if the attachment size exceed the post_max_size directive
 
@@ -27,14 +27,15 @@ $language="en";
 $num_rows=0;
 if ($lang) {
 	//echo "HERE".$num_rows.$lang;
-	$sql ="SELECT * FROM rz_faq WHERE language='".$lang."' ORDER BY category, topic";
+	Sys::console_log('debug', $default_page->getCompanyId());
+	$sql ="SELECT * FROM " . FAQ_TABLE . " WHERE language='".$lang."' AND company_id=" . $default_page->getCompanyId() .  " ORDER BY category, topic";
 	$result=db_query($sql);
 	$num_rows = db_num_rows($result);
 }
 
 if($_POST) {
-	$sql ='SELECT * FROM rz_faq ORDER BY category, topic';
-    //echo $sql;
+	$sql ="SELECT * FROM " . FAQ_TABLE . " WHERE language='".$lang."' AND company_id=" . $default_page->getCompanyId() .  " ORDER BY category, topic";
+	//echo $sql;
     $result=db_query($sql);
     $mycounter = 0;
     if ($result) {
@@ -49,9 +50,8 @@ if($_POST) {
     }
 }else{
 	if ($num_rows == 0) {
-		$sql ="SELECT * FROM rz_faq ORDER BY category, topic";
-	    //echo $sql;
-	    $result=db_query($sql);
+		$sql ="SELECT * FROM " . FAQ_TABLE . " WHERE company_id=" . $default_page->getCompanyId() .  " ORDER BY category, topic";
+		$result=db_query($sql);
     }
     
     $mycounter = 0;

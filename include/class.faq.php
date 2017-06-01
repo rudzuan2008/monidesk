@@ -6,7 +6,7 @@
 
     Copyright (c)  2012-2014 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket v1.6 by Peter Rotich.
     See LICENSE.TXT for details.
@@ -26,9 +26,12 @@ class Faq {
     var $active;
     var $topic;
     var $language;
- 
+
     var $info;
-    
+    var $sql;
+    var $total;
+
+    var $data;
     function Faq($id,$fetch=true){
         $this->id=$id;
         if($fetch)
@@ -39,7 +42,7 @@ class Faq {
 
         if(!$this->id)
             return false;
-        
+
         $sql='SELECT * FROM rz_faq WHERE faq_id='.db_input($this->id);
         if(($res=db_query($sql)) && db_num_rows($res)) {
             $info=db_fetch_array($res);
@@ -54,30 +57,45 @@ class Faq {
             return true;
         }
         $this->id=0;
-        
+
         return false;
     }
-  
+    function loadAll($sql) {
+    	$this->sql=$sql;
+    	//echo $sql;
+    	if(($res=db_query($sql)) && $count=db_num_rows($res)) {
+    		$mycounter = 0;
+    		while($row = db_fetch_array($res)){
+    			$myData[$mycounter] = $row;
+    			$mycounter++;
+    		}
+    		$this->total=$count;
+    		$this->data=$myData;
+    		return $myData;
+    	}
+    	return null;
+    }
+
     function reload() {
         return $this->load();
     }
-    
+
     function getId(){
         return $this->id;
     }
-    
+
     function getTopic(){
     	return $this->topic;
     }
-    
+
     function getAnswer(){
     	return $this->answer;
     }
-    
+
     function getQuestion(){
     	return $this->question;
     }
-    
+
     function getName(){
         return $this->question;
     }
@@ -102,7 +120,7 @@ class Faq {
         return false;
     }
 
-    function create($vars,&$errors) { 
+    function create($vars,&$errors) {
         return Faq::save(0,$vars,$errors);
     }
 
@@ -125,14 +143,15 @@ class Faq {
             if(($res=db_query($sql)) && db_num_rows($res))
                 $errors['question']=_('Question already exists');
         }
-            
+
         if(!$errors) {
             $sql='updated=NOW(),question='.db_input(Format::striptags($vars['question'])).
+            	 ',company_id='.db_input($vars['company_id']).
                  ',isactive='.db_input($vars['isactive']).
                  ',answer='.db_input($vars['answer']).
                  ',topic='.db_input($vars['topic']).
-                 ',language='.db_input($vars['language']).
-                 ',category='.db_input($vars['category']);
+                 ',language='.db_input($vars['language']);
+            if (isset($vars['category']) && $vars['category']!="") $sql.=',category='.db_input($vars['category']);
             if($id) {
                 $sql='UPDATE rz_faq SET '.$sql.' WHERE faq_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())
@@ -148,7 +167,7 @@ class Faq {
 
         return $errors?false:true;
     }
-    
+
     function cleanString($text) {
 	    $utf8 = array(
 	        '/[áàâãªä]/u'   =>   'a',
@@ -172,6 +191,22 @@ class Faq {
 	    );
 	    return preg_replace(array_keys($utf8), array_values($utf8), $text);
 	}
-	
+	function setData($data) {
+		$this->data=$data;
+	}
+	function setTotal($sql_count) {
+		if(($res=db_query($sql_count)) && $count=db_num_rows($res)) {
+			$this->total=$count;
+		}
+		return 0;
+	}
+	function getJson($callback=null) {
+		if (isset($callback)) {
+			header('Content-Type: text/javascript');
+			return $callback . '(' . json_encode($this) . ')';
+		}
+		header('Content-Type: text/html; charset=iso-8859-1');
+		return json_encode($this);
+	}
 }
 ?>

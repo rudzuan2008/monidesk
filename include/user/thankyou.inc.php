@@ -2,6 +2,7 @@
 if(!defined('KTKUSERINC') || !is_object($ticket)) die('Adiaux amikoj!'); //Say bye to our friend..
 
 //Please customize the message below to fit your organization speak!
+Sys::console_log($data);
 ?>
 <div>
     <?php if($errors['err']) {?>

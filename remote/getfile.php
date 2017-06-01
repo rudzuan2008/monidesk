@@ -1,7 +1,15 @@
 <?php
-header('Access-Control: allow <*>');
+session_start();
+header('Access-Control-Allow-Origin: *');
 
-include("inc_connection.php");
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
+include('include/connection.inc.php');
+include('include/class.common.php');
+
+//include("inc_connection.php");
 
 $uploaddir = '../attachments/';//your-path-to-upload
 $folder = 'files/';
@@ -139,9 +147,9 @@ try {
                   ",file_size='".$size."'".
                   ",file_name='".$name."'".
                   ",file_key='".$rand."'";
-            
-            $result = mysql_query($sql);
-			if ($result) {
+            if(!db_query($sql) or !($ID=db_insert_id())) {
+            //$result = mysql_query($sql);
+			//if ($result) {
 				//$ins_id = mysql_result(mysql_query("SELECT MAX(attach_id) id FROM rz_ticket_attachment WHERE ref_id=$refid"), 0);
 				$response->refid =  $refid;
 				//$response->sql =  $sql;
@@ -184,5 +192,6 @@ try {
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($response);
+db_close();
 exit;
 ?>

@@ -8,7 +8,7 @@ $rep=Format::htmlchars($rep);
   <input type="hidden" name="id" value="<?=$thisuser->getId()?>">
   <table width="100%" border="0" cellspacing=0 cellpadding=2>
     <tr>
-        <td width="120"><?= _('Current Password:') ?></td>
+        <td width="220"><?= _('Current Password:') ?></td>
         <td>
             <input type="password" name="password" AUTOCOMPLETE=OFF value="<?=$rep['password']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['password']?></font></td>

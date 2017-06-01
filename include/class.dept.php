@@ -15,6 +15,7 @@
 **********************************************************************/
 class Dept {
     var $id;
+    var $company_id;
     var $name;
     var $signature;
     
@@ -35,6 +36,7 @@ class Dept {
         if($id && ($info=$this->getInfoById($id))){
             $this->row=$info;
             $this->id=$info['dept_id'];
+            $this->company_id=$info['company_id'];
             $this->tplId=$info['tpl_id'];
             $this->emailId=$info['email_id'];
             $this->managerId=$info['manager_id'];
@@ -47,7 +49,22 @@ class Dept {
     function getId(){
         return $this->id;
     }
+    function getCompanyId() {
+    	if ($this->company_id) {
+    		return $this->company_id;
+    	}else{
+    		return Sys::getCompanyId();
+    	}
+    }
     
+    function getCompanyName() {
+    	if ($this->getCompanyId()) {
+    		$company = db_query('SELECT company_id, name FROM '.COMPANY_TABLE.' WHERE company_id='.$this->getCompanyId());
+    		$company_info = db_fetch_array($company);
+    		return $company_info['name'];
+    	}
+    	return '';
+    }
     function getName(){
         return $this->deptname;
     }
@@ -235,6 +252,7 @@ class Dept {
             $sql=' SET updated=NOW() '.
                  ',ispublic='.db_input($_POST['ispublic']).
                  ',email_id='.db_input($_POST['email_id']).
+                 ',company_id='.db_input($_POST['company_id']).
                  ',tpl_id='.db_input($_POST['tpl_id']).
                  ',autoresp_email_id='.db_input($_POST['autoresp_email_id']).
                  ',manager_id='.db_input($_POST['manager_id']?$_POST['manager_id']:0).

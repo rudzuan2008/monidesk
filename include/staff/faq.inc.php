@@ -1,6 +1,8 @@
 <?php
 if(!defined('KTKADMININC') || !$thisuser->isadmin()) die(_('Access Denied'));
 require_once(INCLUDE_DIR.'class.i18n.php');
+$pmenu=_('FAQ ITEMS');
+
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 if($faq && $_REQUEST['a']!='new'){
     $title=_('Edit Topic');
@@ -10,16 +12,45 @@ if($faq && $_REQUEST['a']!='new'){
    $title=_('New FAQ Item');
    $action='create';
    $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
+   $info ['company_id'] = Sys::getCompanyId ();
 }
-//get the goodies.
-//$depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
 ?>
-<form action="admin.php?t=faq" method="post">
+<script type="text/javascript">
+	window.addEvent('domready', function(){
+		//new MooEditable('description');
+		var myMooEditable = new MooEditable('question', {
+			paragraphise: false,
+			baseCSS: 'textarea',
+			externalCSS: 'css/style.css',
+			cleanup: false,
+		    onRender: function(){
+		        console.log('Done rendering.');
+		    }
+		});
+		var myMooEditable1 = new MooEditable('answer', {
+			paragraphise: false,
+			baseCSS: 'textarea',
+			externalCSS: 'css/style.css',
+			cleanup: false,
+		    onRender: function(){
+		        console.log('Done rendering.');
+		    }
+		});
+	});
+</script>
+
+<form class="rz-form" action="admin.php" method="post">
   <input type="hidden" name="do" value="<?=$action?>">
   <input type="hidden" name="a" value="<?=Format::htmlchars($_REQUEST['a'])?>">
   <input type='hidden' name='t' value='faq'>
   <input type="hidden" name="faq_id" value="<?=$info['faq_id']?>">
-  <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
+  <input type="hidden" name="company_id" value="<?=$info['company_id']?>">
+  <input type="hidden" name="menu" 		value="<?=$pmenu?>">
+  <input type="hidden" name="randcheck" 	value="<?= $rand ?>">
+  <input type="hidden" name="sel_company_id" value="<?= $info['company_id'] ?>">
+
+
+  <table style="width: 100%; border: 0px solid;" class="tform">
     <tr class="header"><td colspan=2><?=$title?></td></tr>
     <tr class="subheader">
         <td colspan=2 ><?= _('To stop display FAQ item, change the FAQ Status accordingly.') ?></td>
@@ -31,12 +62,12 @@ if($faq && $_REQUEST['a']!='new'){
     </tr>
     <tr>
         <th width="20%"><?= _('Question:') ?></th>
-        <td><textarea name="question" rows="8" cols="70"><?php echo $info['question'];?></textarea>
+        <td><textarea id="question" name="question" rows="8" cols="120"><?php echo $info['question'];?></textarea>
             &nbsp;<font class="error">*&nbsp;<?=$errors['question']?></font></td>
     </tr>
     <tr>
         <th><?= _('Answer:') ?></th>
-        <td><textarea name="answer" rows="8" cols="70"><?php echo $info['answer'];?></textarea>
+        <td><textarea id="answer" name="answer" rows="8" cols="120"><?php echo $info['answer'];?></textarea>
             &nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font></td>
     </tr>
     <tr>
@@ -53,18 +84,18 @@ if($faq && $_REQUEST['a']!='new'){
           </select>
           (<i><?= _('FAQ language options') ?></i>)
           </td>
-    </tr>      
+    </tr>
     <tr><th><?= _('FAQ Status') ?></th>
         <td>
             <input type="radio" name="isactive"  value="1"   <?=$info['isactive']?'checked':''?> /><?= _('Enabled') ?>
             <input type="radio" name="isactive"  value="0"   <?=!$info['isactive']?'checked':''?> /><?= _('Disabled') ?>
         </td>
     </tr>
-    
+
   </table>
   <div class="centered">
       <input class="button" type="submit" name="submit" value="<?= _('Submit') ?>">
       <input class="button" type="reset" name="reset" value="<?= _('Reset') ?>">
-      <input class="button" type="button" name="cancel" value="<?= _('Cancel') ?>" onClick='window.location.href="admin.php?t=faq"'>
+      <input class="button" type="button" name="cancel" value="<?= _('Cancel') ?>" onClick='window.location.href="admin.php?t=faq&menu=<?=$pmenu?>&sid=<?=$info['company_id']?>"'>
   </div>
 </form>

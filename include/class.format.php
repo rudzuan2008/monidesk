@@ -156,6 +156,14 @@ class Format {
         $offset+=$daylight?date('I',$gmtimestamp):0; //Daylight savings crap.
         return date($format,($gmtimestamp+($offset*3600)));
     }
+    static function propercase($str) {
+    	return ucwords($str);
+    }
+    
+    static function defaultdate($var) {
+    	$date=date_create($var);
+    	return date_format($date,"m/d/Y");
+    }
     
 }
 ?>

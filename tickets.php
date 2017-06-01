@@ -7,7 +7,7 @@
 
     Copyright (c)  2012-2013 Katak Support
     http://www.katak-support.com/
-    
+
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     Derived from osTicket by Peter Rotich.
     See LICENSE.TXT for details.
@@ -42,7 +42,7 @@ if($_POST && is_object($ticket) && $ticket->getId()):
     case 'postmessage':
         if(strcasecmp($thisuser->getEmail(),$ticket->getEmail())) { //double check perm again!
             $errors['err']=_('Capaian Tidak Dibenarkan. Kemungkinan Tiket tidak tepat, cuba lagi...');
-            $inc='tickets.inc.php'; //Show the tickets.               
+            $inc='tickets.inc.php'; //Show the tickets.
         }
 
         if(!$_POST['message'])
@@ -58,13 +58,13 @@ if($_POST && is_object($ticket) && $ticket->getId()):
               $errors['attachment']=_('File is too big').': '.$_FILES['attachment']['size'][$i].' bytes';
           $i++;
         }
-            
+
         if(!$errors){
             //Everything checked out...do the magic.
             if(($msgid=$ticket->postMessage($_POST['message'],'Web'))) {
                 if($_FILES['attachment']['name'] && $cfg->canUploadFiles() && $cfg->allowOnlineAttachments())
                     $ticket->uploadAttachment($_FILES['attachment'],$msgid,'M');
-                    
+
                 $msg=_('Message Posted Successfully');
             }else{
                 $errors['err']=_('Unable to post the message. Try again');
@@ -78,6 +78,8 @@ if($_POST && is_object($ticket) && $ticket->getId()):
     }
     $ticket->reload();
 endif;
+Sys::console_log('debug','Opening Page:'.$inc);
+
 include(USERINC_DIR.'header.inc.php');
 include(USERINC_DIR.$inc);
 include(USERINC_DIR.'footer.inc.php');

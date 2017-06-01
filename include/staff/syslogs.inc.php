@@ -143,3 +143,10 @@ $showing=db_num_rows($resp)?$pageNav->showing():"";
     <?php } ?>
   </form>
 </div>
+<form action="admin.php?t=syslog" method="post">
+    <input type="hidden" name="t" value="syslog" />
+    <input type="hidden" name="oper" value="purge" />
+	<div class="centered">
+      <input class="button" type="submit" name="submit" value="<?= _('Purge All Logs') ?>">
+   </div>
+  </form>
