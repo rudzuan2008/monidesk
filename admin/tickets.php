@@ -38,14 +38,14 @@ elseif (isset($_REQUEST['a']) && $_REQUEST['a'] == 'open') {
 }
 //At this stage we know the access status. we can process the post.
 if ($_POST && !$errors):
-
+	
     if ($ticket && $ticket->getId()) {
         $errors = array();
         $lock = $ticket->getLock(); //Ticket lock if any
         $statusKeys = array('open' => 'Open', 'Reopen' => 'Open', 'Close' => 'Closed');
         switch (strtolower($_POST['a'])):
             case 'reply':
-              $fields = array();
+	            $fields = array();
                 $fields['response'] = array('type' => 'text', 'required' => 1, 'error' => _('Response message required'));
                 $params = new Validator($fields);
                 if (!$params->validate($_POST)) {
@@ -76,9 +76,12 @@ if ($_POST && !$errors):
                 //If no error...do the do.
                 if (!$errors && ($respId = $ticket->postResponse($_POST['response'], $_POST['signature'], $_FILES['attachment']))) {
                     $msg = _('Response Posted Successfully');
-
-		    $ticket->sendNotification($ticket->getSubject(), $_POST['response'], $ticket->getEmail(), "WTDESK");
-
+                    //$userEmail = $ticket->getEmail();
+                    //$notiSubject = $ticket->getSubject();
+                    //$notiResponse = $_POST['response'];
+                    
+                    $ticket->sendNotification($ticket->getSubject(), $_POST['response'], $ticket->getEmail(), "WTDESK");
+                    
                     //Set status if any.
                     $wasOpen = $ticket->isOpen();
                     if (isset($_POST['ticket_status']) && $_POST['ticket_status']) {
@@ -98,6 +101,7 @@ if ($_POST && !$errors):
                     } elseif ($wasOpen) { //Closed on response???
                         $page = $ticket = null; //Going back to main listing.
                     }
+                    
                 } elseif (!$errors['err']) {
                     $errors['err'] = _('Unable to post the response.');
                 }

@@ -21,6 +21,7 @@ class User {
     var $fullname;
     var $username;
     var $email;
+    var $phone;
 
     
     var $udata;
@@ -58,6 +59,7 @@ class User {
         $this->fullname   = ucfirst($row['name']);
         $this->username   = $row['email'];
         $this->email      = $row['email'];
+        $this->phone      = $row['phone'];
       
         return($this->id);
     }
@@ -69,6 +71,10 @@ class User {
 
     function getEmail(){
         return($this->email);
+    }
+    
+    function getPhone(){
+        return($this->phone);
     }
 
     function getUserName(){

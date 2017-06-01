@@ -2,7 +2,7 @@
 if(!defined('KTKADMININC') || !$thisuser->isadmin()) die(_('Access Denied'));
 
 //List all help faqs
-$sql='SELECT faq_id,isactive,question,answer,category,created,updated FROM rz_faq';
+$sql='SELECT faq_id,isactive,topic,question,answer,category,created,updated FROM rz_faq';
 $services=db_query($sql.' ORDER BY faq_id'); 
 ?>
 <div class="msg"><?= _('FAQ Items') ?></div>
@@ -12,11 +12,12 @@ $services=db_query($sql.' ORDER BY faq_id');
   <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
       <tr>
         <th width="7px">&nbsp;</th>
-              <th><?= _('Question') ?></th>
-              <th><?= _('Status') ?></th>
+        	  <th width="150px"><?= _('Topic') ?></th>
+              <th width="150px"><?= _('Question') ?></th>
               <th><?= _('Answer') ?></th>
-              <th><?= _('Category') ?></th>
-              <th><?= _('Last Updated') ?></th>
+              <th><?= _('Status') ?></th>
+              <th><?= _('Sequence') ?></th>
+              <th nowrap><?= _('Last Updated') ?></th>
       </tr>
       <?php
       $class = 'row1';
@@ -34,9 +35,10 @@ $services=db_query($sql.' ORDER BY faq_id');
               <td width=7px>
                <input type="checkbox" name="tids[]" value="<?=$row['faq_id']?>" <?=$sel?'checked':''?>  onClick="highLight(this.value,this.checked);">
               </td>
+              <td><?=$row['topic']?></td>
               <td><a href="admin.php?t=faq&id=<?=$row['faq_id']?>"><?=Format::htmlchars(Format::truncate($row['question'],30))?></a></td>
-              <td><?=$row['isactive']?_('Active'):_('<b>Disabled</b>')?></td>
               <td><?=$row['answer']?></td>
+              <td><?=$row['isactive']?_('Active'):_('<b>Disabled</b>')?></td>
               <td><?=$row['category']?></td>
               <td><?=Format::db_datetime($row['updated'])?></td>
           </tr>

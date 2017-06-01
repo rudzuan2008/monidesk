@@ -1,0 +1,232 @@
+$base-color: #000099;
+$base-gradient: glossy;
+$include-default-icons: false;
+$font-family: 'Helvetica Neue';
+
+$tabs-bar-gradient: glossy;
+$tabs-color-active: white;
+$tabs-color: red;
+
+// throw out default pictos font
+//$include-pictos-font: true;
+$include-default-icons: true;
+
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+//@import 'sencha-touch/cupertino';
+//@import 'sencha-touch/cupertino/all';
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+// Custom code goes here..
+//@import 'pathmenu';
+// Examples of using the icon mixin:
+// @include icon('user');
+//@import "fonts";
+@import 'titlebar';
+@import "chat";
+@import "buttons";
+@import "variables";
+@import "mixins";
+@import "path";
+@import "core";
+@import "larger";
+@import "fixed-width";
+@import "list";
+@import "bordered-pulled";
+@import "animated";
+@import "rotated-flipped";
+@import "stacked";
+@import "icons";
+@import "fileup";
+
+  
+
+@include sencha-button-ui('confirm', red, 'glossy');
+//@include sencha-toolbar-ui('white', red, 'glossy');
+@include sencha-tabbar-ui('dark', $tabs-color, $tabs-bar-gradient, $tabs-color-active);
+
+
+@include sencha-toolbar-ui('pink', #333, 'matte');
+
+.x-button-confirm .x-button-label {
+	color: white;
+	font-weight: bold;
+}
+.x-toolbar-dark, .x-tabbar-dark {
+   background-image: -webkit-radial-gradient(top center, circle, #000099, #00004d);
+   background-repeat: repeat-x;
+   color: white;
+   .x-innerhtml {
+     color: white;
+     text-shadow: 0px 1px white;
+     //box-shadow: #F6ECEC 0 0 0.25em inset;
+   }
+   
+}
+
+@include icon('add');
+@include icon('cloud');
+@include icon('user');
+@include icon('table');
+@include icon('check2');
+@include icon('refresh');
+@include icon('arrow_left');
+@include icon('arrow_right');
+@include icon('arrow_down');
+@include icon('arrow_up');
+@include icon('trash');
+@include icon('maps');
+
+@include icon("home");
+@include icon("team");
+@include icon("mail");
+@include icon("search");
+@include icon("tags");
+
+
+// patch for ugly loadmask in ST 2.3
+.x-mask {
+	.x-mask-inner {
+		background: rgba(black, .4);
+		@include border-radius(.5em);
+	}
+	
+	.x-mask-message {
+		bottom: 1em;
+		color: white;
+	}
+	
+	&.x-has-message {
+		.x-loading-spinner-outer {
+			height: 6em;
+		}
+	}
+}
+
+//LOADING SPINNER FIX
+@keyframes x-loading-spinner-rotate {
+    0%{     transform: rotate(0deg);   }
+    8.32%{  transform: rotate(0deg);   }
+
+    8.33%{  transform: rotate(30deg);  }
+    16.65%{ transform: rotate(30deg);  }
+
+    16.66%{ transform: rotate(60deg);  }
+    24.99%{ transform: rotate(60deg);  }
+
+    25%{    transform: rotate(90deg);  }
+    33.32%{ transform: rotate(90deg);  }
+
+    33.33%{ transform: rotate(120deg); }
+    41.65%{ transform: rotate(120deg); }
+
+    41.66%{ transform: rotate(150deg); }
+    49.99%{ transform: rotate(150deg); }
+
+    50%{    transform: rotate(180deg); }
+    58.32%{ transform: rotate(180deg); }
+
+    58.33%{ transform: rotate(210deg); }
+    66.65%{ transform: rotate(210deg); }
+
+    66.66%{ transform: rotate(240deg); }
+    74.99%{ transform: rotate(240deg); }
+
+    75%{    transform: rotate(270deg); }
+    83.32%{ transform: rotate(270deg); }
+
+    83.33%{ transform: rotate(300deg); }
+    91.65%{ transform: rotate(300deg); }
+
+    91.66%{ transform: rotate(330deg); }
+    100%{   transform: rotate(330deg); }
+}
+
+.landingpage {
+	background-color : ghostwhite;
+	background-image:url('../images/background-home-johor.jpg');
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size: contain;
+  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .85em;
+  text-decoration: none;
+  border: none;
+  font-weight: normal;
+}
+@include sencha-button-ui('pathmenu', #ffffff, 'glossy');
+
+.x-button {
+	&.x-button-pathmenu {
+		background: $base-color;
+		color : white;
+		border: 3px solid #fff;
+		border-radius:50%;
+		//text-align: center;
+		padding-top: 5px;
+		//padding-left: 9px;
+		-webkit-box-shadow: 0px 0px 2px #999;
+		font-family: 'FontAwesome' !important;
+		.x-button-icon {
+			&.x-icon-mask {
+				background-color: white;
+				color: white;
+				background-image: none;
+				text-align: center;
+				height : 20px !important;
+				width : 20px !important;
+			}
+		}
+		.x-button-icon {
+			padding-top: .1em;
+  			left: -2px;
+		}
+		&.x-button-active,
+		&.x-button-pressing {
+			background: red;
+		}
+
+		&.menubutton {
+			background: red;
+			padding-top: 5px;
+		}
+
+		&.open {
+			-webkit-transform: rotate(360deg) translateZ(0);
+		}
+
+		&.close {
+			-webkit-transform: rotate(-360deg) translateZ(0);
+		}
+
+
+		&.menubutton {
+			-webkit-transition: all 300ms;
+
+			&.open {
+				-webkit-transform: rotate(45deg) translateZ(0);
+			}
+
+			&.close {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+		}
+		&.menuitembutton {
+			-webkit-transition-duration: 300ms;
+			-webkit-transition-property: opacity, left, bottom, -webkit-transform;
+			-webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+			opacity: 1;
+
+			&.close {
+			}
+
+			&.tapped {
+				-webkit-transform: rotate(180deg) scale(4) translatez(0);
+				opacity: 0;
+			}
+		}
+	}
+}

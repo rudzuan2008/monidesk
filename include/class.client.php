@@ -21,6 +21,12 @@ class Client extends User {
     var $firstname;
     var $lastname;
     var $passwd;
+    
+    var $organization;
+    var $product;
+    var $email;
+    var $phone;
+    var $mobile;
 
 
     function Client($var){
@@ -53,12 +59,28 @@ class Client extends User {
         $this->lastname 	= ucfirst($row['client_lastname']);
         $this->fullname   = ucfirst($row['client_firstname'].' '.$row['client_lastname']);
         $this->passwd     = $row['client_password'];
+        $this->email   	  = $row['client_email'];
         $this->username   = $row['client_email'];
-        $this->email      = $row['client_email'];
+        $this->organization      = $row['client_organization'];
+        $this->product      = $row['client_product'];
+        $this->phone      = $row['client_phone'];
+        $this->mobile      = $row['client_mobile'];
 
         return($this->id);
     }
 
+	function getOrganization() {
+		 return($this->organization);
+	}
+	
+	function getPhone(){
+        return($this->phone);
+    }
+    
+    function getProduct(){
+        return($this->product);
+    }
+    
     function getInfo() {
         return $this->udata;
     }

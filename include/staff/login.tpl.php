@@ -11,7 +11,7 @@
 </head>
 <body>
 <div id="loginBox">
-  <h1 id="title"><?= _('EDC Staff Control Panel') ?></h1>
+  <h1 id="title"><?= _('Staff Control Panel') ?></h1>
   <h1 id="logo"><a href="index.php">&nbsp;</a></h1>
 	<h1><?=$msg?></h1>
 	<br />
@@ -23,6 +23,6 @@
     <div><input class="submit" type="submit" name="submit" value="<?= _('Login') ?>" /></div>
   </form>
 </div>
-<div id="copyRights">Copyright &copy; <a href="http://www.edc-support.com" target="_blank">EDC-support.com</a></div>
+<div id="copyRights">Copyright &copy; <a href="http://www.wbiztech.com" target="_blank">WtDesk</a></div>
 </body>
 </html>

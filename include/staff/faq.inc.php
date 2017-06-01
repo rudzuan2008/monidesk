@@ -40,7 +40,7 @@ if($faq && $_REQUEST['a']!='new'){
             &nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font></td>
     </tr>
     <tr>
-        <th><?= _('Category:') ?></th>
+        <th><?= _('Sequence:') ?></th>
         <td><input type="text" name="category" size=35 value="<?=$info['category']?>">
             (<i><?= _('Sequence sort') ?></i>)</td>
     </tr>

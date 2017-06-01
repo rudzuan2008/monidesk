@@ -1,1 +1,180 @@
-{"id":"200de0df-431e-4b9a-99b7-fcf5af87bbf5","js":[{"path":"app.js","update":"delta","version":"65568635617591a4908dde8242610244e0308009"}],"css":[{"path":"resources/css/app.css","update":"delta","theme":"Default","version":"662c3a21d3287e86350797c5a2a54d79b1eab129","platform":["phone","tablet","android","desktop"]},{"path":"resources/css/cupertino.css","update":"delta","theme":"Cupertino","version":"6919ea03d2ec25e38d397795c5b2593638bb0e18","platform":["windows"]}]}
+{
+    "builds": {
+        "web": {"default": true},
+        "native": {
+            "packager": "cordova",
+            "cordova" : {
+                "config": {
+                    // Uncomment the line below and add the platforms you wish to build for
+                    //"platforms": "ios android",
+					"platforms" : "android",
+                    "id": "com.domain.wtdesk",
+                    "name": "WtDesk"
+                }
+            }
+        }
+    },
+
+                
+    /**
+     * The application's namespace, used by Sencha Command to generate classes
+     */
+    "name": "WtDesk",
+
+    /**
+     * The file path to this application's front HTML document, relative to this app.json file
+     */
+    "indexHtmlPath": "index.html",
+
+    /**
+     * The absolute URL to this application in development environment, i.e: the URL to run this application
+     * on your web browser during development, e.g: "http://localhost/myapp/index.html".
+     *
+     * This value is needed when build to resolve your application's dependencies if it requires server-side resources
+     * that are not accessible via file system protocol.
+     */
+    "url": "http://android.schoolcheck-now.com/hdesk/mhelpdesk/",
+	"classpath": "${app.dir}/app",
+    /**
+     * List of all JavaScript assets in the right execution order.
+     * Each item is an object with the following format:
+     *      {
+     *          "path": "path/to/script.js" // Path to file, if local file it must be relative to this app.json file
+     *          "remote": true              // (Optional)
+     *                                      // - Defaults to undefined (falsey) to signal a local file which will be copied
+     *                                      // - Specify true if this file is a remote file which will not to be copied
+     *          "update": "delta"           // (Optional)
+     *                                      //  - If not specified, this file will only be loaded once, and
+     *                                      //    cached inside localStorage until this value is changed.
+     *                                      //  - "delta" to enable over-the-air delta update for this file
+     *                                      //  - "full" means full update will be made when this file changes
+     *          "x-bootstrap": true         // (Optional)
+     *                                      // Indicates a development mode only dependency.  
+     *                                      // These files will not be copied into the build directory or referenced
+     *                                      // in the generate app.json manifest for the micro loader.
+     *
+     *      }
+     */
+    "js": [
+        {
+            "path": "touch/sencha-touch.js",
+            "x-bootstrap": true
+        },
+        {
+            "path": "bootstrap.js",
+            "x-bootstrap": true
+        },
+        {
+            "path": "app.js",
+            "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
+            "update": "delta"
+        }
+    ],
+
+    /**
+     * List of all CSS assets in the right inclusion order.
+     * Each item is an object with the following format:
+     *      {
+     *          "path": "path/to/item.css" // Path to file, if local file it must be relative to this app.json file
+     *          "remote": true             // (Optional)
+     *                                     // - Defaults to undefined (falsey) to signal a local file which will be copied
+     *                                     // - Specify true if this file is a remote file which will not to be copied
+     *          "update": "delta"          // (Optional)
+     *                                     //  - If not specified, this file will only be loaded once, and
+     *                                     //    cached inside localStorage until this value is changed to either one below
+     *                                     //  - "delta" to enable over-the-air delta update for this file
+     *                                     //  - "full" means full update will be made when this file changes
+     *
+     *      }
+     */
+     "css": [
+      {
+         "update": "delta",
+         "platform": [
+         	"phone",
+            "tablet",
+            "android",
+            "desktop"
+         ],
+         "theme": "Default",
+         "path": "resources/css/app.css"
+      },{
+         "update": "delta",
+         "platform": [
+            "windows"
+         ],
+         "theme": "Cupertino",
+         "path": "resources/css/cupertino.css"
+      }
+      /*,{
+         "update": "delta",
+         "platform": [
+            "windows"
+         ],
+         "theme": "Windows",
+         "path": "resources/css/bb10.css"
+      }*/
+    ], 
+    /*
+    "css": [
+        {
+            "path": "resources/css/cupertino.css",
+            "update": "delta"
+        }
+    ],
+	*/
+    /**
+     * Used to automatically generate cache.manifest (HTML 5 application cache manifest) file when you build
+     */
+    "appCache": {
+        /**
+         * List of items in the CACHE MANIFEST section
+         */
+        "cache": [
+            "index.html"
+        ],
+        /**
+         * List of items in the NETWORK section
+         */
+        "network": [
+            "*"
+        ],
+        /**
+         * List of items in the FALLBACK section
+         */
+        "fallback": []
+    },
+
+    /**
+     * Extra resources to be copied along when build
+     */
+    "resources": [
+        "resources/images", "resources/icons", "resources/startup",
+			"resources/fonts", "resources/css", "images", "remote", "sounds"
+    ],
+
+    /**
+     * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
+     */
+    "ignore": [
+        "\.svn$"
+    ],
+
+    /**
+     * Directory path to store all previous production builds. Note that the content generated inside this directory
+     * must be kept intact for proper generation of deltas between updates
+     */
+    "archivePath": "archive",
+
+    /**
+     * List of package names to require for the cmd build process
+     */
+    "requires": [],
+
+    /**
+     * Uniquely generated id for this application, used as prefix for localStorage keys.
+     * Normally you should never change this value.
+     */
+    /*"id": "427b641e-f557-4392-9367-3a134486b246"*/
+    "id": "200de0df-431e-4b9a-99b7-fcf5af87bbf5"
+}
