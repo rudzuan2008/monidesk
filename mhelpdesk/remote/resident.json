@@ -1,0 +1,12 @@
+{
+    "operation": [
+    		{no:1,icon:'fa-home',title:'HOME', description:'Show Main page', action:'tapMain', badge: false},
+            {no:2,icon:'fa-street-view',title:'VISITOR', description:'Pre-Register visitor to the unit', action:'tapVisitor', badge: true},
+            {no:3,icon:'fa-envelope-o',title:'COMPLAINT / FEEDBACK', description:'Register complaint/feedback', action:'tapTicket', badge: true},
+            {no:4,icon:'fa-question',title:'STATUS', description:'Check complaint/feedback status', action:'tapStatus', badge: true},
+            {no:5,icon:'fa-bell-o',title:'NOTIFICATION', description:'Check notification', action:'tapNotification', badge: true},
+            {no:6,icon:'fa-users',title:'EVENTS', description:'Show events list', action:'tapEvent', badge: true},
+            {no:7,icon:'fa-fire',title:'SOS', description:'Emergency alert help', action:'tapSosAlert', badge: false},
+            {no:8,icon:'fa-sign-in',title:'LOGIN', description:'System Login', action:'tapLogin', badge: false},
+            {no:9,icon:'fa-gear',title:'SETTING', description:'Manage system setting', action:'tapSetting', badge: false}]
+}

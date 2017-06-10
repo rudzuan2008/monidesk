@@ -1,0 +1,12 @@
+{
+    "operation": [
+    		{no:1,icon:'fa-phone',title:'CALL RESIDENT', description:'Click this button to call resident', action:'tapCallOwner', badge: false},
+            {no:2,icon:'fa-ambulance',title:'CALL AMBULANCE', description:'Click this button to call ambulance', action:'tapAmbulance', badge: false},
+            {no:3,icon:'fa-taxi',title:'CALL POLICE', description:'Click this button to call police', action:'tapPolice', badge: false},
+            {no:4,icon:'fa-users',title:'CALL MANAGEMENT', description:'Click this to call management', action:'tapManagement', badge: false},
+            {no:5,icon:'fa-university',title:'CALL LOCAL COUNCIL', description:'Click this to call local council', action:'tapCouncil', badge: false},
+            {no:6,icon:'fa-bell-o',title:'S-O-S LIST', description:'Show list of SOS Alert triggered by resident', action:'tapSos', badge: true},
+            {no:7,icon:'fa-camera',title:'VISITOR CHECK', description:'Manage visitor operation', action:'tapVisitor', badge: false},
+            {no:8,icon:'fa-sign-in',title:'LOGIN', description:'System Login', action:'tapLogin', badge: false}
+    ]
+}

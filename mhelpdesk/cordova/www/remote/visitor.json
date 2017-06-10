@@ -1,0 +1,9 @@
+{
+    "operation": [
+    		{no:1,icon:'fa-pencil-square-o',title:'REGISTER NEW', description:'Register new visitor', action:'tapRegister', badge: false},
+            {no:2,icon:'fa-users',title:'VISITOR LIST', description:'Show list of visitor', action:'tapVisitorList', badge: false},
+            //{no:3,icon:'fa-credit-card',title:'VISITOR PASS', description:'Manage visitor pass', action:'tapVisitorPass', badge: false},
+            {no:4,icon:'fa-truck',title:'DELIVERY VEHICLE', description:'Register delivery vehicle', action:'tapDeliveryVehicle', badge: false},
+            {no:5,icon:'fa-times',title:'BACK TO MAIN', description:'Return to main page', action:'tapBack', badge: false}
+            ]
+}

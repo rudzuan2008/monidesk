@@ -1,0 +1,3 @@
+ALTER TABLE rz_std_reply
+ADD COLUMN `staff_id` INT(10) DEFAULT 1,
+ADD COLUMN `publish_type` VARCHAR(50) DEFAULT 'PUBLIC';

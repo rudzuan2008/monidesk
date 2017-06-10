@@ -18,6 +18,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
+
 require('user.inc.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
 $errors=array();

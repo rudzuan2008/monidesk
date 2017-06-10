@@ -1,0 +1,21 @@
+cordova plugin remove cordova-plugin-camera -save
+cordova plugin remove cordova-plugin-device -save
+cordova plugin remove cordova-plugin-dialogs -save
+cordova plugin remove cordova-plugin-file-transfer -save
+cordova plugin remove cordova-plugin-media -save
+cordova plugin remove cordova-plugin-file -save
+cordova plugin remove cordova-plugin-inappbrowser -save
+cordova plugin remove cordova-plugin-network-information -save
+cordova plugin remove cordova-plugin-splashscreen -save
+cordova plugin remove cordova-plugin-vibration -save
+
+cordova plugin add cordova-plugin-camera -save
+cordova plugin add cordova-plugin-device -save
+cordova plugin add cordova-plugin-dialogs -save
+cordova plugin add cordova-plugin-file-transfer -save
+cordova plugin add cordova-plugin-media -save
+cordova plugin add cordova-plugin-file -save
+cordova plugin add cordova-plugin-inappbrowser -save
+cordova plugin add cordova-plugin-network-information -save
+cordova plugin add cordova-plugin-splashscreen -save
+cordova plugin add cordova-plugin-vibration -save

@@ -1,0 +1,90 @@
+// TABBARS
+.x-tab:before {
+	content: none !important;
+}
+.x-tabbar.x-docked-bottom {
+	height: 65px;
+    padding: 0;
+	border-top-color: #555753;
+	border-bottom-color: #2e3436;
+	font-size: 1em;
+	//@include linear-gradient(top, #babdb6,#888a85 3%,#000000);
+	@include linear-gradient(top, #ffffff,#f2f2f2 3%,#d9d9d9);
+	//background-image: -webkit-linear-gradient(top, #ffffff,#f2f2f2 50%,#e6e6e6 51%,#d9d9d9) !important;
+	.x-tab, .x-tab-active {
+		font-family: Arial, Helvetica, sans-serif;
+		padding: .25em;
+		//@include border-radius(0.25em);
+	    //margin : 0.2em;
+		//min-width: auto;
+	    //border: 2px solid white !important;
+	    //padding-top: 0;
+	    //-webkit-box-shadow: 0px 0px 3px #999;
+ 		//-webkit-box-orient: vertical;
+	    -ms-flex-direction: column;
+	    flex-direction: column;
+	    cursor:pointer;
+	    .x-badge {
+		    @include border-radius(100%);
+		    border: 2px solid white;
+		    text-align: -webkit-center;
+		    padding: 0;
+		    padding-top: 2px !important;
+		    min-height: 20px;
+		    min-width: 20px;
+		    color: white !important;
+		    //font-weight: bold;
+		    font-size: 10px !important;
+		    background-color: #BF0404;
+		}
+	
+		/*
+		.x-button-icon {
+		    margin: 0 auto;
+		    border: 3px solid $pathmenu-icon-color;
+			padding-top: 5px;
+		    text-align: -webkit-center;
+		    &:before {
+		    	font-family: FontAwesome;
+			    font-size: 1.3em;
+			    line-height: 1.6em;
+			    padding: 0;
+		    }	
+		    &:hover {
+		    	background-color: $contrast-color;
+		   	}
+		}*/
+	} 
+
+	.x-tab {
+		.x-button-icon:before{
+			box-shadow: none;
+			//color: shade($base-color, 80%);	
+		}
+		.x-button-label {
+			font-family: Arial, Helvetica, sans-serif;
+			//color: shade($base-color, 20%);	
+		}
+	}
+
+	.x-tab-active {
+		@include text-shadow-effect('Glow');
+		background-color: $pathmenu-base-color;
+		.x-button-icon:before, .x-button-label {
+			font-family: Arial, Helvetica, sans-serif;
+			box-shadow: none;
+			color: darken($contrast-color, 10%);
+		}
+		.x-button-icon {
+			//background-color: $pathmenu-base-color;
+		}
+	}	
+	.x-tab.x-tab-pressed {
+		.x-button-icon:before, .x-button-label {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		//.x-button-icon {
+		//	background-color: shade($base-color, 20%);
+		//}
+	}
+}

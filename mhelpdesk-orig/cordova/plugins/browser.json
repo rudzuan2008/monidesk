@@ -1,0 +1,83 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"PhoneRTCPlugin\"><param name=\"browser-package\" value=\"PhoneRTCPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"browser-package\" value=\"Camera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-analytics": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "com.dooble.phonertc": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "call-number": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.domain.wtpropertycheck"
+        }
+    }
+}
